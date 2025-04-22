@@ -43,7 +43,7 @@ export const userApi = createApi({
         };
       },
     }),
-    getUser: build.query<UserRes, string>({
+    getUser: build.query<UserRes[], void>({
       query: () => `account`,
     }),
     createUser: build.mutation<UserRes, string>({

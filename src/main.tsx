@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./components/Login";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import UserPage from "./pages/UserPage";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/list-flow",
-    element: <>List flow</>,
+    element: <UserPage />,
     errorElement: <>Lỗi rồi</>,
   },
 ]);
