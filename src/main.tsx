@@ -1,23 +1,9 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from "./components/Login";
+import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import UserPage from "./pages/UserPage";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LoginPage />,
-    errorElement: <>Lỗi rồi</>,
-  },
-  {
-    path: "/list-flow",
-    element: <UserPage />,
-    errorElement: <>Lỗi rồi</>,
-  },
-]);
+import { router } from "./routes";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

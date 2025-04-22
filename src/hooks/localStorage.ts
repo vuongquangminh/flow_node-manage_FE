@@ -4,8 +4,15 @@ type TLocalStorage = {
 };
 
 export const getLocalStorage = ({ key }: TLocalStorage) => {
-  const value = JSON.parse(localStorage.getItem(key) || "{}");
-  return value;
+  const item = localStorage.getItem(key);
+  if (!item) return null;
+
+  try {
+    return JSON.parse(item);
+  } catch (e) {
+    console.error("Lỗi parse JSON:", e);
+    return null;
+  }
 };
 
 export const setLocalStorage = ({ key, value }: TLocalStorage) => {
