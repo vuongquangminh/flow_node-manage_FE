@@ -1,3 +1,5 @@
+import { setLocalStorage } from "../hooks/localStorage";
+
 const request = async ({
   path,
   payload,
@@ -21,6 +23,7 @@ const request = async ({
     }
 
     const json = await response.json();
+    setLocalStorage({ key: "token", value: json.token });
     return { ...json, status: response.ok };
   } catch (error) {
     console.log(error);

@@ -1,28 +1,29 @@
 import { Button, Form, FormProps, Input, notification } from "antd";
-import request from "../utils/request";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../store/services/UserService";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { setLocalStorage } from "../hooks/localStorage";
 
 type FieldType = {
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
 };
 
 const LoginPage = () => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
+  const [doLogin] = useLoginMutation();
+
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    const response = await request({
-      path: "login",
-      method: "POST",
-      payload: values,
-    });
-    if (response.status) {
+    const response = await doLogin(values);
+    console.log("response: ", response);
+    if (response?.data?.status) {
+      setLocalStorage({ key: "token", value: response.data.token });
       navigate("/list-flow");
     } else {
       api.error({
-        message: "Notification Title",
-        description:
-          "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+        message: "Thất bại",
+        description: (response.error as FetchBaseQueryError)?.data as string,
       });
     }
   };

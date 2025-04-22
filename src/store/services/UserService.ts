@@ -1,14 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserRes } from "../../type/api";
+import { getLocalStorage } from "../../hooks/localStorage";
+
+type TLoginRes = {
+  message: string;
+  token: string;
+  status: boolean;
+};
+type TLoginReq = {
+  email: string;
+  password: string;
+};
 
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const token = (getState() as any).auth.token;
+    prepareHeaders: (headers) => {
+      const token = getLocalStorage({ key: "token" });
 
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
@@ -20,6 +30,19 @@ export const userApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (build) => ({
+    login: build.mutation<TLoginRes, TLoginReq>({
+      query: (body) => ({
+        url: `login`,
+        method: "POST",
+        body: body,
+      }),
+      transformResponse: (response: TLoginRes, meta) => {
+        return {
+          ...response,
+          status: meta?.response ? meta?.response.ok : false,
+        };
+      },
+    }),
     getUser: build.query<UserRes, string>({
       query: () => `account`,
     }),
@@ -34,4 +57,5 @@ export const userApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserQuery, useCreateUserMutation } = userApi;
+export const { useLoginMutation, useGetUserQuery, useCreateUserMutation } =
+  userApi;
