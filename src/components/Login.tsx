@@ -16,10 +16,9 @@ const LoginPage = () => {
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const response = await doLogin(values);
-    console.log("response: ", response);
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
-      navigate("/list-flow");
+      navigate("/user");
     } else {
       api.error({
         message: "Thất bại",

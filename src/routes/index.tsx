@@ -3,6 +3,8 @@ import LoginPage from "../components/Login";
 import UserPage from "../pages/UserPage";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
+import FlowPage from "../pages/FlowPage";
+import LayoutPage from "../components/Layout/LayoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -13,8 +15,17 @@ export const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        path: "/list-flow",
-        element: <UserPage />,
+        element: <LayoutPage />,
+        children: [
+          {
+            path: "/user",
+            element: <UserPage />,
+          },
+          {
+            path: "/flow",
+            element: <FlowPage />,
+          },
+        ],
       },
     ],
   },
