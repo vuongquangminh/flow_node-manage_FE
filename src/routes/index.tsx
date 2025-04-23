@@ -3,7 +3,7 @@ import LoginPage from "../components/Login";
 import UserPage from "../pages/UserPage";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
-import FlowPage from "../pages/FlowPage";
+import FlowPage from "../pages/flow/FlowPage";
 import LayoutPage from "../components/Layout/LayoutPage";
 
 export const router = createBrowserRouter([

@@ -2,7 +2,7 @@ import { Col, Layout, Row } from "antd";
 import SideBar from "./Sidebar";
 import { Outlet } from "react-router-dom";
 
-const { Header, Footer, Content } = Layout;
+const { Header, Footer } = Layout;
 
 const headerStyle: React.CSSProperties = {
   textAlign: "center",
@@ -21,17 +21,15 @@ const footerStyle: React.CSSProperties = {
 
 const LayoutPage = () => {
   return (
-    <Layout>
+    <Layout style={{ height: "100vh" }}>
       <Header style={headerStyle}>Header</Header>
       <Layout>
-        <Row gutter={16}>
+        <Row gutter={16} className="!mx-0 h-[100ch]">
           <Col span={6}>
             <SideBar />
           </Col>
           <Col span={18}>
-            <Content>
-              <Outlet />
-            </Content>
+            <Outlet />
           </Col>
         </Row>
       </Layout>
