@@ -8,7 +8,7 @@ import {
   useEdgesState,
   useNodesState,
 } from "@xyflow/react";
-
+import io from "socket.io-client";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useEffect } from "react";
 import TextUpdaterNode from "./customNode/TextUpdaterNode";
@@ -26,8 +26,9 @@ const rfStyle = {
 };
 
 export default function FlowPage() {
-  const res = useGetFlowByIdQuery({ id: 2 });
-  console.log("res: ", res);
+  const socket = io("http://localhost:3000"); // URL backend
+
+  const res = useGetFlowByIdQuery({ id: 3 });
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [doCreate, insert] = useAddFlowMutation();
@@ -70,12 +71,36 @@ export default function FlowPage() {
       }
     }
   }, [res.data]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to WebSocket server");
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   if (edges.length > 0 && nodes.length > 0) {
+  //     socket.emit("change-flow", {
+  //       _id: 3,
+  //       nodes: JSON.stringify(nodes),
+  //       edges: JSON.stringify(edges),
+  //     });
+  //   }
+  // }, [nodes, edges]);
+
+  // socket.on("flow-updated", (data) => {
+  //   setNodes((nds) => nds.concat(data.nodes));
+  //   setEdges((nds) => nds.concat(data.edges));
+  // });
+
+  console.log("nodes: ", nodes);
   return (
     <div className="h-full">
       <Button type="primary" onClick={handleSave} loading={insert.isLoading}>
         Lưu
       </Button>
       <Button onClick={handleAdd}>Add</Button>
+      {/* {nodes?.nodes?.length > 0 && ( */}
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -90,6 +115,7 @@ export default function FlowPage() {
         <MiniMap />
         <Background gap={18} size={1} />
       </ReactFlow>
+      {/* )} */}
     </div>
   );
 }
