@@ -10,19 +10,13 @@ import {
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import TextUpdaterNode from "./customNode/TextUpdaterNode";
-
-const initialNodes = [
-  {
-    id: "1",
-    type: "textUpdater",
-    position: { x: 0, y: 0 },
-    data: { label: "1" },
-  },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-];
-const initialEdges = [{ id: "1-2", source: "1", target: "2", animated: true }];
+import { Button } from "antd";
+import {
+  useAddFlowMutation,
+  useGetFlowByIdQuery,
+} from "../../store/services/FlowService";
 
 const nodeTypes = {
   textUpdater: TextUpdaterNode,
@@ -32,16 +26,56 @@ const rfStyle = {
 };
 
 export default function FlowPage() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const res = useGetFlowByIdQuery({ id: 2 });
+  console.log("res: ", res);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [doCreate, insert] = useAddFlowMutation();
+  const id: string = (nodes.length + 1).toString();
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 
+  const handleSave = () => {
+    doCreate({
+      nodes: JSON.stringify(nodes),
+      edges: JSON.stringify(edges),
+    }).then(() => console.log("success!"));
+  };
+
+  const handleAdd = () => {
+    const newNode = {
+      id,
+      type: "default",
+      position: {
+        x: 0,
+        y: 0,
+      },
+      data: { label: `Node ${id}` },
+    };
+    setNodes((nds) => nds.concat(newNode));
+  };
+
+  useEffect(() => {
+    if (res.data) {
+      try {
+        const parsedNodes = JSON.parse(res.data.nodes);
+        const parsedEdges = JSON.parse(res.data.edges);
+        setNodes(parsedNodes);
+        setEdges(parsedEdges);
+      } catch (error) {
+        console.error("Lỗi khi parse dữ liệu:", error);
+      }
+    }
+  }, [res.data]);
   return (
     <div className="h-full">
+      <Button type="primary" onClick={handleSave} loading={insert.isLoading}>
+        Lưu
+      </Button>
+      <Button onClick={handleAdd}>Add</Button>
       <ReactFlow
         nodes={nodes}
         edges={edges}
