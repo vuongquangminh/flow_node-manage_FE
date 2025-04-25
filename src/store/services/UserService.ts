@@ -46,6 +46,9 @@ export const userApi = createApi({
     getUser: build.query<UserRes[], void>({
       query: () => `account`,
     }),
+    getUserById: build.query<UserRes[], {name: string}>({
+      query: ({name}) => `account/${name}`,
+    }),
     createUser: build.mutation<UserRes, string>({
       query: (name) => ({
         url: `pokemon/${name}`,
@@ -57,5 +60,5 @@ export const userApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetUserQuery, useCreateUserMutation } =
+export const { useLoginMutation, useGetUserQuery, useGetUserByIdQuery, useCreateUserMutation } =
   userApi;
