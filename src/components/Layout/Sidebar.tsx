@@ -8,7 +8,12 @@ type MenuItem = Required<MenuProps>["items"][number] & { path: string };
 
 const items: MenuItem[] = [
   { key: "1", icon: <PieChartOutlined />, label: "User", path: "/user" },
-  { key: "2", icon: <DesktopOutlined />, label: "Flow", path: "/flow" },
+  {
+    key: "2",
+    icon: <DesktopOutlined />,
+    label: "Dashboard",
+    path: "/dashboard",
+  },
   //   {
   //     key: "sub1",
   //     label: "Navigation One",
