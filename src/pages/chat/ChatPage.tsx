@@ -5,6 +5,7 @@ import io, { Socket } from "socket.io-client";
 export default function DashboardPage() {
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
+  const [new_message, setNewMessage] = useState("");
 
   useEffect(() => {
     const socket = io("http://localhost:3000");
@@ -16,26 +17,31 @@ export default function DashboardPage() {
 
     socket.on("conversation-updated", (data) => {
       console.log("Received from server:", data);
+      setNewMessage(data.message);
     });
 
     socket.on("disconnect", () => {
       console.log("Disconnected from server");
     });
 
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   const handleSend = () => {
     if (socketRef.current) {
-      socketRef.current.emit("sent-message", { name: "Thuy", message: message });
+      socketRef.current.emit("sent-message", {
+        name: "Thuy",
+        message: message,
+      });
       console.log("Sent:", message);
     }
   };
 
   return (
     <div className="h-full flex items-end">
+      {new_message}
       <Input
         placeholder="Nhập email hoặc tin nhắn"
         value={message}
