@@ -49,10 +49,11 @@ export const userApi = createApi({
     getUserById: build.query<UserRes[], {name: string}>({
       query: ({name}) => `account/${name}`,
     }),
-    createUser: build.mutation<UserRes, string>({
-      query: (name) => ({
-        url: `pokemon/${name}`,
+    createUser: build.mutation<UserRes, {name: string, email: string}>({
+      query: (body) => ({
+        url: `account`,
         method: "POST",
+        data: body
       }),
     }),
   }),
