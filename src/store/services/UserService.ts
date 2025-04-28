@@ -5,6 +5,15 @@ import { getLocalStorage } from "../../hooks/localStorage";
 type TLoginRes = {
   message: string;
   token: string;
+  user: {
+    _id: number;
+    name: string;
+    email: string;
+    password: string;
+    status: boolean;
+    createAt: string;
+    upDateAt: string;
+  };
   status: boolean;
 };
 type TLoginReq = {
@@ -46,14 +55,17 @@ export const userApi = createApi({
     getUser: build.query<UserRes[], void>({
       query: () => `account`,
     }),
-    getUserById: build.query<UserRes[], {name: string}>({
-      query: ({name}) => `account/${name}`,
+    getUserById: build.query<UserRes[], { id: number }>({
+      query: ({ id }) => `account/${id}`,
     }),
-    createUser: build.mutation<UserRes, {name: string, email: string}>({
+    createUser: build.mutation<
+      UserRes,
+      { name: string; email: string; password: string; status: boolean }
+    >({
       query: (body) => ({
         url: `account`,
         method: "POST",
-        data: body
+        data: body,
       }),
     }),
   }),
@@ -61,5 +73,9 @@ export const userApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginMutation, useGetUserQuery, useGetUserByIdQuery, useCreateUserMutation } =
-  userApi;
+export const {
+  useLoginMutation,
+  useGetUserQuery,
+  useGetUserByIdQuery,
+  useCreateUserMutation,
+} = userApi;

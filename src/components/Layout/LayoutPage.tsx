@@ -1,6 +1,8 @@
 import { Col, Layout, Row } from "antd";
 import SideBar from "./Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useGetUserByIdQuery } from "../../store/services/UserService";
+import { getLocalStorage } from "../../hooks/localStorage";
 
 const { Header, Footer } = Layout;
 
@@ -20,6 +22,13 @@ const footerStyle: React.CSSProperties = {
 };
 
 const LayoutPage = () => {
+  const navigate = useNavigate();
+
+  const user = getLocalStorage({ key: "user" });
+  const res = useGetUserByIdQuery({ id: user._id });
+  if (!res) {
+    navigate("/");
+  }
   return (
     <Layout style={{ height: "100vh" }}>
       <Header style={headerStyle}>Header</Header>
