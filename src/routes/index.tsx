@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
             element: <GetStartChatPage />,
           },
           {
-            path: "/conversation/:id",
+            path: "/conversation/:id/:name",
             element: <ChatPagePage />,
           },
         ],

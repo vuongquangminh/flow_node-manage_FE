@@ -3,14 +3,15 @@ import { Button, Input } from "antd";
 import { getLocalStorage } from "../../hooks/localStorage";
 import { SocketContext } from "../../utils/socketContext";
 import { Socket } from "socket.io-client";
+import { useParams } from "react-router-dom";
 
 export default function ChatPagePage() {
   const socket = useContext(SocketContext);
-
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [new_message, setNewMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
+  const params = useParams();
   useEffect(() => {
     socketRef.current = socket;
 
@@ -33,6 +34,8 @@ export default function ChatPagePage() {
       socketRef.current.emit("sent-message", {
         name: user.name,
         sender_id: user._id,
+        receiver_id: params.id,
+        name_receiver: params.name,
         message: message,
       });
       console.log("Sent:", message);
