@@ -5,6 +5,7 @@ import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
 import LayoutPage from "../components/Layout/LayoutPage";
 import ChatPagePage from "../pages/chat/ChatPage";
+import GetStartChatPage from "../pages/chat/GetStartChatPage";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
           },
           {
             path: "/conversation",
+            element: <GetStartChatPage />,
+          },
+          {
+            path: "/conversation/:id",
             element: <ChatPagePage />,
           },
         ],

@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
-import io, { Socket } from "socket.io-client";
 import { getLocalStorage } from "../../hooks/localStorage";
+import { SocketContext } from "../../utils/socketContext";
+import { Socket } from "socket.io-client";
 
 export default function ChatPagePage() {
+  const socket = useContext(SocketContext);
+
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [new_message, setNewMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
   useEffect(() => {
-    const socket = io("http://localhost:3000");
     socketRef.current = socket;
 
     socket.on("connect", () => {
@@ -17,7 +19,7 @@ export default function ChatPagePage() {
     });
 
     socket.on("conversation-updated", (data) => {
-      // console.log("Received from server:", data);
+      console.log("Received from server:", data);
       setNewMessage(data.message);
     });
 
