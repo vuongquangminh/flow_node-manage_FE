@@ -3,12 +3,12 @@ import { Button, Input } from "antd";
 import io, { Socket } from "socket.io-client";
 import { getLocalStorage } from "../../hooks/localStorage";
 
-export default function DashboardPage() {
+export default function ChatPagePage() {
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [new_message, setNewMessage] = useState("");
-  const user = getLocalStorage({key: 'user'})
-  console.log('user: ', user)
+  const user = getLocalStorage({ key: "user" });
+  console.log("user: ", user);
   useEffect(() => {
     const socket = io("http://localhost:3000");
     socketRef.current = socket;
@@ -25,7 +25,6 @@ export default function DashboardPage() {
     socket.on("disconnect", () => {
       console.log("Disconnected from server");
     });
-
   }, []);
 
   const handleSend = () => {

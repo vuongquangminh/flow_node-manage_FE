@@ -4,7 +4,7 @@ import UserPage from "../pages/UserPage";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
 import LayoutPage from "../components/Layout/LayoutPage";
-import DashboardPage from "../pages/chat/ChatPage";
+import ChatPagePage from "../pages/chat/ChatPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +22,8 @@ export const router = createBrowserRouter([
             element: <UserPage />,
           },
           {
-            path: "/dashboard",
-            element: <DashboardPage />,
+            path: "/conversation",
+            element: <ChatPagePage />,
           },
         ],
       },
