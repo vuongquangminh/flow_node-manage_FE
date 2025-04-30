@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import io, { Socket } from "socket.io-client";
+import { getLocalStorage } from "../../hooks/localStorage";
 
 export default function DashboardPage() {
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [new_message, setNewMessage] = useState("");
-
+  const user = getLocalStorage({key: 'user'})
+  console.log('user: ', user)
   useEffect(() => {
     const socket = io("http://localhost:3000");
     socketRef.current = socket;
@@ -29,7 +31,8 @@ export default function DashboardPage() {
   const handleSend = () => {
     if (socketRef.current) {
       socketRef.current.emit("sent-message", {
-        name: "Thuy",
+        name: user.name,
+        sender_id: user._id,
         message: message,
       });
       console.log("Sent:", message);

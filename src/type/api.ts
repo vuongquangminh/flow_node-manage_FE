@@ -1,5 +1,7 @@
 export type UserRes = {
-    name: string,
-    email: string,
-    
-}
+  _id: number;
+  name: string;
+  email: string;
+  createAt: string;
+  upDateAt: string;
+};
