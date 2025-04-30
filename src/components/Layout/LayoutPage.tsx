@@ -25,8 +25,9 @@ const LayoutPage = () => {
   const navigate = useNavigate();
 
   const user = getLocalStorage({ key: "user" });
-  const res = useGetUserByIdQuery({ id: user._id });
-  if (!res) {
+  const res = useGetUserByIdQuery({ id: user?._id }, { skip: !user });
+  console.log(!user, res);
+  if (!user) {
     navigate("/");
   }
   return (

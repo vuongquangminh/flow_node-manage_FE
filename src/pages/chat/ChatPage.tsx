@@ -24,9 +24,6 @@ export default function DashboardPage() {
       console.log("Disconnected from server");
     });
 
-    // return () => {
-    //   socket.disconnect();
-    // };
   }, []);
 
   const handleSend = () => {
