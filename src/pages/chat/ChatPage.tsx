@@ -8,7 +8,6 @@ export default function ChatPagePage() {
   const [message, setMessage] = useState("");
   const [new_message, setNewMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
-  console.log("user: ", user);
   useEffect(() => {
     const socket = io("http://localhost:3000");
     socketRef.current = socket;
@@ -18,7 +17,7 @@ export default function ChatPagePage() {
     });
 
     socket.on("conversation-updated", (data) => {
-      console.log("Received from server:", data);
+      // console.log("Received from server:", data);
       setNewMessage(data.message);
     });
 

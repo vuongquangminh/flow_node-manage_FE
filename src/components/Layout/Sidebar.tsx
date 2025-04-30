@@ -17,7 +17,7 @@ const SideBar: React.FC = () => {
 
   const handleClick: MenuProps["onClick"] = (e) => {
     const clickedItem = items?.find((item) => item.key === e.key);
-    if (clickedItem && "path" in clickedItem) {
+    if (clickedItem) {
       navigate(`/${clickedItem.key}`);
     }
   };

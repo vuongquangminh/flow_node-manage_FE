@@ -1,7 +1,6 @@
 import { Col, Layout, Row } from "antd";
 import SideBar from "./Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useGetUserByIdQuery } from "../../store/services/UserService";
 import { getLocalStorage } from "../../hooks/localStorage";
 
 const { Header, Footer } = Layout;
@@ -25,8 +24,6 @@ const LayoutPage = () => {
   const navigate = useNavigate();
 
   const user = getLocalStorage({ key: "user" });
-  const res = useGetUserByIdQuery({ id: user?._id }, { skip: !user });
-  console.log(!user, res);
   if (!user) {
     navigate("/");
   }
