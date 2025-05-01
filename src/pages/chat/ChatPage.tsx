@@ -49,25 +49,39 @@ export default function ChatPagePage() {
 
   return (
     <>
-      {res.data?.map((item) => {
-        return (
-          <p
-            key={item._id}
-            className={item.sender_id == user._id ? "text-end" : "text-start"}
-          >
-            {item.message}
-          </p>
-        );
-      })}
-      <div className="h-full flex items-end">
-        <Input
-          placeholder="Nhập email hoặc tin nhắn"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <Button type="primary" className="mx-4" onClick={handleSend}>
-          Send
-        </Button>
+      <div className="h-full flex flex-col justify-between p-4">
+        <div className="">
+          {res.data?.map((item) => {
+            return (
+              <div
+                key={item._id}
+                className={`flex mb-2 ${
+                  user._id == item.sender_id ? "justify-end" : "justify-start"
+                }`}
+              >
+                <div
+                  className={`max-w-xs px-4 py-2 rounded-2xl shadow ${
+                    user._id == item.sender_id
+                      ? "bg-blue-500 text-white rounded-br-none"
+                      : "bg-gray-200 text-gray-800 rounded-bl-none"
+                  }`}
+                >
+                  Đây là tin nhắn mình gửi.
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex items-end">
+          <Input
+            placeholder="Nhập email hoặc tin nhắn"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <Button type="primary" className="mx-4" onClick={handleSend}>
+            Send
+          </Button>
+        </div>
       </div>
     </>
   );
