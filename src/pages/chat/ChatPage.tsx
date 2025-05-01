@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { getLocalStorage } from "../../hooks/localStorage";
 import { Socket } from "socket.io-client";
@@ -45,18 +45,30 @@ export default function ChatPagePage() {
       console.log("Sent:", message);
     }
   };
+  console.log("res.data");
 
   return (
-    <div className="h-full flex items-end">
-      {new_message}
-      <Input
-        placeholder="Nhập email hoặc tin nhắn"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <Button type="primary" className="mx-4" onClick={handleSend}>
-        Send
-      </Button>
-    </div>
+    <>
+      {res.data?.map((item) => {
+        return (
+          <p
+            key={item._id}
+            className={item.sender_id == user._id ? "text-end" : "text-start"}
+          >
+            {item.message}
+          </p>
+        );
+      })}
+      <div className="h-full flex items-end">
+        <Input
+          placeholder="Nhập email hoặc tin nhắn"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <Button type="primary" className="mx-4" onClick={handleSend}>
+          Send
+        </Button>
+      </div>
+    </>
   );
 }
