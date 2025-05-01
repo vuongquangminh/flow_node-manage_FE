@@ -46,6 +46,7 @@ export default function ChatPagePage() {
       });
       console.log("Sent:", message);
     }
+    setMessage("");
   };
   console.log("res.data");
 
