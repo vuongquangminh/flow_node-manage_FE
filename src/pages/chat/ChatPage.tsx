@@ -12,7 +12,10 @@ export default function ChatPagePage() {
   const [message, setMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
   const params = useParams();
-  const res = useGetHistoryMessageQuery({ sender_id: user._id, receiver_id: Number(params.id) });
+  const res = useGetHistoryMessageQuery({
+    sender_id: user._id,
+    receiver_id: Number(params.id),
+  });
   console.log("res: ", res);
 
   useEffect(() => {
@@ -32,8 +35,8 @@ export default function ChatPagePage() {
     });
   }, []);
 
-  const handleSend = () => {
-    if (socketRef.current) {
+  const handleSend = (message: string) => {
+    if (socketRef.current && message.length > 0) {
       socketRef.current.emit("sent-message", {
         name: user.name,
         sender_id: user._id,
@@ -71,16 +74,23 @@ export default function ChatPagePage() {
             );
           })}
         </div>
-        <div className="flex items-end">
-          <Input
-            placeholder="Nhập email hoặc tin nhắn"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <Button type="primary" className="mx-4" onClick={handleSend}>
-            Send
-          </Button>
-        </div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault(); // ngăn reload
+            handleSend(message);
+          }}
+        >
+          <div className="flex items-end">
+            <Input
+              placeholder="Nhập email hoặc tin nhắn"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <Button type="primary" className="mx-4" htmlType="submit">
+              Send
+            </Button>
+          </div>
+        </form>
       </div>
     </>
   );
