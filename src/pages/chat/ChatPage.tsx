@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { getLocalStorage } from "../../hooks/localStorage";
 import { Socket } from "socket.io-client";
@@ -10,10 +10,9 @@ export default function ChatPagePage() {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
-  const [new_message, setNewMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
   const params = useParams();
-  const res = useGetHistoryMessageQuery({ sender_id: 1, receiver_id: 1 });
+  const res = useGetHistoryMessageQuery({ sender_id: user._id, receiver_id: Number(params.id) });
   console.log("res: ", res);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function ChatPagePage() {
 
     socket.on("conversation-updated", (data) => {
       console.log("Received from server:", data);
-      setNewMessage(data.message);
+      res.refetch();
     });
 
     socket.on("disconnect", () => {
@@ -66,7 +65,7 @@ export default function ChatPagePage() {
                       : "bg-gray-200 text-gray-800 rounded-bl-none"
                   }`}
                 >
-                  Đây là tin nhắn mình gửi.
+                  {item.message}
                 </div>
               </div>
             );
