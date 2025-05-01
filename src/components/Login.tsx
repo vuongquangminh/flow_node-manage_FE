@@ -19,7 +19,7 @@ const LoginPage = () => {
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
       setLocalStorage({ key: "user", value: response.data.user });
-      navigate("/user");
+      navigate("/conversation");
     } else {
       api.error({
         message: "Thất bại",
