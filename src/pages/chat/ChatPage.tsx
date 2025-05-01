@@ -1,9 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { getLocalStorage } from "../../hooks/localStorage";
-import { SocketContext } from "../../utils/socketContext";
 import { Socket } from "socket.io-client";
 import { useParams } from "react-router-dom";
+import { useGetHistoryMessageQuery } from "../../store/services/ChatService";
+import { SocketContext } from "../../utils/SocketContext";
 
 export default function ChatPagePage() {
   const socket = useContext(SocketContext);
@@ -12,6 +13,9 @@ export default function ChatPagePage() {
   const [new_message, setNewMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
   const params = useParams();
+  const res = useGetHistoryMessageQuery({ sender_id: 1, receiver_id: 1 });
+  console.log("res: ", res);
+
   useEffect(() => {
     socketRef.current = socket;
 
