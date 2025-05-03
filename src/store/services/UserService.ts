@@ -60,13 +60,16 @@ export const userApi = createApi({
     }),
     createUser: build.mutation<
       UserRes,
-      { name: string; email: string; password: string; status: boolean }
+      { name: string; email: string; password: string }
     >({
-      query: (body) => ({
-        url: `account`,
-        method: "POST",
-        data: body,
-      }),
+      query: (body) => {
+        console.log("body: ", body);
+        return {
+          url: `account`,
+          method: "POST",
+          body: body,
+        };
+      },
     }),
   }),
 });
