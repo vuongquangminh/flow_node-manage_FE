@@ -35,6 +35,9 @@ export default function ChatPagePage() {
     });
   }, []);
 
+  useEffect(() => {
+    res.refetch();
+  }, [params.id]);
   const handleSend = (message: string) => {
     if (socketRef.current && message.length > 0) {
       socketRef.current.emit("sent-message", {
