@@ -23,7 +23,14 @@ export const friendApi = createApi({
         url: `list-friend`,
       }),
     }),
+    addFriend: build.mutation<unknown, { id: number }>({
+      query: (body) => ({
+        url: `friend`,
+        method: "POST",
+        body: body,
+      }),
+    }),
   }),
 });
 
-export const { useGetListFriendQuery } = friendApi;
+export const { useGetListFriendQuery, useAddFriendMutation } = friendApi;

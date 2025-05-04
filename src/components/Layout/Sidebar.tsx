@@ -47,6 +47,7 @@ const SideBar: React.FC = () => {
       <Select
         className="w-full"
         showSearch
+        allowClear
         placeholder="Select a person"
         optionFilterProp="label"
         onChange={handleChange}
