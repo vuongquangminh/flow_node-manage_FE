@@ -1,11 +1,11 @@
-import { Button, Col, Layout, Row, Select } from "antd";
+import { Col, Layout, Row, Select } from "antd";
 import SideBar from "./Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../hooks/localStorage";
 import { useGetUserQuery } from "../../store/services/UserService";
-import { useAddFriendMutation } from "../../store/services/FriendService";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
+import { io } from "socket.io-client";
 
 const { Header, Footer } = Layout;
 
@@ -19,7 +19,7 @@ const LayoutPage = () => {
   const navigate = useNavigate();
   const account = useGetUserQuery();
   const socket = useContext(SocketContext);
-
+  const [keyRender, setKeyRender] = useState(0);
   const user = getLocalStorage({ key: "user" });
   if (!user) {
     navigate("/");
@@ -36,10 +36,11 @@ const LayoutPage = () => {
     socket.emit("add-friend", {
       id: value,
     });
-    socket.on("update-friend", (data) => {
-      console.log("data2: ", data);
-    });
   };
+  socket.on("update-friend", (data) => {
+    console.log(data);
+    setKeyRender((pre) => pre + 1);
+  });
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -58,7 +59,7 @@ const LayoutPage = () => {
       <Layout>
         <Row gutter={16} className="!mx-0 h-[100ch]">
           <Col span={6}>
-            <SideBar />
+            <SideBar key={keyRender} />
           </Col>
           <Col span={18}>
             <Outlet />
