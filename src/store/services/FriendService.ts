@@ -1,0 +1,29 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getLocalStorage } from "../../hooks/localStorage";
+
+export const friendApi = createApi({
+  reducerPath: "friendApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = getLocalStorage({ key: "token" });
+
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
+  }),
+  tagTypes: ["Friend"],
+  endpoints: (build) => ({
+    getListFriend: build.query<unknown, void>({
+      query: () => ({
+        url: `list-friend`,
+      }),
+    }),
+  }),
+});
+
+export const { useGetListFriendQuery } = friendApi;

@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "./services/UserService";
 import { flowApi } from "./services/FlowService";
 import { chatApi } from "./services/ChatService";
+import { friendApi } from "./services/FriendService";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [flowApi.reducerPath]: flowApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
+    [friendApi.reducerPath]: friendApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -18,7 +20,8 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(userApi.middleware)
       .concat(flowApi.middleware)
-      .concat(chatApi.middleware),
+      .concat(chatApi.middleware)
+      .concat(friendApi.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
