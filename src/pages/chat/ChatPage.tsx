@@ -16,7 +16,6 @@ export default function ChatPagePage() {
     sender_id: user._id,
     receiver_id: Number(params.id),
   });
-  console.log("res: ", res);
 
   useEffect(() => {
     socketRef.current = socket;
