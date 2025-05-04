@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu, Select } from "antd";
@@ -12,6 +12,7 @@ const SideBar: React.FC = () => {
   const res = useGetListFriendQuery();
   const user = getLocalStorage({ key: "user" });
   const account = useGetUserQuery();
+  const [selectedKey, setSelectedKey] = useState("1");
 
   const items = res.data?.map((item) => ({
     key: String(user._id == item.id_user_1 ? item.id_user_2 : item.id_user_1),
@@ -34,12 +35,17 @@ const SideBar: React.FC = () => {
     res.refetch();
   }, []);
 
-  const handleChange = (value: string[]) => {
-    console.log(`selected ${value}`);
+  const handleChange = (
+    value: string,
+    option: { value: number; label: string }
+  ) => {
+    navigate(`/conversation/${value}/${option.label}`);
+    setSelectedKey(String(value));
   };
   return (
     <div>
       <Select
+        className="w-full"
         showSearch
         placeholder="Select a person"
         optionFilterProp="label"
@@ -48,12 +54,13 @@ const SideBar: React.FC = () => {
       />
       {items?.length > 0 ? (
         <Menu
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[selectedKey]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
           items={items}
           onClick={handleClick}
+          key={selectedKey}
         />
       ) : (
         "Bạn chưa có bạn bè nào"
