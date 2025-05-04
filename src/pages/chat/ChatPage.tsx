@@ -22,7 +22,7 @@ export default function ChatPagePage() {
     socketRef.current = socket;
 
     socket.on("connect", () => {
-      console.log("Connected to WebSocket server", socket.id);
+      // console.log("Connected to WebSocket server", socket.id);
     });
 
     socket.on("conversation-updated", (data) => {
@@ -31,7 +31,7 @@ export default function ChatPagePage() {
     });
 
     socket.on("disconnect", () => {
-      console.log("Disconnected from server");
+      // console.log("Disconnected from server");
     });
   }, []);
 
@@ -47,11 +47,9 @@ export default function ChatPagePage() {
         name_receiver: params.name,
         message: message,
       });
-      console.log("Sent:", message);
     }
     setMessage("");
   };
-  console.log("res.data");
 
   return (
     <>

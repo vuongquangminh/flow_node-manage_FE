@@ -63,7 +63,6 @@ export const userApi = createApi({
       { name: string; email: string; password: string }
     >({
       query: (body) => {
-        console.log("body: ", body);
         return {
           url: `account`,
           method: "POST",
