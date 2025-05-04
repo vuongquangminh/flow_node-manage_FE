@@ -25,7 +25,6 @@ export default function ChatPagePage() {
     });
 
     socket.on("conversation-updated", (data) => {
-      console.log("Received from server:", data);
       res.refetch();
     });
 
