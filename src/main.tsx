@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { router } from "./routes";
 import "./index.css";
-import { socket, SocketContext } from "./utils/socketContext";
+import { socket, SocketContext } from "./utils/SocketContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
