@@ -5,15 +5,12 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { router } from "./routes";
 import "./index.css";
-import { socket, SocketContext } from "./utils/SocketContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <React.Suspense fallback={<div>Đang tải...</div>}>
       <Provider store={store}>
-        <SocketContext.Provider value={socket}>
-          <RouterProvider router={router} />
-        </SocketContext.Provider>
+        <RouterProvider router={router} />
       </Provider>
     </React.Suspense>
   </StrictMode>

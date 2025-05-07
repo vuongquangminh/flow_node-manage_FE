@@ -5,7 +5,6 @@ import { getLocalStorage } from "../../hooks/localStorage";
 import { useGetUserQuery } from "../../store/services/UserService";
 import { useContext, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
-import { io } from "socket.io-client";
 
 const { Header, Footer } = Layout;
 
@@ -43,31 +42,33 @@ const LayoutPage = () => {
   });
 
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Header className="flex justify-center items-center bg-cyan-700">
-        <Select
-          className="w-full mx-3"
-          showSearch
-          allowClear
-          placeholder="Select a person"
-          optionFilterProp="label"
-          onChange={handleChange}
-          options={options}
-        />
-      </Header>
+    <SocketContext.Provider value={socket}>
+      <Layout style={{ height: "100vh" }}>
+        <Header className="flex justify-center items-center bg-cyan-700">
+          <Select
+            className="w-full mx-3"
+            showSearch
+            allowClear
+            placeholder="Select a person"
+            optionFilterProp="label"
+            onChange={handleChange}
+            options={options}
+          />
+        </Header>
 
-      <Layout>
-        <Row gutter={16} className="!mx-0 h-[100ch]">
-          <Col span={6}>
-            <SideBar key={keyRender} />
-          </Col>
-          <Col span={18}>
-            <Outlet />
-          </Col>
-        </Row>
+        <Layout>
+          <Row gutter={16} className="!mx-0 h-[100ch]">
+            <Col span={6}>
+              <SideBar key={keyRender} />
+            </Col>
+            <Col span={18}>
+              <Outlet />
+            </Col>
+          </Row>
+        </Layout>
+        <Footer style={footerStyle}>Footer</Footer>
       </Layout>
-      <Footer style={footerStyle}>Footer</Footer>
-    </Layout>
+    </SocketContext.Provider>
   );
 };
 
