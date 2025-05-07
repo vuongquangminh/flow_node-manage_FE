@@ -4,9 +4,10 @@ import UserPage from "../pages/UserPage";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
 import LayoutPage from "../components/Layout/LayoutPage";
-import ChatPagePage from "../pages/chat/ChatPage";
+import ChatPage from "../pages/chat/ChatPage";
 import GetStartChatPage from "../pages/chat/GetStartChatPage";
 import RegisterPage from "../components/RegisterPage";
+import ChatBotPage from "../pages/chat/ChatBotPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,9 +34,13 @@ export const router = createBrowserRouter([
           },
           {
             path: "/conversation/:id/:name",
-            element: <ChatPagePage />,
+            element: <ChatPage />,
           },
         ],
+      },
+      {
+        path: "/chatbot",
+        element: <ChatBotPage />,
       },
     ],
   },

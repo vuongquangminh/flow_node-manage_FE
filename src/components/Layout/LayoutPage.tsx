@@ -1,6 +1,6 @@
 import { Col, Layout, Row, Select } from "antd";
 import SideBar from "./Sidebar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../../hooks/localStorage";
 import { useGetUserQuery } from "../../store/services/UserService";
 import { useContext, useState } from "react";
@@ -54,6 +54,9 @@ const LayoutPage = () => {
             onChange={handleChange}
             options={options}
           />
+          <Link to={'/chatbot'} className="w-10">
+            <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
+          </Link>
         </Header>
 
         <Layout>
