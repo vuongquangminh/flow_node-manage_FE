@@ -46,7 +46,7 @@ const LayoutPage = () => {
       <Layout style={{ height: "100vh" }}>
         <Header className="flex justify-center items-center bg-cyan-700">
           <Select
-            className="w-full mx-3"
+            className="w-full"
             showSearch
             allowClear
             placeholder="Select a person"
@@ -54,8 +54,11 @@ const LayoutPage = () => {
             onChange={handleChange}
             options={options}
           />
-          <Link to={'/chatbot'} className="w-10">
+          <Link to={"/chatbot"} className="w-10 mx-3">
             <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
+          </Link>
+          <Link to={"/ai-agent"} className="w-10">
+            <img className="h-full w-full rounded" src="/ai-agent.jpg" alt="" />
           </Link>
         </Header>
 

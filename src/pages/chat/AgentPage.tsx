@@ -1,12 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
+import { getLocalStorage } from "../../hooks/localStorage";
 import { Socket } from "socket.io-client";
+import { data, useParams } from "react-router-dom";
+import { useGetHistoryMessageQuery } from "../../store/services/ChatService";
 import { SocketContext } from "../../utils/SocketContext";
 
-export default function ChatBotPage() {
+const AgentPage = () => {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
+  const user = getLocalStorage({ key: "user" });
   const [answer, setAnswer] = useState("");
   useEffect(() => {
     socketRef.current = socket;
@@ -29,7 +33,6 @@ export default function ChatBotPage() {
     }
     setMessage("");
   };
-
   return (
     <>
       <div className="h-screen flex flex-col justify-between p-4">
@@ -54,4 +57,6 @@ export default function ChatBotPage() {
       </div>
     </>
   );
-}
+};
+
+export default AgentPage;

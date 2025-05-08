@@ -8,6 +8,7 @@ import ChatPage from "../pages/chat/ChatPage";
 import GetStartChatPage from "../pages/chat/GetStartChatPage";
 import RegisterPage from "../components/RegisterPage";
 import ChatBotPage from "../pages/chat/ChatBotPage";
+import AgentPage from "../pages/chat/AgentPage";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/chatbot",
         element: <ChatBotPage />,
+      },
+      {
+        path: "/ai-agent",
+        element: <AgentPage />,
       },
     ],
   },
