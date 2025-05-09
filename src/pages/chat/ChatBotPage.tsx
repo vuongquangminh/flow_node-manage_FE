@@ -33,6 +33,7 @@ export default function ChatBotPage() {
   return (
     <>
       <div className="h-screen flex flex-col justify-between p-4">
+        Chatbot
         <div className="">{answer}</div>
         <form
           onSubmit={(e) => {

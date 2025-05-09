@@ -1,16 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
-import { getLocalStorage } from "../../hooks/localStorage";
 import { Socket } from "socket.io-client";
-import { data, useParams } from "react-router-dom";
-import { useGetHistoryMessageQuery } from "../../store/services/ChatService";
 import { SocketContext } from "../../utils/SocketContext";
 
 const AgentPage = () => {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
-  const user = getLocalStorage({ key: "user" });
   const [answer, setAnswer] = useState("");
   useEffect(() => {
     socketRef.current = socket;
@@ -18,7 +14,7 @@ const AgentPage = () => {
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
-    socket.on("ai-response", (data) => {
+    socket.on("ai-agent-realtime-response", (data) => {
       setAnswer(data);
     });
 
@@ -29,13 +25,14 @@ const AgentPage = () => {
 
   const handleSend = (message: string) => {
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatbot", message);
+      socketRef.current.emit("user-send-ai-agent-realtime", message);
     }
     setMessage("");
   };
   return (
     <>
       <div className="h-screen flex flex-col justify-between p-4">
+        AI Aigent
         <div className="">{answer}</div>
         <form
           onSubmit={(e) => {
