@@ -54,11 +54,18 @@ const LayoutPage = () => {
             onChange={handleChange}
             options={options}
           />
-          <Link to={"/chatbot"} className="w-10 mx-3">
+          <Link to={"/chatbot"} className="w-10 ml-3">
             <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
           </Link>
-          <Link to={"/ai-agent"} className="w-10">
+          <Link to={"/ai-agent"} className="w-10 mx-3">
             <img className="h-full w-full rounded" src="/ai-agent.jpg" alt="" />
+          </Link>
+          <Link to={"/chat-tool"} className="w-10">
+            <img
+              className="h-full w-full rounded"
+              src="/chat-tool.jpg"
+              alt=""
+            />
           </Link>
         </Header>
 
