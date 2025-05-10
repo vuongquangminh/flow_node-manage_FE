@@ -41,16 +41,21 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/chatbot",
-        element: <ChatBotPage />,
-      },
-      {
-        path: "/chat-tool",
-        element: <ChatToolPage />,
-      },
-      {
-        path: "/ai-agent",
-        element: <AgentPage />,
+        element: <LayoutPage />,
+        children: [
+          {
+            path: "/chatbot",
+            element: <ChatBotPage />,
+          },
+          {
+            path: "/chat-tool",
+            element: <ChatToolPage />,
+          },
+          {
+            path: "/ai-agent",
+            element: <AgentPage />,
+          },
+        ],
       },
     ],
   },

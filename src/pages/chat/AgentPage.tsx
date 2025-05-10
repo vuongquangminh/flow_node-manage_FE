@@ -31,8 +31,8 @@ const AgentPage = () => {
   };
   return (
     <>
-      <div className="h-screen flex flex-col justify-between p-4">
-        AI Aigent
+      <div className="h-full flex flex-col justify-between p-4">
+        <h1 className="text-3xl font-bold text-blue-600">AI Aigent</h1>
         <div className="">{answer}</div>
         <form
           onSubmit={(e) => {

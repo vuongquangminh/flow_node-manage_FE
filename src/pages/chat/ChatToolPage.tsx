@@ -32,8 +32,8 @@ export default function ChatToolPage() {
 
   return (
     <>
-      <div className="h-screen flex flex-col justify-between p-4">
-        ChatTool
+      <div className="h-full flex flex-col justify-between p-4">
+        <h1 className="text-3xl font-bold text-blue-600">Chat Tool</h1>
         <div className="">{answer}</div>
         <form
           onSubmit={(e) => {
