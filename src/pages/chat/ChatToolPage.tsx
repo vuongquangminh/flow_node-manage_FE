@@ -3,7 +3,7 @@ import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 
-export default function ChatBotPage() {
+export default function ChatToolPage() {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
@@ -14,8 +14,7 @@ export default function ChatBotPage() {
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
-    socket.on("chatbot-response", (data) => {
-      console.log("data chatbot: ", data);
+    socket.on("chatTool-response", (data) => {
       setAnswer(data);
     });
 
@@ -26,7 +25,7 @@ export default function ChatBotPage() {
 
   const handleSend = (message: string) => {
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatbot", message);
+      socketRef.current.emit("user-send-chatTool", message);
     }
     setMessage("");
   };
@@ -34,7 +33,7 @@ export default function ChatBotPage() {
   return (
     <>
       <div className="h-screen flex flex-col justify-between p-4">
-        Chatbot
+        ChatTool
         <div className="">{answer}</div>
         <form
           onSubmit={(e) => {
