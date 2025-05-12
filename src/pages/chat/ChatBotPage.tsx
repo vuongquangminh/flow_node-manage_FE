@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ChatBotPage() {
   const socket = useContext(SocketContext);
@@ -10,9 +11,10 @@ export default function ChatBotPage() {
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
+  const sessionId = useRef(uuidv4());
   useEffect(() => {
     socketRef.current = socket;
-
+    
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
@@ -26,22 +28,23 @@ export default function ChatBotPage() {
         },
       ]);
     };
-
+    
     socket.on("chatbot-response", handleChatbotResponse);
-
+    
     socket.on("disconnect", () => {
       // console.log("Disconnected from server");
     });
-
+    
     // Cleanup để tránh lặp listener
     return () => {
       socket.off("chatbot-response", handleChatbotResponse);
     };
   }, []);
-
+  
   const handleSend = (message: string) => {
+    const config = { configurable: { sessionId }, streamMode: "values" };
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatbot", message);
+      socketRef.current.emit("user-send-chatbot", {message, sessionId, config});
     }
     setConversation((pre) => [
       ...pre,
