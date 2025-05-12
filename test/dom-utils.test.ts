@@ -9,7 +9,7 @@ beforeEach(() => {
   
   // Set the global document and window objects to use the JSDOM instance
   global.document = dom.window.document;
-  global.window = dom.window;
+  (global.window as unknown) = dom.window;
 });
 
 test('createGreeting adds a greeting to the DOM', () => {

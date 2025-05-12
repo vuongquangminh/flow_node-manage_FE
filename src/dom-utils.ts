@@ -1,5 +1,5 @@
 // Function to create a greeting element and add it to the DOM
-export function createGreeting(name) {
+export function createGreeting(name: string) {
   // Create a new div element
   const div = document.createElement('div');
   
