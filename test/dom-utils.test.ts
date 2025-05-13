@@ -8,8 +8,8 @@ beforeEach(() => {
   const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>");
 
   // Set the global document and window objects to use the JSDOM instance
-  global.document = dom.window.document;
-  (global.window as unknown) = dom.window;
+  globalThis.document = dom.window.document;
+  globalThis.window = dom.window;
 });
 
 test("createGreeting adds a greeting to the DOM", () => {
