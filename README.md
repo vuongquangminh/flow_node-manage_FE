@@ -54,3 +54,5 @@ export default tseslint.config({
   },
 })
 ```
+
+Run test file: npx vitest
