@@ -10,7 +10,7 @@
    }
 
    // Create a test using the `test` function from Vitest
-   test('adds two numbers', () => {
+   test('adds two numbers', { retry: 3 }, () => {
      // Inside the test function, we define what we want to test
      // The first argument is a description of the test
      
@@ -18,3 +18,6 @@
      // We expect the sum of 2 and 3 to be 5
      expect(sum(2, 3)).toBe(5);
    });
+
+   // Retry test
+  // Add { retry: 3 } into test is number times retry test when false test

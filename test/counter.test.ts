@@ -4,8 +4,8 @@ import { createCounter } from "./counter";
 
 beforeEach(() => {
   const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>");
-  global.document = dom.window.document;
-  (global.window as unknown) = dom.window;
+  globalThis.document = dom.window.document;
+  globalThis.window = dom.window;
 });
 
 test("counter increments when clicked", () => {
@@ -18,3 +18,5 @@ test("counter increments when clicked", () => {
   counter.click();
   expect(counter.textContent).toBe("Count: 3");
 });
+
+// Configuring Retries
