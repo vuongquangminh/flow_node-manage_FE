@@ -67,6 +67,13 @@ const LayoutPage = () => {
               alt=""
             />
           </Link>
+          <Link to={"/ai-embedding"} className="w-10 mx-3">
+            <img
+              className="h-full w-full rounded"
+              src="/embedding.jpg"
+              alt=""
+            />
+          </Link>
         </Header>
 
         <Layout>

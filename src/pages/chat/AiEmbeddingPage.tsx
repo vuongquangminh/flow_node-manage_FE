@@ -2,22 +2,23 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
+import { v4 as uuidv4 } from "uuid";
 
-export default function ChatToolPage() {
+export default function AiEmbeddingPage() {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
+  // const sessionId = useRef(uuidv4());
   useEffect(() => {
     socketRef.current = socket;
 
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
-    const handleChatToolResponse = (data: string) => {
-      console.log("data; ", data);
+    const handleChatbotResponse = (data: string) => {
       setConversation((pre) => [
         ...pre,
         {
@@ -26,19 +27,23 @@ export default function ChatToolPage() {
         },
       ]);
     };
-    socket.on("chatTool-response", handleChatToolResponse);
+
+    socket.on("chat-embedding-response", handleChatbotResponse);
 
     socket.on("disconnect", () => {
       // console.log("Disconnected from server");
     });
+
+    // Cleanup để tránh lặp listener
     return () => {
-      socket.off("chatTool-response", handleChatToolResponse);
+      socket.off("chat-embedding-response", handleChatbotResponse);
     };
   }, []);
 
   const handleSend = (message: string) => {
+    // const config = { configurable: { sessionId }, streamMode: "values" };
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatTool", message);
+      socketRef.current.emit("user-send-chat-embedding", message);
     }
     setConversation((pre) => [
       ...pre,
@@ -50,31 +55,37 @@ export default function ChatToolPage() {
     setMessage("");
   };
 
+  console.log("conversation: ", conversation);
+
   return (
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          <h1 className="text-3xl font-bold text-blue-600">Chat Tool</h1>
-          {conversation?.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className={`flex mb-2 ${
-                  item.type == "sender" ? "justify-end" : "justify-start"
-                }`}
-              >
+          <h1 className="text-3xl font-bold text-blue-600">
+            Chatbot Embedding
+          </h1>
+          <div className="">
+            {conversation?.map((item, index) => {
+              return (
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-2xl shadow ${
-                    item.type == "sender"
-                      ? "bg-blue-500 text-white rounded-br-none"
-                      : "bg-gray-200 text-gray-800 rounded-bl-none"
+                  key={index}
+                  className={`flex mb-2 ${
+                    item.type == "sender" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  {item.message}
+                  <div
+                    className={`max-w-xs px-4 py-2 rounded-2xl shadow ${
+                      item.type == "sender"
+                        ? "bg-blue-500 text-white rounded-br-none"
+                        : "bg-gray-200 text-gray-800 rounded-bl-none"
+                    }`}
+                  >
+                    {item.message}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
         <form
           onSubmit={(e) => {

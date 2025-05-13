@@ -7,7 +7,7 @@ import userAPI from "./userAPI";
 vi.mock("node-fetch");
 
 const mockFetch = vi.fn();
-global.fetch = mockFetch;
+globalThis.fetch = mockFetch;
 
 test("getUser fetches user data successfully", async () => {
   const mockResponse = { id: 1, name: "John Doe" };
