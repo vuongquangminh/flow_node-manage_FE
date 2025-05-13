@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
-import { v4 as uuidv4 } from "uuid";
 
 export default function AiEmbeddingPage() {
   const socket = useContext(SocketContext);
