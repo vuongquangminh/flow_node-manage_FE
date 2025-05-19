@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
-import { v4 as uuidv4 } from "uuid";
 
 export default function ChatBotPage() {
   const socket = useContext(SocketContext);
@@ -11,7 +10,6 @@ export default function ChatBotPage() {
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
-  const sessionId = useRef(uuidv4());
   useEffect(() => {
     socketRef.current = socket;
     
@@ -42,9 +40,8 @@ export default function ChatBotPage() {
   }, []);
   
   const handleSend = (message: string) => {
-    const config = { configurable: { sessionId }, streamMode: "values" };
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatbot", {message, sessionId, config});
+      socketRef.current.emit("user-send-chatbot", {message});
     }
     setConversation((pre) => [
       ...pre,

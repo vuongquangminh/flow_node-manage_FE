@@ -7,11 +7,11 @@ import {
   Input,
   notification,
 } from "antd";
-import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../store/services/UserService";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { setLocalStorage } from "../hooks/localStorage";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { Link, useNavigate } from "react-router-dom";
 
 type FieldType = {
   email: string;
