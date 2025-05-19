@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
+import { AudioOutlined } from "@ant-design/icons";
 
 export default function ChatBotPage() {
   const socket = useContext(SocketContext);
@@ -12,7 +13,7 @@ export default function ChatBotPage() {
   >([]);
   useEffect(() => {
     socketRef.current = socket;
-    
+
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
@@ -26,22 +27,22 @@ export default function ChatBotPage() {
         },
       ]);
     };
-    
+
     socket.on("chatbot-response", handleChatbotResponse);
-    
+
     socket.on("disconnect", () => {
       // console.log("Disconnected from server");
     });
-    
+
     // Cleanup để tránh lặp listener
     return () => {
       socket.off("chatbot-response", handleChatbotResponse);
     };
   }, []);
-  
+
   const handleSend = (message: string) => {
     if (socketRef.current && message.length > 0) {
-      socketRef.current.emit("user-send-chatbot", {message});
+      socketRef.current.emit("user-send-chatbot", { message });
     }
     setConversation((pre) => [
       ...pre,
@@ -89,7 +90,10 @@ export default function ChatBotPage() {
             handleSend(message);
           }}
         >
-          <div className="flex items-end">
+          <div className="flex items-center">
+            <div className="mx-2">
+              <AudioOutlined />
+            </div>
             <Input
               placeholder="Nhập email hoặc tin nhắn"
               value={message}
