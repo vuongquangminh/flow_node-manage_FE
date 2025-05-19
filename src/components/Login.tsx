@@ -24,7 +24,6 @@ const LoginPage = () => {
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const response = await doLogin(values);
-    console.log("ressponse: ", response);
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
       setLocalStorage({ key: "user", value: response.data.user });

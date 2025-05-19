@@ -18,7 +18,6 @@ export default function ChatBotPage() {
       // console.log("Connected to WebSocket server", socket.id);
     });
     const handleChatbotResponse = (data: string) => {
-      console.log("data chatbot: ", data);
       setConversation((pre) => [
         ...pre,
         {
@@ -53,8 +52,10 @@ export default function ChatBotPage() {
     ]);
     setMessage("");
   };
+  const onAudio = () => {
+    console.log("123");
+  };
 
-  console.log("conversation: ", conversation);
 
   return (
     <>
@@ -91,7 +92,10 @@ export default function ChatBotPage() {
           }}
         >
           <div className="flex items-center">
-            <div className="mx-2">
+            <div
+              className="mx-2 px-2 rounded-lg text-lg hover:bg-slate-200 cursor-pointer"
+              onClick={onAudio}
+            >
               <AudioOutlined />
             </div>
             <Input

@@ -17,7 +17,6 @@ export default function ChatToolPage() {
       // console.log("Connected to WebSocket server", socket.id);
     });
     const handleChatToolResponse = (data: string) => {
-      console.log("data; ", data);
       setConversation((pre) => [
         ...pre,
         {
