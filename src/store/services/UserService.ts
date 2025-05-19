@@ -38,7 +38,7 @@ export const userApi = createApi({
     },
   }),
   tagTypes: ["User"],
-  endpoints: (build) => ({
+  endpoints: (build: unknown) => ({
     login: build.mutation<TLoginRes, TLoginReq>({
       query: (body) => ({
         url: `login`,
@@ -51,6 +51,7 @@ export const userApi = createApi({
           status: meta?.response ? meta?.response.ok : false,
         };
       },
+      
     }),
     getUser: build.query<UserRes[], void>({
       query: () => `account`,

@@ -10,7 +10,6 @@ import {
 import { useLoginMutation } from "../store/services/UserService";
 import { setLocalStorage } from "../hooks/localStorage";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Link, useNavigate } from "react-router-dom";
 
 type FieldType = {
@@ -25,6 +24,7 @@ const LoginPage = () => {
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const response = await doLogin(values);
+    console.log("ressponse: ", response);
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
       setLocalStorage({ key: "user", value: response.data.user });
@@ -32,26 +32,21 @@ const LoginPage = () => {
     } else {
       api.error({
         message: "Thất bại",
-        description: (response.error as FetchBaseQueryError)?.data as string,
+        description: response.error.data.error,
       });
     }
   };
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
-  };
   return (
-    <>
+    <div className="w-full bg-login bg-no-repeat bg-center bg-cover">
+      {contextHolder}
       <div className="flex justify-center items-center h-screen">
-        {contextHolder}
         <Form
           name="login"
           initialValues={{ remember: true }}
           style={{ maxWidth: 360 }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          className="p-8 backdrop-contrast-50 rounded-xl"
         >
           <Form.Item
             name="email"
@@ -86,7 +81,7 @@ const LoginPage = () => {
           </Form.Item>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 
