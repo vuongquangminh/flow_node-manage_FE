@@ -6,13 +6,7 @@ import { useGetUserQuery } from "../../store/services/UserService";
 import { useContext, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
 
-const { Header, Footer } = Layout;
-
-const footerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  backgroundColor: "#4096ff",
-};
+const { Header } = Layout;
 
 const LayoutPage = () => {
   const navigate = useNavigate();
@@ -86,7 +80,6 @@ const LayoutPage = () => {
             </Col>
           </Row>
         </Layout>
-        <Footer style={footerStyle}>Footer</Footer>
       </Layout>
     </SocketContext.Provider>
   );
