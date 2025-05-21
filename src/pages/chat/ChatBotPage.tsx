@@ -3,8 +3,10 @@ import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 import { AudioOutlined } from "@ant-design/icons";
+import { useTranslation } from 'react-i18next';
 
 export default function ChatBotPage() {
+  const { t } = useTranslation();
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
@@ -61,7 +63,7 @@ export default function ChatBotPage() {
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          <h1 className="text-3xl font-bold text-blue-600">Chatbot</h1>
+          <h1 className="text-3xl font-bold text-blue-600">{t('label')}</h1>
           <div className="">
             {conversation?.map((item, index) => {
               return (
