@@ -68,6 +68,7 @@ export default function ChatToolPage() {
                       ? "bg-blue-500 text-white rounded-br-none"
                       : "bg-gray-200 text-gray-800 rounded-bl-none"
                   }`}
+                  style={{ whiteSpace: "pre-line" }}
                 >
                   {item.message}
                 </div>
