@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetUserQuery } from "../store/services/UserService";
 
 import React from "react";
@@ -35,7 +36,7 @@ const columns: TableProps<DataType>["columns"] = [
 ];
 
 const UserPage: React.FC = () => {
-  const res = useGetUserQuery();
+  const res:any = useGetUserQuery();
   return (
     <Table<DataType>
       columns={columns}
