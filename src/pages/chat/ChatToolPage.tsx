@@ -53,7 +53,7 @@ export default function ChatToolPage() {
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          <h1 className="text-3xl font-bold text-blue-600">Chat Tool</h1>
+          <h1 className="text-3xl font-bold text-blue-600">Chat Tool Agent</h1>
           {conversation?.map((item, index) => {
             return (
               <div
