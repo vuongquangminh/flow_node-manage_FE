@@ -53,7 +53,7 @@ export default function ChatPagePage() {
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          {res.data?.map((item) => {
+          {(Array.isArray(res.data) ? res.data : []).map((item) => {
             return (
               <div
                 key={item._id}
