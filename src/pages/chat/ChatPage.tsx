@@ -24,7 +24,7 @@ export default function ChatPagePage() {
       // console.log("Connected to WebSocket server", socket.id);
     });
 
-    socket.on("conversation-updated", (data) => {
+    socket.on("conversation-updated", () => {
       res.refetch();
     });
 
