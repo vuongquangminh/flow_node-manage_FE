@@ -35,6 +35,9 @@ const LoginPage = () => {
       });
     }
   };
+  const handleLogin = async () => {
+    window.location.href = "http://localhost:3000/auth/github";
+  };
 
   return (
     <div className="w-full bg-login bg-no-repeat bg-center bg-cover">
@@ -77,6 +80,7 @@ const LoginPage = () => {
               Log in
             </Button>
             or <Link to={"/register"}>Register now!</Link>
+            <button onClick={handleLogin}>Login with GitHub</button>
           </Form.Item>
         </Form>
       </div>

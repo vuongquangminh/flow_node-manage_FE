@@ -11,12 +11,18 @@ import ChatBotPage from "../pages/chat/ChatBotPage";
 import AgentPage from "../pages/chat/AgentPage";
 import ChatToolPage from "../pages/chat/ChatToolPage";
 import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
+import OAuthCallback from "../components/OAuthCallback";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
   },
+  {
+    path: "/oauth-callback",
+    element: <OAuthCallback />,
+  },
+
   {
     path: "/register",
     element: <RegisterPage />,
