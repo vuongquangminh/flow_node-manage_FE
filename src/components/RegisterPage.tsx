@@ -92,11 +92,10 @@ const RegisterPage = () => {
             block
             type="primary"
             htmlType="submit"
-            loading={insert.loading}
+            loading={insert.isLoading}
           >
             Đăng ký
           </Button>
-          {/* Render Props */}
         </Form>
       </div>
     </>
