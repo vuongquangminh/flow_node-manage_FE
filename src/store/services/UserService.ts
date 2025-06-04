@@ -38,7 +38,7 @@ export const userApi = createApi({
     },
   }),
   tagTypes: ["User"],
-  endpoints: (build: unknown) => ({
+  endpoints: (build) => ({
     login: build.mutation<TLoginRes, TLoginReq>({
       query: (body) => ({
         url: `login`,
