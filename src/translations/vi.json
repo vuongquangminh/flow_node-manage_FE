@@ -3,5 +3,7 @@
     "label": "Chat GPT",
     "send": "Gửi",
     "cancel": "Hủy",
-    "list_friends": "Danh sách bạn bè"
+    "list_friends": "Danh sách bạn bè",
+    "back": "Quay lại",
+    "search": "Tìm kiếm"
 }

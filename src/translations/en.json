@@ -4,6 +4,8 @@
     "label": "Chat GPT",
     "send": "Send",
     "cancel": "Cancel",
-    "list_friends": "List Friend"
+    "list_friends": "List Friend",
+    "back": "Back",
+    "search": "Search"
 
 }
