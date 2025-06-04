@@ -1,21 +1,15 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import translationVI from "./translations/vi.json";
+import translationEN from "./translations/en.json";
 
-// the translations
-// (tip move them in a JSON file and import them,
 const resources = {
-  en: {
-    translation: {
-      "Welcome to React": "Welcome to React and react-i18next",
-      "label": "ChatBotE"
-    }
+  vi: {
+    translation: translationVI,
   },
-  fr: {
-    translation: {
-      "Welcome to React": "Bienvenue à React et react-i18next",
-      "label": "CkatPotF"
-    }
-  }
+  en: {
+    translation: translationEN,
+  },
 };
 
 i18n
@@ -24,8 +18,8 @@ i18n
     resources,
     lng: "vi", // language to use
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
 
-  export default i18n;
+export default i18n;
