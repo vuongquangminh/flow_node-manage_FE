@@ -31,7 +31,11 @@ const LoginPage = () => {
     } else {
       api.error({
         message: "Thất bại",
-        description: response.error.data.error,
+        description:
+          (response.error &&
+            "data" in response.error &&
+            (response.error as { data?: { error?: string } }).data?.error) ||
+          "Đã xảy ra lỗi",
       });
     }
   };
