@@ -1,5 +1,9 @@
 
 {
     "welcome_app": "Welcome to my app",
-    "label": "Chat GPT"
+    "label": "Chat GPT",
+    "send": "Send",
+    "cancel": "Cancel",
+    "list_friends": "List Friend"
+
 }

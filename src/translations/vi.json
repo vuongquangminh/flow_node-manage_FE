@@ -1,4 +1,7 @@
 {
     "welcome_app": "Chào mừng bạn đến với hệ thống hỏi đáp của chúng tôi",
-    "label": "Chat GPT"
+    "label": "Chat GPT",
+    "send": "Gửi",
+    "cancel": "Hủy",
+    "list_friends": "Danh sách bạn bè"
 }

@@ -5,6 +5,7 @@ import { Socket } from "socket.io-client";
 import { useParams } from "react-router-dom";
 import { useGetHistoryMessageQuery } from "../../store/services/ChatService";
 import { SocketContext } from "../../utils/SocketContext";
+import { useTranslation } from "react-i18next";
 
 export default function ChatPagePage() {
   const socket = useContext(SocketContext);
@@ -12,6 +13,7 @@ export default function ChatPagePage() {
   const [message, setMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
   const params = useParams();
+  const { t } = useTranslation();
   const res = useGetHistoryMessageQuery({
     sender_id: user._id,
     receiver_id: Number(params.id),
@@ -87,7 +89,7 @@ export default function ChatPagePage() {
               onChange={(e) => setMessage(e.target.value)}
             />
             <Button type="primary" className="mx-4" htmlType="submit">
-              Send
+              {t('send')}
             </Button>
           </div>
         </form>
