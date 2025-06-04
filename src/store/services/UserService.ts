@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserRes } from "../../type/api";
-import { getLocalStorage } from "../../hooks/localStorage";
+import headerTokenRequest from "../../utils/headerTokenRequest";
 
 type TLoginRes = {
   message: string;
@@ -26,16 +26,7 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
-    prepareHeaders: (headers) => {
-      const token = getLocalStorage({ key: "token" });
-
-      // If we have a token set in state, let's assume that we should be passing it.
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
-
-      return headers;
-    },
+    prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["User"],
   endpoints: (build) => ({
@@ -51,7 +42,6 @@ export const userApi = createApi({
           status: meta?.response ? meta?.response.ok : false,
         };
       },
-      
     }),
     getUser: build.query<UserRes[], void>({
       query: () => `account`,

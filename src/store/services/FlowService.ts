@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import headerRequest from "../../utils/headerRequest";
+import headerTokenRequest from "../../utils/headerTokenRequest";
 
 export const flowApi = createApi({
   reducerPath: "flowApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
-    prepareHeaders: (headers) => headerRequest(headers),
+    prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["Flow"],
   endpoints: (build) => ({

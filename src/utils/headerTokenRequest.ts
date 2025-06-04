@@ -1,4 +1,4 @@
-const headerRequest = (headers: Headers) => {
+const headerTokenRequest = (headers: Headers) => {
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -8,4 +8,4 @@ const headerRequest = (headers: Headers) => {
   return headers;
 };
 
-export default headerRequest;
+export default headerTokenRequest;
