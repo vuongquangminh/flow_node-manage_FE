@@ -1,19 +1,23 @@
-import { Col, Layout, Row } from "antd";
-import SideBar from "./Sidebar";
-import { Link, Outlet} from "react-router-dom";
-import { useContext, useState } from "react";
+import { Col, Layout, Popover, Row } from "antd";
+import { Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
 import { SocketContext } from "../../utils/SocketContext";
+import { SettingOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
 const LayoutPage = () => {
   const socket = useContext(SocketContext);
-  const [keyRender, setKeyRender] = useState(0);
 
   socket.on("update-friend", (data) => {
     console.log(data);
-    setKeyRender((pre) => pre + 1);
   });
+  const content = (
+    <div>
+      <p>Content</p>
+      <p>Content</p>
+    </div>
+  );
 
   return (
     <SocketContext.Provider value={socket}>
@@ -39,13 +43,19 @@ const LayoutPage = () => {
               alt=""
             />
           </Link>
+          <Popover
+            content={content}
+            title="Title"
+            trigger="click"
+            className="flex grow justify-end"
+          >
+            <SettingOutlined className="text-white text-2xl" />
+          </Popover>
         </Header>
 
         <Layout>
-          <Row gutter={16} className="!mx-0 h-[100ch]">
-            <Col span={6}>
-              <SideBar key={keyRender} />
-            </Col>
+          <Row gutter={16} className="!mx-0 ">
+            <Col span={6}>{/* <SideBar key={keyRender} /> */}</Col>
             <Col span={18}>
               <Outlet />
             </Col>
