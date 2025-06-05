@@ -10,6 +10,7 @@ export default function ChatBotPage() {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
@@ -19,14 +20,9 @@ export default function ChatBotPage() {
     socket.on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
-    const handleChatbotResponse = (data: string) => {
-      setConversation((pre) => [
-        ...pre,
-        {
-          type: "answer",
-          message: data,
-        },
-      ]);
+    const handleChatbotResponse = (token: string) => {
+      console.log("token:", token);
+      setResponse((pre) => pre + token);
     };
 
     socket.on("chatbot-response", handleChatbotResponse);
@@ -47,12 +43,21 @@ export default function ChatBotPage() {
     }
     setConversation((pre) => [
       ...pre,
+      ...(response.length > 0
+        ? [
+            {
+              type: "answer",
+              message: response,
+            },
+          ]
+        : []),
       {
         type: "sender",
         message: message,
       },
     ]);
     setMessage("");
+    setResponse("");
   };
   const onAudio = () => {
     console.log("123");
@@ -73,7 +78,7 @@ export default function ChatBotPage() {
                   }`}
                 >
                   <div
-                    className={`max-w-xs px-4 py-2 rounded-2xl shadow ${
+                    className={`max-w-xs px-4 py-2 rounded-2xl shadow whitespace-pre-line ${
                       item.type == "sender"
                         ? "bg-blue-500 text-white rounded-br-none"
                         : "bg-gray-200 text-gray-800 rounded-bl-none"
@@ -84,6 +89,9 @@ export default function ChatBotPage() {
                 </div>
               );
             })}
+            {response.length > 0 && (
+              <div className="whitespace-pre-line">{response}</div>
+            )}
           </div>
         </div>
         <form
