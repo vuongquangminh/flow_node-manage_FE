@@ -40,8 +40,12 @@ const LoginPage = () => {
       });
     }
   };
-  const handleLogin = async () => {
-    window.location.href = "http://localhost:3000/auth/github";
+  const handleLogin = async (service: string) => {
+    if(service == "github") {
+      window.location.href = "http://localhost:3000/auth/github";
+    } else if(service == "google") {
+      window.location.href = "http://localhost:3000/auth/google";
+    }
   };
 
   return (
@@ -95,8 +99,11 @@ const LoginPage = () => {
               {t("login")}
             </Button>
             or <Link to={"/register"}>{t("register")}</Link>
-            <button onClick={handleLogin}>
+            <button onClick={() => handleLogin("github")}>
               {t("login_with_name", { name: "Github" })}
+            </button>
+            <button onClick={() => handleLogin("google")}>
+              {t("login_with_name", { name: "Google" })}
             </button>
           </Form.Item>
         </Form>
