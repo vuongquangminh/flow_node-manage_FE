@@ -84,7 +84,7 @@ export default function ChatPagePage() {
         >
           <div className="flex items-end">
             <Input
-              placeholder="Nhập email hoặc tin nhắn"
+              placeholder={t("enter_message")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setLocalStorage } from "../hooks/localStorage";
+import { useTranslation } from "react-i18next";
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   useEffect(() => {
     console.log("location.pathname: ", location.pathname);
     if (location.pathname === "/oauth-callback") {
@@ -19,7 +20,7 @@ const OAuthCallback = () => {
     }
   }, [navigate]);
 
-  return <div>Đang đăng nhập...</div>;
+  return <div>{t("loading")}</div>;
 };
 
 export default OAuthCallback;

@@ -1,11 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Alert, Button, Form, Input, notification } from "antd";
 import { useCreateUserMutation } from "../store/services/UserService";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
   const [form] = Form.useForm();
   const [doCreate, insert] = useCreateUserMutation();
   const [api, contextHolder] = notification.useNotification();
+  const { t } = useTranslation();
 
   const onFinish = (values: {
     email: string;
@@ -16,13 +18,13 @@ const RegisterPage = () => {
       .unwrap()
       .then(() => {
         api.success({
-          message: "Thành công",
-          description: "Đăng ký tài khoản thành công",
+          message: t("success"),
+          description: t("feature_success", { name: t("regiter") }),
         });
       })
       .catch((error) => {
         api.error({
-          message: "Thất bại",
+          message: t("failed"),
           description: error.data.error,
         });
       });
@@ -40,24 +42,34 @@ const RegisterPage = () => {
           layout="vertical"
           onFinish={onFinish}
         >
-          <Alert message="Đăng ký" type="info" showIcon className=" my-5" />
+          <Alert
+            message={t("register")}
+            type="info"
+            showIcon
+            className=" my-5"
+          />
 
           <Form.Item
-            label="Name"
+            label={t("name")}
             name="name"
-            rules={[{ required: true, message: "Please input your name!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: t("name") }),
+              },
+            ]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Email" />
+            <Input prefix={<UserOutlined />} placeholder={t("email")} />
           </Form.Item>
           <Form.Item
-            label="Email"
+            label={t("email")}
             name="email"
-            rules={[{ required: true, message: "Please input your Email!" }]}
+            rules={[{ required: true, message: t("please_field_required", { field: t("email") }) }]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Email" />
+            <Input prefix={<UserOutlined />} placeholder={t("email")} />
           </Form.Item>
           <Form.Item
-            label="Password"
+            label={t("password")}
             name="password"
             rules={[{ required: true }]}
           >
@@ -66,7 +78,7 @@ const RegisterPage = () => {
 
           {/* Field */}
           <Form.Item
-            label="Confirm Password"
+            label={t("confirm_password")}
             name="password2"
             dependencies={["password"]}
             rules={[
@@ -94,7 +106,7 @@ const RegisterPage = () => {
             htmlType="submit"
             loading={insert.isLoading}
           >
-            Đăng ký
+            {t("register")}
           </Button>
         </Form>
       </div>

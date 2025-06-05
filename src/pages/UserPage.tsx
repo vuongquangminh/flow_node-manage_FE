@@ -4,6 +4,7 @@ import { useGetUserQuery } from "../store/services/UserService";
 import React from "react";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
+import { t } from "i18next";
 
 interface DataType {
   email: string;
@@ -12,13 +13,13 @@ interface DataType {
 
 const columns: TableProps<DataType>["columns"] = [
   {
-    title: "Name",
+    title: t("username"),
     dataIndex: "name",
     key: "name",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Email",
+    title: t("email"),
     dataIndex: "email",
     key: "email",
   },
@@ -29,14 +30,14 @@ const columns: TableProps<DataType>["columns"] = [
     render: (_, record) => (
       <Space size="middle">
         <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <a>{t("delete")}</a>
       </Space>
     ),
   },
 ];
 
 const UserPage: React.FC = () => {
-  const res:any = useGetUserQuery();
+  const res: any = useGetUserQuery();
   return (
     <Table<DataType>
       columns={columns}

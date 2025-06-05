@@ -11,6 +11,7 @@ import { useLoginMutation } from "../store/services/UserService";
 import { setLocalStorage } from "../hooks/localStorage";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 type FieldType = {
   email: string;
@@ -21,7 +22,7 @@ const LoginPage = () => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
   const [doLogin] = useLoginMutation();
-
+  const { t } = useTranslation();
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const response = await doLogin(values);
     if (response?.data?.status) {
@@ -30,12 +31,12 @@ const LoginPage = () => {
       navigate("/conversation");
     } else {
       api.error({
-        message: "Thất bại",
+        message: t("loading"),
         description:
           (response.error &&
             "data" in response.error &&
             (response.error as { data?: { error?: string } }).data?.error) ||
-          "Đã xảy ra lỗi",
+          t("error"),
       });
     }
   };
@@ -48,7 +49,7 @@ const LoginPage = () => {
       {contextHolder}
       <div className="flex justify-center items-center h-screen">
         <Form
-          name="login"
+          name={t("login")}
           initialValues={{ remember: true }}
           style={{ maxWidth: 360 }}
           onFinish={onFinish}
@@ -56,35 +57,47 @@ const LoginPage = () => {
         >
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "Please input your Email!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: t("email") }),
+              },
+            ]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Email" />
+            <Input prefix={<UserOutlined />} placeholder={t("email")} />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: t("password") }),
+              },
+            ]}
           >
             <Input
               prefix={<LockOutlined />}
-              type="password"
-              placeholder="Password"
+              type={t("password")}
+              placeholder={t("password")}
             />
           </Form.Item>
           <Form.Item>
             <Flex justify="space-between" align="center">
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox>{t("remember_me")}</Checkbox>
               </Form.Item>
-              <Link to={"/forgot-password"}>Forgot password</Link>
+              <Link to={"/forgot-password"}>{t("forgot_password")}</Link>
             </Flex>
           </Form.Item>
 
           <Form.Item>
             <Button block type="primary" htmlType="submit">
-              Log in
+              {t("login")}
             </Button>
-            or <Link to={"/register"}>Register now!</Link>
-            <button onClick={handleLogin}>Login with GitHub</button>
+            or <Link to={"/register"}>{t("register")}</Link>
+            <button onClick={handleLogin}>
+              {t("login_with_name", { name: "Github" })}
+            </button>
           </Form.Item>
         </Form>
       </div>

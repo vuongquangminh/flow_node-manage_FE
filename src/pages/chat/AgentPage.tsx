@@ -2,11 +2,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
+import { useTranslation } from "react-i18next";
 
 const AgentPage = () => {
   const socket = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
+  const { t } = useTranslation();
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
@@ -53,7 +55,7 @@ const AgentPage = () => {
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          <h1 className="text-3xl font-bold text-blue-600">AI Aigent</h1>
+          <h1 className="text-3xl font-bold text-blue-600">{t("ai_aigent")}</h1>
           {conversation?.map((item, index) => {
             return (
               <div
@@ -83,12 +85,12 @@ const AgentPage = () => {
         >
           <div className="flex items-end">
             <Input
-              placeholder="Nhập email hoặc tin nhắn"
+              placeholder={t("enter_message")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <Button type="primary" className="mx-4" htmlType="submit">
-              Send
+              {t("send")}
             </Button>
           </div>
         </form>

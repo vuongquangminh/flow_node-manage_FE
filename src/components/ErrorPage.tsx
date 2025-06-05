@@ -7,7 +7,7 @@ const ErrorPage = () => {
     <Result
       status="404"
       title="404"
-      subTitle="Sorry, the page you visited does not exist."
+      subTitle={t("page_not_found")}
       extra={<Button type="primary">{t("back")}</Button>}
     />
   );

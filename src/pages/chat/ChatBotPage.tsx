@@ -3,7 +3,7 @@ import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 import { AudioOutlined } from "@ant-design/icons";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function ChatBotPage() {
   const { t } = useTranslation();
@@ -58,12 +58,11 @@ export default function ChatBotPage() {
     console.log("123");
   };
 
-
   return (
     <>
       <div className="h-full flex flex-col justify-between p-4">
         <div className="">
-          <h1 className="text-3xl font-bold text-blue-600">{t('label')}</h1>
+          <h1 className="text-3xl font-bold text-blue-600">{t("label")}</h1>
           <div className="">
             {conversation?.map((item, index) => {
               return (
@@ -101,12 +100,12 @@ export default function ChatBotPage() {
               <AudioOutlined />
             </div>
             <Input
-              placeholder="Nhập email hoặc tin nhắn"
+              placeholder={t("enter_message")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <Button type="primary" className="mx-4" htmlType="submit">
-              Send
+              {t("send")}
             </Button>
           </div>
         </form>
