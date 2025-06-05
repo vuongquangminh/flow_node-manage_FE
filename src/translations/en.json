@@ -1,11 +1,39 @@
 
 {
-    "welcome_app": "Welcome to my app",
+    "welcome_app": "Welcome to my chat app",
     "label": "Chat GPT",
     "send": "Send",
     "cancel": "Cancel",
     "list_friends": "List Friend",
     "back": "Back",
-    "search": "Search"
+    "search": "Search",
+    "error_page_not_found": "Page not found",
+    "error": "Something went wrong",
+    "failed": "Failed",
+    "loading": "Loading",
+    "login": "Login",
+    "logout": "Logout",
+    "chat": "Chat",
+    "please_field_required": "This {{field}} is required",
+    "email": "Email",
+    "password": "Password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "register": "Register",
+    "login_with_name": "Login with {{name}}",
+    "success": "Success",
+    "feature_success": "{{name}} success!",
+    "name": "Username",
+    "confirm_password": "Confirm Password",
+    "ai_aigent": "AI Agent",
+    "enter_message": "Enter your message here",
+    "ai_embedding": "AI Embedding",
+    "ai_tools": "AI Tools",
+    "create": "Create new",
+    "update": "Update",
+    "delete": "Delete"
+    
+
+
 
 }
