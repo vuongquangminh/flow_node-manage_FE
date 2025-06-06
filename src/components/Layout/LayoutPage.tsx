@@ -1,6 +1,6 @@
 import { Col, Layout, Popover, Row, Select } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
 import { SettingOutlined } from "@ant-design/icons";
 import SideBar from "./Sidebar";
@@ -11,7 +11,6 @@ const { Header } = Layout;
 
 const LayoutPage = () => {
   const socket = useContext(SocketContext);
-  const navigate = useNavigate();
   const account = useGetUserQuery();
   const [keyRender, setKeyRender] = useState(0);
 
@@ -25,9 +24,6 @@ const LayoutPage = () => {
     </div>
   );
   const user = getLocalStorage({ key: "user" });
-  if (!user) {
-    navigate("/");
-  }
 
   const options = account?.data
     ?.filter((item) => item._id !== user._id)
@@ -42,6 +38,9 @@ const LayoutPage = () => {
     });
     setKeyRender((pre) => pre + 1);
   };
+  useEffect(() => {
+    console.log("User data:", user);
+  }, [user]);
 
   return (
     <SocketContext.Provider value={socket}>
