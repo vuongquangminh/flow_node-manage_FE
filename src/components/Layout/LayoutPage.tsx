@@ -1,6 +1,6 @@
 import { Col, Layout, Popover, Row, Select } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
 import { SettingOutlined } from "@ant-design/icons";
 import SideBar from "./Sidebar";
@@ -10,12 +10,12 @@ import { getLocalStorage } from "../../hooks/localStorage";
 const { Header } = Layout;
 
 const LayoutPage = () => {
-  const socket = useContext(SocketContext);
-  const navigate = useNavigate();
+  const socketFn = useContext(SocketContext);
   const account = useGetUserQuery();
   const [keyRender, setKeyRender] = useState(0);
+  const user = getLocalStorage({ key: "user" });
 
-  socket.on("update-friend", (data) => {
+  socketFn(JSON.stringify(user)).on("update-friend", (data) => {
     console.log(data);
   });
   const content = (
@@ -24,10 +24,6 @@ const LayoutPage = () => {
       <p>Content</p>
     </div>
   );
-  const user = getLocalStorage({ key: "user" });
-  if (!user) {
-    navigate("/");
-  }
 
   const options = account?.data
     ?.filter((item) => item._id !== user._id)
@@ -37,14 +33,17 @@ const LayoutPage = () => {
     }));
 
   const handleChange = (value: number) => {
-    socket.emit("add-friend", {
+    socketFn(JSON.stringify(user)).emit("add-friend", {
       id: value,
     });
     setKeyRender((pre) => pre + 1);
   };
+  useEffect(() => {
+    console.log("User data:", user);
+  }, [user]);
 
   return (
-    <SocketContext.Provider value={socket}>
+    <SocketContext.Provider value={user}>
       <Layout style={{ height: "100vh" }}>
         <Header className="flex justify-center items-center bg-cyan-700">
           <Select

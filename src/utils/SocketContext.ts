@@ -1,11 +1,14 @@
 // SocketContext.js
 import { createContext } from "react";
 import { io } from "socket.io-client";
-import { getLocalStorage } from "../hooks/localStorage";
 
-const user = getLocalStorage({ key: "user" });
-
-export const socket = io("http://localhost:3000", {
-  query: { user: JSON.stringify(user) },
-});
-export const SocketContext = createContext(socket);
+export const socket = (data: string) =>
+  io("http://localhost:3000", {
+    query: { user: data },
+  });
+export const socketFn = (data: string) => {
+  return io("http://localhost:3000", {
+    query: { user: data },
+  });
+};
+export const SocketContext = createContext(socketFn);
