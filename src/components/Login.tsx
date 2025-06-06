@@ -12,6 +12,7 @@ import { setLocalStorage } from "../hooks/localStorage";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useGetMe from "../utils/getMe";
 
 type FieldType = {
   email: string;
@@ -23,11 +24,12 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [doLogin] = useLoginMutation();
   const { t } = useTranslation();
+  const getMe = useGetMe();
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const response = await doLogin(values);
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
-      setLocalStorage({ key: "user", value: response.data.user });
+      await getMe();
       navigate("/conversation");
     } else {
       api.error({
