@@ -41,9 +41,9 @@ const LoginPage = () => {
     }
   };
   const handleLogin = async (service: string) => {
-    if(service == "github") {
+    if (service == "github") {
       window.location.href = "http://localhost:3000/auth/github";
-    } else if(service == "google") {
+    } else if (service == "google") {
       window.location.href = "http://localhost:3000/auth/google";
     }
   };
@@ -99,12 +99,28 @@ const LoginPage = () => {
               {t("login")}
             </Button>
             or <Link to={"/register"}>{t("register")}</Link>
-            <button onClick={() => handleLogin("github")}>
-              {t("login_with_name", { name: "Github" })}
-            </button>
-            <button onClick={() => handleLogin("google")}>
-              {t("login_with_name", { name: "Google" })}
-            </button>
+            <div className="flex mt-2">
+              <button
+                className="w-12 mx-2 rounded"
+                onClick={() => handleLogin("github")}
+              >
+                <img
+                  className="w-full rounded"
+                  src="./images/logo-github.png"
+                  alt=""
+                />
+              </button>
+              <button
+                className="w-12 p-2 rounded"
+                onClick={() => handleLogin("google")}
+              >
+                <img
+                  className="w-full rounded"
+                  src="./images/logo-google.png"
+                  alt=""
+                />
+              </button>
+            </div>
           </Form.Item>
         </Form>
       </div>
