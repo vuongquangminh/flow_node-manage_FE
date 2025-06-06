@@ -4,20 +4,23 @@ import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 import { AudioOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import { getLocalStorage } from "../../hooks/localStorage";
 
 export default function ChatBotPage() {
   const { t } = useTranslation();
-  const socket = useContext(SocketContext);
+  const socketFn = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
+  const user = getLocalStorage({ key: "user" });
+
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
   useEffect(() => {
-    socketRef.current = socket;
+    socketRef.current = socketFn(user);
 
-    socket.on("connect", () => {
+    socketFn(user).on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
     const handleChatbotResponse = (token: string) => {
@@ -25,15 +28,15 @@ export default function ChatBotPage() {
       setResponse((pre) => pre + token);
     };
 
-    socket.on("chatbot-response", handleChatbotResponse);
+    socketFn(user).on("chatbot-response", handleChatbotResponse);
 
-    socket.on("disconnect", () => {
+    socketFn(user).on("disconnect", () => {
       // console.log("Disconnected from server");
     });
 
     // Cleanup để tránh lặp listener
     return () => {
-      socket.off("chatbot-response", handleChatbotResponse);
+      socketFn(user).off("chatbot-response", handleChatbotResponse);
     };
   }, []);
 

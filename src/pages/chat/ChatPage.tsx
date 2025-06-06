@@ -8,7 +8,7 @@ import { SocketContext } from "../../utils/SocketContext";
 import { useTranslation } from "react-i18next";
 
 export default function ChatPagePage() {
-  const socket = useContext(SocketContext);
+  const socketFn = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
@@ -20,17 +20,17 @@ export default function ChatPagePage() {
   });
 
   useEffect(() => {
-    socketRef.current = socket;
+    socketRef.current = socketFn(user);
 
-    socket.on("connect", () => {
+    socketFn(user).on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
 
-    socket.on("conversation-updated", () => {
+    socketFn(user).on("conversation-updated", () => {
       res.refetch();
     });
 
-    socket.on("disconnect", () => {
+    socketFn(user).on("disconnect", () => {
       // console.log("Disconnected from server");
     });
   }, []);

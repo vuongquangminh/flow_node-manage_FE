@@ -3,23 +3,26 @@ import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 import { useTranslation } from "react-i18next";
+import { getLocalStorage } from "../../hooks/localStorage";
 
 const AgentPage = () => {
-  const socket = useContext(SocketContext);
+  const socketFn = useContext(SocketContext);
+
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const { t } = useTranslation();
+  const user = getLocalStorage({ key: "user" });
+
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
   useEffect(() => {
-    socketRef.current = socket;
+    socketRef.current = socketFn(user);
 
-    socket.on("connect", () => {
+    socketFn(user).on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
     const handleAgentResponse = (data: string) => {
-      console.log("data: ", data);
       setConversation((pre) => [
         ...pre,
         {
@@ -28,13 +31,13 @@ const AgentPage = () => {
         },
       ]);
     };
-    socket.on("ai-agent-realtime-response", handleAgentResponse);
+    socketFn(user).on("ai-agent-realtime-response", handleAgentResponse);
 
-    socket.on("disconnect", () => {
+    socketFn(user).on("disconnect", () => {
       // console.log("Disconnected from server");
     });
     return () => {
-      socket.off("ai-agent-realtime-response", handleAgentResponse);
+      socketFn(user).off("ai-agent-realtime-response", handleAgentResponse);
     };
   }, []);
 

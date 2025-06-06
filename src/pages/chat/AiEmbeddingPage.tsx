@@ -3,20 +3,23 @@ import { Button, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { SocketContext } from "../../utils/SocketContext";
 import { useTranslation } from "react-i18next";
+import { getLocalStorage } from "../../hooks/localStorage";
 
 export default function AiEmbeddingPage() {
-  const socket = useContext(SocketContext);
+  const socketFn = useContext(SocketContext);
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const { t } = useTranslation();
+    const user = getLocalStorage({ key: "user" });
+  
   const [conversation, setConversation] = useState<
     { type: string; message: string }[]
   >([]);
   // const sessionId = useRef(uuidv4());
   useEffect(() => {
-    socketRef.current = socket;
+    socketRef.current = socketFn(user);
 
-    socket.on("connect", () => {
+    socketFn(user).on("connect", () => {
       // console.log("Connected to WebSocket server", socket.id);
     });
     const handleChatbotResponse = (data: string) => {
@@ -29,15 +32,15 @@ export default function AiEmbeddingPage() {
       ]);
     };
 
-    socket.on("chat-embedding-response", handleChatbotResponse);
+    socketFn(user).on("chat-embedding-response", handleChatbotResponse);
 
-    socket.on("disconnect", () => {
+    socketFn(user).on("disconnect", () => {
       // console.log("Disconnected from server");
     });
 
     // Cleanup để tránh lặp listener
     return () => {
-      socket.off("chat-embedding-response", handleChatbotResponse);
+      socketFn(user).off("chat-embedding-response", handleChatbotResponse);
     };
   }, []);
 

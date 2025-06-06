@@ -12,6 +12,7 @@ const SideBar: React.FC = () => {
   const user = getLocalStorage({ key: "user" });
   const [selectedKey, setSelectedKey] = useState("1");
 
+  console.log(res.data, "res.data");
   const items = (Array.isArray(res.data) ? res.data : []).map((item) => ({
     key: String(user._id == item.id_user_1 ? item.id_user_2 : item.id_user_1),
     icon: <UserOutlined />,
