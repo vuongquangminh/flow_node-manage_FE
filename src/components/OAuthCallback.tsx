@@ -14,9 +14,6 @@ const OAuthCallback = () => {
       const token = params.get("access_token");
       if (token) {
         setLocalStorage({ key: "token", value: token });
-        (async () => {
-          await getMe();
-        })();
         navigate("/conversation"); // hoặc route bạn muốn chuyển tới
       } else {
         navigate("/");
