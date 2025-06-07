@@ -41,9 +41,9 @@ const LoginPage = () => {
     }
   };
   const handleLogin = async (service: string) => {
-    if(service == "github") {
+    if (service == "github") {
       window.location.href = "http://localhost:3000/auth/github";
-    } else if(service == "google") {
+    } else if (service == "google") {
       window.location.href = "http://localhost:3000/auth/google";
     }
   };
