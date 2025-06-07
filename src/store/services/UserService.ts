@@ -43,6 +43,9 @@ export const userApi = createApi({
         };
       },
     }),
+    getMe: build.query<UserRes, void>({
+      query: () => `account/me`,
+    }),
     getUser: build.query<UserRes[], void>({
       query: () => `account`,
     }),
@@ -71,4 +74,6 @@ export const {
   useGetUserQuery,
   useGetUserByIdQuery,
   useCreateUserMutation,
+  useGetMeQuery,
+  useLazyGetMeQuery
 } = userApi;
