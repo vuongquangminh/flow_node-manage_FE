@@ -27,6 +27,7 @@ const LoginPage = () => {
     const response = await doLogin(values);
     if (response?.data?.status) {
       setLocalStorage({ key: "token", value: response.data.token });
+      setLocalStorage({ key: "user", value: response.data.user });
       navigate("/conversation");
     } else {
       api.error({
