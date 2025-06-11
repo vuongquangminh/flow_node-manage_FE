@@ -16,6 +16,7 @@ const LayoutPage = () => {
 
   socket.on("update-friend", (data) => {
     console.log(data);
+    setKeyRender((pre) => pre + 1);
   });
   const content = (
     <div>

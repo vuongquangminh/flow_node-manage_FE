@@ -38,6 +38,7 @@ export default function ChatPagePage() {
   useEffect(() => {
     res.refetch();
   }, [params.id]);
+
   const handleSend = (message: string) => {
     if (socketRef.current && message.length > 0) {
       socketRef.current.emit("sent-message", {
@@ -50,6 +51,8 @@ export default function ChatPagePage() {
     }
     setMessage("");
   };
+
+  console.log("res.data", res.data);
 
   return (
     <>
@@ -89,7 +92,7 @@ export default function ChatPagePage() {
               onChange={(e) => setMessage(e.target.value)}
             />
             <Button type="primary" className="mx-4" htmlType="submit">
-              {t('send')}
+              {t("send")}
             </Button>
           </div>
         </form>
