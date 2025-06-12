@@ -10,7 +10,7 @@ import { getLocalStorage } from "../../hooks/localStorage";
 const { Header } = Layout;
 
 const LayoutPage = () => {
-  const socket = useContext(SocketContext);
+  const socket = useContext(SocketContext)();
   const account = useGetUserQuery();
   const [keyRender, setKeyRender] = useState(0);
 
@@ -42,9 +42,10 @@ const LayoutPage = () => {
   useEffect(() => {
     console.log("User data:", user);
   }, [user]);
+  console.log("socket: ", user);
 
   return (
-    <SocketContext.Provider value={socket}>
+    <SocketContext.Provider value={() => socket}>
       <Layout style={{ height: "100vh" }}>
         <Header className="flex justify-center items-center bg-cyan-700">
           <Select
