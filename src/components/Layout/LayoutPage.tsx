@@ -42,7 +42,6 @@ const LayoutPage = () => {
   useEffect(() => {
     console.log("User data:", user);
   }, [user]);
-  console.log("socket: ", user);
 
   return (
     <SocketContext.Provider value={() => socket}>
