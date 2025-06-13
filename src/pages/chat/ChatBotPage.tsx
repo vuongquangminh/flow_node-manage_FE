@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function ChatBotPage() {
   const { t } = useTranslation();
-  const socket = useContext(SocketContext);
+  const socket = useContext(SocketContext)();
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
@@ -65,7 +65,7 @@ export default function ChatBotPage() {
 
   return (
     <>
-      <div className="h-full flex flex-col justify-between p-4">
+      <div className="h-full grown flex flex-col justify-between p-4">
         <div className="">
           <h1 className="text-3xl font-bold text-blue-600">{t("label")}</h1>
           <div className="">

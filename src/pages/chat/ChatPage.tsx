@@ -8,7 +8,7 @@ import { SocketContext } from "../../utils/SocketContext";
 import { useTranslation } from "react-i18next";
 
 export default function ChatPagePage() {
-  const socket = useContext(SocketContext);
+  const socket = useContext(SocketContext)();
   const socketRef = useRef<Socket | null>(null);
   const [message, setMessage] = useState("");
   const user = getLocalStorage({ key: "user" });
