@@ -87,7 +87,7 @@ const LayoutPage = () => {
         </Header>
 
         <Layout>
-          <Row gutter={16} className="!mx-0 ">
+          <Row gutter={16} className="!mx-0 h-full">
             <Col span={6}>
               <SideBar key={keyRender} />{" "}
             </Col>
