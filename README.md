@@ -8,6 +8,7 @@ Flow Web Manage Frontend là một ứng dụng web được xây dựng bằng 
 
 - **Quản lý người dùng**: Thêm, sửa, xóa và cập nhật thông tin người dùng.
 - **Tích hợp WebSocket**: Giao tiếp thời gian thực với server để cập nhật dữ liệu.
+- **Tích hợp WebChatOpenAi**: Tạo 1 trợ lý ảo để chatbot với người người dùng.
 - **Giao diện hiện đại**: Sử dụng Ant Design để xây dựng giao diện trực quan và dễ sử dụng.
 - **Hỗ trợ tìm kiếm**: Tìm kiếm và lọc dữ liệu nhanh chóng.
 - **Quản lý bạn bè**: Thêm bạn bè và cập nhật danh sách bạn bè.
