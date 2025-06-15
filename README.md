@@ -1,58 +1,34 @@
-# flow_node-manage_FE
-Use React flow to manage
-# React + TypeScript + Vite
+# Flow Web Manage Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Giới thiệu
 
-Currently, two official plugins are available:
+Flow Web Manage Frontend là một ứng dụng web được xây dựng bằng React và TypeScript, nhằm cung cấp giao diện quản lý cho hệ thống Flow Web. Dự án sử dụng các công nghệ hiện đại như WebSocket, Ant Design, và Redux Toolkit để đảm bảo hiệu suất cao và trải nghiệm người dùng tốt.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tính năng
 
-## Expanding the ESLint configuration
+- **Quản lý người dùng**: Thêm, sửa, xóa và cập nhật thông tin người dùng.
+- **Tích hợp WebSocket**: Giao tiếp thời gian thực với server để cập nhật dữ liệu.
+- **Giao diện hiện đại**: Sử dụng Ant Design để xây dựng giao diện trực quan và dễ sử dụng.
+- **Hỗ trợ tìm kiếm**: Tìm kiếm và lọc dữ liệu nhanh chóng.
+- **Quản lý bạn bè**: Thêm bạn bè và cập nhật danh sách bạn bè.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Công nghệ sử dụng
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **React**: Framework JavaScript để xây dựng giao diện người dùng.
+- **TypeScript**: Ngôn ngữ lập trình mạnh mẽ với kiểu tĩnh.
+- **Socket.IO**: Thư viện để giao tiếp thời gian thực qua WebSocket.
+- **Ant Design**: Thư viện giao diện người dùng hiện đại.
+- **Redux Toolkit**: Quản lý trạng thái ứng dụng.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Cài đặt
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone dự án:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/your-repo/flow-web-manage-frontend.git
+   cd flow-web-manage-frontend
+   ```
 
-Run test file: yarn test
+2. Cài đặt các dependencies + run
+   yarn
+   yarn dev
