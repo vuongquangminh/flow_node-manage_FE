@@ -5,7 +5,7 @@ import { getLocalStorage } from "../hooks/localStorage";
 
 export const createSocket = () => {
   const user = getLocalStorage({ key: "user" });
-  const socket = io("http://localhost:3000", {
+  const socket = io(import.meta.env.VITE_API_URL, {
     query: { user: JSON.stringify(user) },
   });
   return socket;

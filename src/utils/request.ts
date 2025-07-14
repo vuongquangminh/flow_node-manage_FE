@@ -9,7 +9,7 @@ const request = async ({
   payload?: object;
   method?: string;
 }) => {
-  const url = `${import.meta.env.VITE_API_URL}${path}`;
+  const url = `${import.meta.env.VITE_API_URL + '/api/'}${path}`;
   try {
     const response = await fetch(url, {
       headers: {

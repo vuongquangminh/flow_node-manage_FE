@@ -4,7 +4,7 @@ import headerTokenRequest from "../../utils/headerTokenRequest";
 export const flowApi = createApi({
   reducerPath: "flowApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
+    baseUrl: import.meta.env.VITE_API_URL + '/api/',
     prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["Flow"],

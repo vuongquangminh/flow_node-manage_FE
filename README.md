@@ -1,35 +1,48 @@
-# Flow Web Manage Frontend
+# 🌐 Flow Web Manage Frontend
 
-## Giới thiệu
+## 📘 Overview
 
-Flow Web Manage Frontend là một ứng dụng web được xây dựng bằng React và TypeScript, nhằm cung cấp giao diện quản lý cho hệ thống Flow Web. Dự án sử dụng các công nghệ hiện đại như WebSocket, Ant Design, và Redux Toolkit để đảm bảo hiệu suất cao và trải nghiệm người dùng tốt.
+**Flow Web Manage Frontend** is a modern web-based admin interface developed using **React** and **TypeScript**. This project is part of a larger system designed to manage users, real-time communication, and AI-powered chat features. Built with scalability and performance in mind, it leverages powerful tools like **WebSocket**, **Redux Toolkit**, and **Ant Design** to provide a seamless experience.
 
-## Tính năng
+---
 
-- **Quản lý người dùng**: Thêm, sửa, xóa và cập nhật thông tin người dùng.
-- **Tích hợp WebSocket**: Giao tiếp thời gian thực với server để cập nhật dữ liệu.
-- **Tích hợp WebChatOpenAi**: Tạo 1 trợ lý ảo để chatbot với người người dùng.
-- **Giao diện hiện đại**: Sử dụng Ant Design để xây dựng giao diện trực quan và dễ sử dụng.
-- **Hỗ trợ tìm kiếm**: Tìm kiếm và lọc dữ liệu nhanh chóng.
-- **Quản lý bạn bè**: Thêm bạn bè và cập nhật danh sách bạn bè.
+## 🚀 Features
 
-## Công nghệ sử dụng
+- **User Management**: Create, update, delete users with full CRUD functionality.
+- **WebSocket Integration**: Real-time communication with the backend using Socket.IO.
+- **OpenAI Assistant**: Integrated Chatbot using WebChat + OpenAI for smart user interactions.
+- **Modern UI**: Built with Ant Design to ensure a clean, user-friendly interface.
+- **Search & Filter**: Fast search and data filtering across lists.
+- **Friend Management**: Add and manage user connections/friends easily.
 
-- **React**: Framework JavaScript để xây dựng giao diện người dùng.
-- **TypeScript**: Ngôn ngữ lập trình mạnh mẽ với kiểu tĩnh.
-- **Socket.IO**: Thư viện để giao tiếp thời gian thực qua WebSocket.
-- **Ant Design**: Thư viện giao diện người dùng hiện đại.
-- **Redux Toolkit**: Quản lý trạng thái ứng dụng.
+---
 
-## Cài đặt
+## 🛠️ Tech Stack
 
-1. Clone dự án:
+- **Frontend**: React, TypeScript, Ant Design, TailwindCSS, Redux Toolkit, Redux Toolkit Query, i18n
+- **Real-time**: WebSocket, Socket.IO
+- **State Management**: Redux Toolkit
+- **AI Integration**: OpenAI, Langchain
+- **Backend**: Node.js, ExpressJS (for chat), Laravel (optional setup)
 
-   ```bash
-   git clone https://github.com/your-repo/flow-web-manage-frontend.git
-   cd flow-web-manage-frontend
-   ```
+---
 
-2. Cài đặt các dependencies + run
+## 📦 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-repo/flow-web-manage-frontend.git
+cd flow-web-manage-frontend
+
+2. Install dependencies and run the app:
    yarn
    yarn dev
+
+   
+📺 Demo & Screenshots
+<!-- 🔹 Upload a demo video to YouTube or Loom and paste the link here -->
+🎥 Demo Video: Coming soon...
+🖼️ Screenshots: Coming soon...
+
+You can update this section with:

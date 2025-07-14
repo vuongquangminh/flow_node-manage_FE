@@ -4,7 +4,7 @@ import headerTokenRequest from "../../utils/headerTokenRequest";
 export const friendApi = createApi({
   reducerPath: "friendApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
+    baseUrl: import.meta.env.VITE_API_URL + '/api/',
     prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["Friend"],
