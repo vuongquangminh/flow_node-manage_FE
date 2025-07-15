@@ -31,7 +31,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
+    <div className="w-full bg-login bg-no-repeat bg-center bg-cover">
       {contextHolder}
       <div className="flex justify-center h-screen items-center">
         <Form
@@ -41,6 +41,7 @@ const RegisterPage = () => {
           style={{ maxWidth: 600 }}
           layout="vertical"
           onFinish={onFinish}
+          className="p-8 backdrop-contrast-50 rounded-xl"
         >
           <Alert
             message={t("register")}
@@ -64,7 +65,12 @@ const RegisterPage = () => {
           <Form.Item
             label={t("email")}
             name="email"
-            rules={[{ required: true, message: t("please_field_required", { field: t("email") }) }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: t("email") }),
+              },
+            ]}
           >
             <Input prefix={<UserOutlined />} placeholder={t("email")} />
           </Form.Item>
@@ -110,7 +116,7 @@ const RegisterPage = () => {
           </Button>
         </Form>
       </div>
-    </>
+    </div>
   );
 };
 export default RegisterPage;

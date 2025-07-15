@@ -1,8 +1,8 @@
-import { Col, Layout, Popover, Row, Select } from "antd";
-import { Link, Outlet } from "react-router-dom";
+import { Col, Layout, Row, Select } from "antd";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../utils/SocketContext";
-import { SettingOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import SideBar from "./Sidebar";
 import { useGetUserQuery } from "../../store/services/UserService";
 import { getLocalStorage } from "../../hooks/localStorage";
@@ -13,17 +13,12 @@ const LayoutPage = () => {
   const socket = useContext(SocketContext)();
   const account = useGetUserQuery();
   const [keyRender, setKeyRender] = useState(0);
+  const navigate = useNavigate();
 
   socket.on("update-friend", (data) => {
     console.log(data);
     setKeyRender((pre) => pre + 1);
   });
-  const content = (
-    <div>
-      <p>Content</p>
-      <p>Content</p>
-    </div>
-  );
   const user = getLocalStorage({ key: "user" });
 
   const options = account?.data
@@ -38,6 +33,10 @@ const LayoutPage = () => {
       id: value,
     });
     setKeyRender((pre) => pre + 1);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
   useEffect(() => {
     console.log("User data:", user);
@@ -76,14 +75,11 @@ const LayoutPage = () => {
               alt=""
             />
           </Link> */}
-          <Popover
-            content={content}
-            title="Title"
-            trigger="click"
-            className="flex grow justify-end"
-          >
-            <SettingOutlined className="text-white text-2xl" />
-          </Popover>
+
+          <LogoutOutlined
+            className="text-white text-2xl"
+            onClick={handleLogout}
+          />
         </Header>
 
         <Layout>
