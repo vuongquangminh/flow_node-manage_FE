@@ -30,5 +30,9 @@
   "ai_tools": "AI Tools agent send email",
   "create": "Tạo mới",
   "update": "Cập nhật",
-  "delete": "Xóa"
+  "delete": "Xóa",
+  "regiter": "Đăng ký",
+  "select_friend_chat": "Chọn 1 người bạn để trò chuyện",
+  "none_friends": "Không có bạn bè nào"
+
 }

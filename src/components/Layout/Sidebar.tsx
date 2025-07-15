@@ -5,12 +5,14 @@ import { Menu, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGetListFriendQuery } from "../../store/services/FriendService";
 import { getLocalStorage } from "../../hooks/localStorage";
+import { useTranslation } from "react-i18next";
 
 const SideBar: React.FC = () => {
   const navigate = useNavigate();
   const res = useGetListFriendQuery();
   const user = getLocalStorage({ key: "user" });
   const [selectedKey, setSelectedKey] = useState("1");
+  const { t } = useTranslation();
 
   const items = (Array.isArray(res.data) ? res.data : []).map((item) => ({
     key: String(user._id == item.id_user_1 ? item.id_user_2 : item.id_user_1),
@@ -46,7 +48,7 @@ const SideBar: React.FC = () => {
         className="w-full"
         showSearch
         allowClear
-        placeholder="Select a person"
+        placeholder={t('select_friend_chat')}
         optionFilterProp="label"
         onChange={() => handleChange}
         options={options}
@@ -62,7 +64,7 @@ const SideBar: React.FC = () => {
           key={selectedKey}
         />
       ) : (
-        "Bạn chưa có bạn bè nào"
+        t('none_friends')
       )}
     </div>
   );

@@ -30,5 +30,8 @@
   "ai_tools": "AI Tools agent send email",
   "create": "Create new",
   "update": "Update",
-  "delete": "Delete"
+  "delete": "Delete",
+  "regiter": "Regiter",
+  "select_friend_chat": "Select a person to chat",
+  "none_friends": "Không có bạn bè nào"
 }
