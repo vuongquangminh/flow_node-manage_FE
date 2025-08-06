@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import LoginPage from "../components/Login";
 import UserPage from "../pages/UserPage";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
@@ -12,11 +11,12 @@ import AgentPage from "../pages/chat/AgentPage";
 import ChatToolPage from "../pages/chat/ChatToolPage";
 import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
 import OAuthCallback from "../components/OAuthCallback";
+import Homepage from "../pages/HomePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage />,
+    element: <Homepage />,
   },
   {
     path: "/oauth-callback",
