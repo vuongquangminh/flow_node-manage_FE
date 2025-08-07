@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import Slider from "react-slick";
+import { slick_settings } from "../../constants";
 
 export default function OurUnivers() {
-  const { t } = useTranslation();
   const items = [
     {
       id: 1,
@@ -36,23 +36,25 @@ export default function OurUnivers() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {items.map((item) => (
-        <div className="relative overflow-hidden">
-          <div className="w-full">
-            <img className="w-full" src={item.image} alt="" />
-          </div>
+    <div className="overflow-hidden">
+      <Slider {...slick_settings}>
+        {items.map((item) => (
+          <div key={item.id} className="relative overflow-hidden px-2">
+            <div className="w-full">
+              <img className="w-full" src={item.image} alt="" />
+            </div>
 
-          <div className="absolute p-4 w-full bottom-0 max-w-[800px] text-white flex justify-between items-center">
-            <h2 className="text-sm sm:text-2xl font-bold font-fantasy">
-              {item.title}
-            </h2>
-            <div className=" text-primary rounded-none text-lg border-inherit border p-3 hover:bg-gray-100 cursor-pointer">
-              <ArrowRight size={24} />
+            <div className="absolute px-6 py-4 w-full bottom-0 max-w-[800px] text-white flex justify-between items-center">
+              <h2 className="text-sm sm:text-2xl font-bold font-fantasy">
+                {item.title}
+              </h2>
+              <div className=" text-primary rounded-none text-lg border-inherit border p-3 hover:bg-gray-100 cursor-pointer">
+                <ArrowRight size={24} />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </Slider>
     </div>
   );
 }
