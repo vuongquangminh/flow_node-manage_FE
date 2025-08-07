@@ -11,7 +11,7 @@ import AgentPage from "../pages/chat/AgentPage";
 import ChatToolPage from "../pages/chat/ChatToolPage";
 import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
 import OAuthCallback from "../components/OAuthCallback";
-import Homepage from "../pages/HomePage";
+import Homepage from "../pages/homepage/HomePage";
 
 export const router = createBrowserRouter([
   {

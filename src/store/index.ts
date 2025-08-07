@@ -5,6 +5,7 @@ import { userApi } from "./services/UserService";
 import { flowApi } from "./services/FlowService";
 import { chatApi } from "./services/ChatService";
 import { friendApi } from "./services/FriendService";
+import { productApi } from "./services/ProductService";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     [flowApi.reducerPath]: flowApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
     [friendApi.reducerPath]: friendApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -21,6 +23,7 @@ export const store = configureStore({
       .concat(userApi.middleware)
       .concat(flowApi.middleware)
       .concat(chatApi.middleware)
+      .concat(productApi.middleware)
       .concat(friendApi.middleware),
 });
 

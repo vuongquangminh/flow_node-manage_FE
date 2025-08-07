@@ -16,7 +16,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: "vi", // language to use
+    lng: "en", // language to use
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
