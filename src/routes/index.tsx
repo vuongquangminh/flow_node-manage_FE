@@ -12,11 +12,20 @@ import ChatToolPage from "../pages/chat/ChatToolPage";
 import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
 import OAuthCallback from "../components/OAuthCallback";
 import Homepage from "../pages/homepage/HomePage";
+import Products from "../pages/chat/products";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
+  },
+  {
+    path: "/products",
+    element: <Products />,
+  },
+  {
+    path: "/products/:name",
+    element: <Products />,
   },
   {
     path: "/oauth-callback",

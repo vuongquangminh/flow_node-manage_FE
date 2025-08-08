@@ -8,7 +8,16 @@ export const productApi = createApi({
   }),
   tagTypes: ["Product"],
   endpoints: (build) => ({
-    getProduct: build.query<ProductRes[], { type_bag?: string }>({
+    getProduct: build.query<
+      {
+        data?: ProductRes[];
+        message: string;
+        total: number;
+        currentPage: number;
+        totalPages: number;
+      },
+      { type_bag?: string; page?: number }
+    >({
       query: () => ({
         url: `products`,
       }),

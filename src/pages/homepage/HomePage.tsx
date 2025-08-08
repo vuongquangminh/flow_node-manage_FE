@@ -98,7 +98,7 @@ export default function Homepage() {
         <h2 className="text-4xl font-bold font-mono text-primary py-6 uppercase">
           {t("our_recommandations")}
         </h2>
-        <SlickImage products={res?.data} />
+        <SlickImage products={res?.data?.data} />
       </div>
       <div className="m-4">
         <h2 className="text-4xl font-bold font-mono text-primary py-6 uppercase">
