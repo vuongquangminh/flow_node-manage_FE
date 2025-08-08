@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Slider from "react-slick";
 import { slick_settings } from "../../constants";
 import CardOurCategory from "../../components/CardOurCategory";
