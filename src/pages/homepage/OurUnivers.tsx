@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Slider from "react-slick";
 import { slick_settings } from "../../constants";
+import CardOurCategory from "../../components/CardOurCategory";
 
 export default function OurUnivers() {
   const items = [
@@ -37,22 +38,9 @@ export default function OurUnivers() {
   ];
   return (
     <div className="overflow-hidden">
-      <Slider {...slick_settings}>
+      <Slider {...slick_settings} slidesToShow={4}>
         {items.map((item) => (
-          <div key={item.id} className="relative overflow-hidden px-2">
-            <div className="w-full">
-              <img className="w-full" src={item.image} alt="" />
-            </div>
-
-            <div className="absolute px-6 py-4 w-full bottom-0 max-w-[800px] text-white flex justify-between items-center">
-              <h2 className="text-sm sm:text-2xl font-bold font-fantasy">
-                {item.title}
-              </h2>
-              <div className=" text-primary rounded-none text-lg border-inherit border p-3 hover:bg-gray-100 cursor-pointer">
-                <ArrowRight size={24} />
-              </div>
-            </div>
-          </div>
+          <CardOurCategory key={item.id} item={item} />
         ))}
       </Slider>
     </div>

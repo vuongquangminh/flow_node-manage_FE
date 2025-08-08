@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 export default function CardProduct({ product }: { product?: ProductRes }) {
   const { t } = useTranslation();
   return (
-    <div className="w-full overflow-hidden max-w-sm bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full overflow-hidden bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <a href="#" className="block overflow-hidden">
         <img
           className=" overflow-hidden  transition duration-500 ease-in-out transform hover:scale-105"
@@ -26,6 +26,7 @@ export default function CardProduct({ product }: { product?: ProductRes }) {
           </div>
           <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">
             {t("sold")}
+            {": "}
             {product?.sold}
           </span>
         </div>

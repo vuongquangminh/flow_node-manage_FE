@@ -1,10 +1,10 @@
 export const slick_settings = {
   focusOnSelect: true,
-  // infinite: true,
+  infinite: true,
   slidesToShow: 5,
   slidesToScroll: 1,
   speed: 500,
-  // autoplay: true,
+  autoplay: true,
   responsive: [
     {
       breakpoint: 1024, // dưới 1024px

@@ -6,10 +6,57 @@ import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
 import { slick_settings_banner } from "../../constants";
 import OurUnivers from "./OurUnivers";
+import CardOurCategory from "../../components/CardOurCategory";
+import { Container, CreditCard, Mail, RefreshCcw } from "lucide-react";
+import MostProminent from "./MostProminent";
+import Footer from "../../components/Layout/Footer";
 
 export default function Homepage() {
   const res = useGetProductQuery({});
   const { t } = useTranslation();
+  const our_mission = [
+    {
+      id: 1,
+      image: "./images/our-mission-1.webp",
+      title: "Partner organization",
+    },
+    {
+      id: 2,
+      image: "./images/our-mission-2.webp",
+      title: "We are Bcorp",
+    },
+    {
+      id: 3,
+      image: "./images/our-mission-3.webp",
+      title: "Know-How",
+    },
+  ];
+  const sub_our_mission = [
+    {
+      id: 1,
+      icon: <CreditCard size={24} />,
+      title: "100% secure",
+      description: "Secure payment methods",
+    },
+    {
+      id: 2,
+      icon: <Container size={24} />,
+      title: "Lifetime guarantee",
+      description: "on bags and luggage",
+    },
+    {
+      id: 3,
+      icon: <RefreshCcw size={24} />,
+      title: "Free Returns",
+      description: "check conditions",
+    },
+    {
+      id: 4,
+      icon: <Mail size={24} />,
+      title: "Customer support",
+      description: "Monday to Friday from 10 am to 6:30 pm",
+    },
+  ];
   return (
     <>
       <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
@@ -59,6 +106,54 @@ export default function Homepage() {
         </h2>
         <OurUnivers />
       </div>
+      <div className="relative overflow-hidden my-12">
+        <div className="aspect-[4/5] sm:aspect-[5/3] md:aspect-[8/3]">
+          <img
+            className="w-full h-full object-cover object-center"
+            src="./images/our-mission.webp"
+            alt=""
+          />
+        </div>
+
+        <div className="absolute p-8 md:pl-16 top-3/4 transform -translate-y-3/4 max-w-[800px] text-white">
+          <h2 className=" text-4xl sm:text-4xl md:text-6xl font-bold font-fantasy">
+            Our mission
+          </h2>
+          <p className="mt-4 max-w-xl">
+            A committed company, CABAIA became a mission-driven enterprise in
+            2021 and has been B Corp certified since 2022. Deeply dedicated to
+            its partner organizations, it established its own endowment fund,
+            Care & Give, in 2024 to further its commitments.
+          </p>
+
+          <Button className="mt-4 text-primary rounded-none text-lg px-8 py-6 border-primary">
+            Read more
+          </Button>
+        </div>
+      </div>
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {our_mission.map((item) => (
+          <CardOurCategory key={item.id} item={item} />
+        ))}
+      </div>
+      <div className="container mx-auto py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {sub_our_mission.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-start text-[#504584] gap-2 opacity-7"
+          >
+            <div>{item.icon}</div>
+            <div>
+              <div className="font-bold">{item.title}</div>
+              <div className="text-xs">{item.description}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="container mx-auto py-6">
+        <MostProminent />
+      </div>
+      <Footer />
     </>
   );
 }
