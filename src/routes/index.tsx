@@ -13,6 +13,7 @@ import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
 import OAuthCallback from "../components/OAuthCallback";
 import Homepage from "../pages/homepage/HomePage";
 import Products from "../pages/products";
+import ProductDetail from "../pages/products/ProductDetail";
 
 export const router = createBrowserRouter([
   {
@@ -24,8 +25,8 @@ export const router = createBrowserRouter([
     element: <Products />,
   },
   {
-    path: "/products/:name",
-    element: <Products />,
+    path: "/products/:id/:name",
+    element: <ProductDetail />,
   },
   {
     path: "/oauth-callback",

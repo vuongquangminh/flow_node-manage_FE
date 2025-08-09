@@ -70,7 +70,7 @@ export default function Footer() {
             . All Rights Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
-            <a href="#" className=" hover: dark:hover:text-white">
+            <a href="/" className=" hover: dark:hover:text-white">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -86,7 +86,7 @@ export default function Footer() {
               </svg>
               <span className="sr-only">Facebook page</span>
             </a>
-            <a href="#" className=" hover: dark:hover:text-white ms-5">
+            <a href="/" className=" hover: dark:hover:text-white ms-5">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -98,7 +98,7 @@ export default function Footer() {
               </svg>
               <span className="sr-only">Discord community</span>
             </a>
-            <a href="#" className=" hover: dark:hover:text-white ms-5">
+            <a href="/" className=" hover: dark:hover:text-white ms-5">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -114,7 +114,7 @@ export default function Footer() {
               </svg>
               <span className="sr-only">Twitter page</span>
             </a>
-            <a href="#" className=" hover: dark:hover:text-white ms-5">
+            <a href="/" className=" hover: dark:hover:text-white ms-5">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -130,7 +130,7 @@ export default function Footer() {
               </svg>
               <span className="sr-only">GitHub account</span>
             </a>
-            <a href="#" className=" hover: dark:hover:text-white ms-5">
+            <a href="/" className=" hover: dark:hover:text-white ms-5">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"

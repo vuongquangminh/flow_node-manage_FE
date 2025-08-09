@@ -3,6 +3,7 @@ import { ShoppingCart } from "lucide-react";
 import { ProductRes } from "../type/api";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default memo(function CardProduct({
   product,
@@ -10,22 +11,28 @@ export default memo(function CardProduct({
   product?: ProductRes;
 }) {
   const { t } = useTranslation();
-  console.log("Render:", product?._id);
+  const navigate = useNavigate();
+
   return (
     <div className="w-full overflow-hidden bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
-      <a href="#" className="block overflow-hidden">
+      <div className="block overflow-hidden">
         <img
           className=" overflow-hidden  transition duration-500 ease-in-out transform hover:scale-105"
           src={product?.image || "./images/default-product.jpg"}
           alt="product image"
         />
-      </a>
+      </div>
       <div className="px-5 pb-5">
-        <a href="#">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <div>
+          <h5
+            className=" cursor-pointer text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+            onClick={() =>
+              navigate(`/products/${product?._id}/${product?.name}`)
+            }
+          >
             {product?.name}
           </h5>
-        </a>
+        </div>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
             <Rate allowHalf defaultValue={Number(product?.rate) || 5} />

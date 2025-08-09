@@ -50,7 +50,22 @@ export const productApi = createApi({
         }`;
       },
     }),
+    getProductDetail: build.query<
+      {
+        data?: ProductRes;
+        message: string;
+      },
+      { id: string }
+    >({
+      query: ({ id }) => ({
+        url: `products/${id}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductQuery, useGetProductInfInfiniteQuery } = productApi;
+export const {
+  useGetProductQuery,
+  useGetProductInfInfiniteQuery,
+  useGetProductDetailQuery,
+} = productApi;

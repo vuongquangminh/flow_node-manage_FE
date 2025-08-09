@@ -58,7 +58,7 @@ export default function Products() {
             ALL
           </div>
         </Badge>
-        {isFetching && <Spin fullscreen={true} />}
+        {isFetching && products.length == 0 && <Spin fullscreen={true} />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 px-4">
           {products.map((item) => (
             <div key={item._id} className="px-2">

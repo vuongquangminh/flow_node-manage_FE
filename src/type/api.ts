@@ -27,13 +27,12 @@ export type ProductRes = {
   image: string;
   type_bag: string;
   size: string[];
-  color: [
+  color: 
     {
       id: number;
       name: string;
       image_color: string[];
-    }
-  ];
+    }[];
   title: string;
   rate: string;
   sold: string;
