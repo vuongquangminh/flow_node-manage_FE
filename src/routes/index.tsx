@@ -12,7 +12,7 @@ import ChatToolPage from "../pages/chat/ChatToolPage";
 import AiEmbeddingPage from "../pages/chat/AiEmbeddingPage";
 import OAuthCallback from "../components/OAuthCallback";
 import Homepage from "../pages/homepage/HomePage";
-import Products from "../pages/chat/products";
+import Products from "../pages/products";
 
 export const router = createBrowserRouter([
   {

@@ -2,9 +2,15 @@ import { Rate } from "antd";
 import { ShoppingCart } from "lucide-react";
 import { ProductRes } from "../type/api";
 import { useTranslation } from "react-i18next";
+import { memo } from "react";
 
-export default function CardProduct({ product }: { product?: ProductRes }) {
+export default memo(function CardProduct({
+  product,
+}: {
+  product?: ProductRes;
+}) {
   const { t } = useTranslation();
+  console.log("Render:", product?._id);
   return (
     <div className="w-full overflow-hidden bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <a href="#" className="block overflow-hidden">
@@ -44,4 +50,4 @@ export default function CardProduct({ product }: { product?: ProductRes }) {
       </div>
     </div>
   );
-}
+});

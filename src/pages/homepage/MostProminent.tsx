@@ -13,7 +13,7 @@ export default function MostProminent() {
   }, []);
   return (
     <div className="container mx-auto py-20">
-      <Row gutter={32} className="px-16 md:px-0">
+      <Row gutter={32} className="px-16 md:px-0 !mx-0">
         <Col span={24} md={16} className="px-20">
           <div className="md:pr-30">
             <div className="">
