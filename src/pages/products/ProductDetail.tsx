@@ -3,7 +3,7 @@ import {
   useGetProductDetailQuery,
   useGetProductQuery,
 } from "../../store/services/ProductService";
-import { Button, Col, Row, Spin } from "antd";
+import { Button, Col, Row, Spin, Tooltip } from "antd";
 import Header from "../../components/Layout/Header";
 import Slider from "react-slick";
 import { ReactNode, useEffect, useRef, useState } from "react";
@@ -23,7 +23,7 @@ import AnyQuestion from "./AnyQuestion";
 import { our_mission, sub_our_mission } from "../homepage/HomePage";
 import Footer from "../../components/Layout/Footer";
 import { useDispatch } from "react-redux";
-import { addCart } from "../../store/slices/cartSlice";
+import { addItemCart } from "../../store/slices/cartSlice";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -35,6 +35,7 @@ export default function ProductDetail() {
   });
 
   const [imageSideBar, setImageSideBar] = useState<string[]>([]);
+  const [sizeSelect, setSizeSelect] = useState("M");
   const [productColor, setProductColor] = useState<{
     id: number;
     name: string;
@@ -70,6 +71,27 @@ export default function ProductDetail() {
   useEffect(() => {
     setImageSideBar(productColor?.image_color || []);
   }, [productColor]);
+
+  const listSize = [
+    {
+      id: 1,
+      label: "M",
+      title:
+        "Kích thước có thể dao động từ 40-45cm (dài) x 30-35cm (rộng) x 15-20cm (cao)",
+    },
+    {
+      id: 2,
+      label: "L",
+      title:
+        "Kích thước có thể dao động từ 45-50cm (dài) x 35-40cm (rộng) x 18-25cm (cao)",
+    },
+    {
+      id: 3,
+      label: "XL",
+      title:
+        "Kích thước có thể dao động từ 50-55cm (dài) x 40-45cm (rộng) x 20-30cm (cao) hoặc lớn hơn",
+    },
+  ];
   return (
     <>
       <div className="bg-[#f4f9f8] items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
@@ -127,7 +149,20 @@ export default function ProductDetail() {
                 <div className="py-4">
                   Color: <strong>{productColor?.name}</strong>
                 </div>
-                
+                {listSize.map((item) => (
+                  <Tooltip key={item.id} title={item.title}>
+                    <Button
+                      onClick={() => setSizeSelect(item.label)}
+                      className={`mb-4 mx-2 ${
+                        item.label == sizeSelect
+                          ? "text-white bg-primary"
+                          : "text-primary"
+                      } rounded text-sm px-4 py-0 border-primary`}
+                    >
+                      {item.label}
+                    </Button>
+                  </Tooltip>
+                ))}
                 <div className="!flex justify-start gap-3 cursor-pointer">
                   {dataProductDetail?.data?.color.map((item) => (
                     <div
@@ -144,15 +179,13 @@ export default function ProductDetail() {
                 <Button
                   className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary"
                   onClick={() =>
-                    // console.log("dataProductDetail: ", dataProductDetail)
                     dispatch(
-                      addCart({
+                      addItemCart({
                         product_id: Number(id),
-                        size: "M",
-                        color: "Cream",
-                        quantity: 2,
-                        address: "LH",
-                        phone: "0869952231",
+                        product_name: String(dataProductDetail?.data?.name),
+                        price: String(dataProductDetail?.data?.price),
+                        size: sizeSelect,
+                        color: String(productColor?.name),
                       })
                     )
                   }

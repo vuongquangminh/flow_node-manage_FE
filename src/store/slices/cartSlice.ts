@@ -1,13 +1,12 @@
 // counterSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CartItem  {
+interface CartItem {
   product_id: number;
+  product_name: string;
+  price: string;
   size: string;
   color: string;
-  quantity: number;
-  address: string;
-  phone: string;
 }
 
 const initialState: CartItem[] = [];
@@ -16,7 +15,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addCart: (state, action: PayloadAction<CartItem>) => {
+    addItemCart: (state, action: PayloadAction<CartItem>) => {
       console.log("action: ", action);
       // Redux Toolkit cho phép mutate trực tiếp vì dùng Immer
       state.push(action.payload);
@@ -30,5 +29,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addCart } = cartSlice.actions;
+export const { addItemCart } = cartSlice.actions;
 export default cartSlice.reducer;

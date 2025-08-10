@@ -83,7 +83,7 @@ export default function AnyQuestion() {
   ];
   return (
     <div className="container mx-auto py-20">
-      <Row gutter={32} className="px-16 md:px-0 !mx-0">
+      <Row gutter={32} className=" px-0 md:px-16 !mx-0">
         <Col span={24} md={12} className="px-20">
           <img
             src="/images/any-question.webp"
