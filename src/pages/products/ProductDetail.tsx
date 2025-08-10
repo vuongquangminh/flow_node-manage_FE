@@ -25,7 +25,7 @@ import Footer from "../../components/Layout/Footer";
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { data, isLoading } = useGetProductDetailQuery({ id: String(id) });
+  const { data: dataProductDetail, isLoading } = useGetProductDetailQuery({ id: String(id) });
   const { data: exploreProduct } = useGetProductQuery({
     type_bag: "bag_school",
   });
@@ -54,8 +54,8 @@ export default function ProductDetail() {
     },
   ];
   useEffect(() => {
-    setProductColor(data?.data?.color[0]);
-  }, [data]);
+    setProductColor(dataProductDetail?.data?.color[0]);
+  }, [dataProductDetail]);
   const handleThumbnailClick = (index: number) => {
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(index);
@@ -112,17 +112,17 @@ export default function ProductDetail() {
                 </Button>
                 <div className="flex justify-between my-4">
                   <p className="text-primary text-2xl uppercase font-bold max-w-80 md:max-w-full">
-                    {data?.data?.name}
+                    {dataProductDetail?.data?.name}
                   </p>
                   <p className="text-gray-250 text-xl font-medium">
-                    {data?.data?.price}
+                    {dataProductDetail?.data?.price}
                   </p>
                 </div>
                 <div className="py-4">
                   Color: <strong>{productColor?.name}</strong>
                 </div>
                 <div className="!flex justify-start gap-3 cursor-pointer">
-                  {data?.data?.color.map((item) => (
+                  {dataProductDetail?.data?.color.map((item) => (
                     <div
                       className=" w-20"
                       key={item.id}
@@ -134,8 +134,8 @@ export default function ProductDetail() {
                     </div>
                   ))}
                 </div>
-                <Button className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary">
-                  Add - {data?.data?.price}
+                <Button className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary" onClick={() => console.log("dataProductDetail: ",dataProductDetail)}>
+                  Add - {dataProductDetail?.data?.price}
                 </Button>
                 <div className="flex items-center text-sm bg-[#f4f9f8] py-2 px-2">
                   <Award size={24} color="#0da01e" />
@@ -157,33 +157,33 @@ export default function ProductDetail() {
             <Row gutter={48} className="py-8 !mx-0">
               <Col sm={24} md={16}>
                 <p className="text-primary text-2xl uppercase font-bold max-w-80 md:max-w-full">
-                  {data?.data?.title}
+                  {dataProductDetail?.data?.title}
                 </p>
                 <RenderInforWeight
                   icon={<RulerDimensionLine size={24} color="#0000c8" />}
                   name="Dimensions"
-                  value={data?.data?.dimensions}
+                  value={dataProductDetail?.data?.dimensions}
                 />
                 <RenderInforWeight
                   icon={<Weight size={24} color="#0000c8" />}
                   name="Weight"
-                  value={data?.data?.weight}
+                  value={dataProductDetail?.data?.weight}
                 />
                 <RenderInforWeight
                   icon={<EthernetPort size={24} color="#0000c8" />}
                   name="Integrated straps"
-                  value={data?.data?.weight}
+                  value={dataProductDetail?.data?.weight}
                 />
-                {data?.data?.feature.map((item) => (
+                {dataProductDetail?.data?.feature.map((item) => (
                   <li>{item}</li>
                 ))}
                 <Composition
                   button="Composition and maintenance"
-                  item={data?.data?.composition_maintenance}
+                  item={dataProductDetail?.data?.composition_maintenance}
                 />
                 <Composition
                   button="Sustainability and guarantee"
-                  item={data?.data?.composition_maintenance}
+                  item={dataProductDetail?.data?.composition_maintenance}
                 />
               </Col>
               <Col sm={24} md={8}>

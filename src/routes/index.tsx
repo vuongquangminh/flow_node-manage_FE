@@ -14,6 +14,7 @@ import OAuthCallback from "../components/OAuthCallback";
 import Homepage from "../pages/homepage/HomePage";
 import Products from "../pages/products";
 import ProductDetail from "../pages/products/ProductDetail";
+import LoginPage from "../components/Login";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,10 @@ export const router = createBrowserRouter([
     path: "/oauth-callback",
     element: <OAuthCallback />,
   },
-
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
   {
     path: "/register",
     element: <RegisterPage />,
