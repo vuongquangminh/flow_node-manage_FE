@@ -35,3 +35,4 @@ export const slick_settings_banner = {
   slidesToScroll: 1,
   autoplay: true,
 };
+

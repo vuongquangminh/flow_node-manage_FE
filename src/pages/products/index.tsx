@@ -48,7 +48,7 @@ export default function Products() {
           <a href="/">– See terms</a>
         </p>
       </div>
-      <div className="container mx-auto mt-24 py-6">
+      <div className="container mx-auto py-10">
         <Badge
           size="small"
           offset={[-5, 6]}

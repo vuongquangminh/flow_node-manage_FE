@@ -14,49 +14,7 @@ import Footer from "../../components/Layout/Footer";
 export default function Homepage() {
   const res = useGetProductQuery({});
   const { t } = useTranslation();
-  const our_mission = [
-    {
-      id: 1,
-      image: "./images/our-mission-1.webp",
-      title: "Partner organization",
-    },
-    {
-      id: 2,
-      image: "./images/our-mission-2.webp",
-      title: "We are Bcorp",
-    },
-    {
-      id: 3,
-      image: "./images/our-mission-3.webp",
-      title: "Know-How",
-    },
-  ];
-  const sub_our_mission = [
-    {
-      id: 1,
-      icon: <CreditCard size={24} />,
-      title: "100% secure",
-      description: "Secure payment methods",
-    },
-    {
-      id: 2,
-      icon: <Container size={24} />,
-      title: "Lifetime guarantee",
-      description: "on bags and luggage",
-    },
-    {
-      id: 3,
-      icon: <RefreshCcw size={24} />,
-      title: "Free Returns",
-      description: "check conditions",
-    },
-    {
-      id: 4,
-      icon: <Mail size={24} />,
-      title: "Customer support",
-      description: "Monday to Friday from 10 am to 6:30 pm",
-    },
-  ];
+  
   return (
     <>
       <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
@@ -157,3 +115,46 @@ export default function Homepage() {
     </>
   );
 }
+export const sub_our_mission = [
+  {
+    id: 1,
+    icon: <CreditCard size={24} />,
+    title: "100% secure",
+    description: "Secure payment methods",
+  },
+  {
+    id: 2,
+    icon: <Container size={24} />,
+    title: "Lifetime guarantee",
+    description: "on bags and luggage",
+  },
+  {
+    id: 3,
+    icon: <RefreshCcw size={24} />,
+    title: "Free Returns",
+    description: "check conditions",
+  },
+  {
+    id: 4,
+    icon: <Mail size={24} />,
+    title: "Customer support",
+    description: "Monday to Friday from 10 am to 6:30 pm",
+  },
+];
+export const our_mission = [
+  {
+    id: 1,
+    image: "/images/our-mission-1.webp",
+    title: "Partner organization",
+  },
+  {
+    id: 2,
+    image: "/images/our-mission-2.webp",
+    title: "We are Bcorp",
+  },
+  {
+    id: 3,
+    image: "/images/our-mission-3.webp",
+    title: "Know-How",
+  },
+];
