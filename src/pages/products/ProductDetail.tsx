@@ -22,13 +22,18 @@ import CardProduct from "../../components/CardProduct";
 import AnyQuestion from "./AnyQuestion";
 import { our_mission, sub_our_mission } from "../homepage/HomePage";
 import Footer from "../../components/Layout/Footer";
+import { useDispatch } from "react-redux";
+import { addCart } from "../../store/slices/cartSlice";
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { data: dataProductDetail, isLoading } = useGetProductDetailQuery({ id: String(id) });
+  const { data: dataProductDetail, isLoading } = useGetProductDetailQuery({
+    id: String(id),
+  });
   const { data: exploreProduct } = useGetProductQuery({
     type_bag: "bag_school",
   });
+
   const [imageSideBar, setImageSideBar] = useState<string[]>([]);
   const [productColor, setProductColor] = useState<{
     id: number;
@@ -36,6 +41,7 @@ export default function ProductDetail() {
     image_color: string[];
   }>();
   const sliderRef = useRef<Slider>(null);
+  const dispatch = useDispatch();
   const preserve = [
     {
       id: 1,
@@ -121,6 +127,7 @@ export default function ProductDetail() {
                 <div className="py-4">
                   Color: <strong>{productColor?.name}</strong>
                 </div>
+                
                 <div className="!flex justify-start gap-3 cursor-pointer">
                   {dataProductDetail?.data?.color.map((item) => (
                     <div
@@ -134,7 +141,22 @@ export default function ProductDetail() {
                     </div>
                   ))}
                 </div>
-                <Button className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary" onClick={() => console.log("dataProductDetail: ",dataProductDetail)}>
+                <Button
+                  className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary"
+                  onClick={() =>
+                    // console.log("dataProductDetail: ", dataProductDetail)
+                    dispatch(
+                      addCart({
+                        product_id: Number(id),
+                        size: "M",
+                        color: "Cream",
+                        quantity: 2,
+                        address: "LH",
+                        phone: "0869952231",
+                      })
+                    )
+                  }
+                >
                   Add - {dataProductDetail?.data?.price}
                 </Button>
                 <div className="flex items-center text-sm bg-[#f4f9f8] py-2 px-2">

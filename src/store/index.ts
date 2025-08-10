@@ -7,16 +7,17 @@ import { chatApi } from "./services/ChatService";
 import { friendApi } from "./services/FriendService";
 import { productApi } from "./services/ProductService";
 import { persistReducer, persistStore } from "redux-persist";
-
+import cartReducer from "./slices/cartSlice";
 // 🔹 Cấu hình persist
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [userApi.reducerPath], // nếu muốn persist dữ liệu API
+  whitelist: ["cart"], // nếu muốn persist dữ liệu API
 };
 
 // 🔹 Gộp tất cả reducer
 const rootReducer = combineReducers({
+  cart: cartReducer,
   [userApi.reducerPath]: userApi.reducer,
   [flowApi.reducerPath]: flowApi.reducer,
   [chatApi.reducerPath]: chatApi.reducer,

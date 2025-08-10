@@ -8,11 +8,18 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { Badge } from "antd";
 
 export default function Header() {
   const { t } = useTranslation();
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const cart = useSelector((state: RootState) => state?.cart);
+
+  console.log("cart: ", cart);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -58,9 +65,9 @@ export default function Header() {
         <div className="">
           <BellRing size={24} />
         </div>
-        <div className="px-2">
+        <Badge count={cart?.length} className="px-2 text-white cursor-pointer">
           <ShoppingCart size={24} />
-        </div>
+        </Badge>
       </div>
     </div>
   );
