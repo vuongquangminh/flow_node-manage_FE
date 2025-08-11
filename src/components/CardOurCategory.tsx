@@ -1,10 +1,13 @@
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function CardOurCategory({
   item,
 }: {
   item: { id: number; image?: string; title?: string };
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className="relative overflow-hidden px-2">
       <div className="w-full overflow-hidden">
@@ -19,7 +22,10 @@ export default function CardOurCategory({
         <h2 className="text-sm sm:text-2xl text-primary font-bold font-fantasy">
           {item.title}
         </h2>
-        <div className=" text-primary rounded-none text-lg border-inherit border p-3 hover:bg-gray-100 cursor-pointer">
+        <div
+          className=" text-primary rounded-none text-lg border-inherit border p-3 hover:bg-gray-100 cursor-pointer"
+          onClick={() => navigate("/products")}
+        >
           <ArrowRight size={24} />
         </div>
       </div>

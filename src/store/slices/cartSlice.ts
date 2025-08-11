@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface CartItem {
   product_id: number;
   product_name: string;
+  image: string;
   price: string;
   size: string;
   color: string;
@@ -16,9 +17,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemCart: (state, action: PayloadAction<CartItem>) => {
-      console.log("action: ", action);
       // Redux Toolkit cho phép mutate trực tiếp vì dùng Immer
       state.push(action.payload);
+    },
+    clearCart: (state) => {
+      return (state = []);
     },
     // decrement: (state) => {
     //   state.value -= 1;
@@ -29,5 +32,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItemCart } = cartSlice.actions;
+export const { addItemCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

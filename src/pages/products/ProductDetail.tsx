@@ -3,7 +3,7 @@ import {
   useGetProductDetailQuery,
   useGetProductQuery,
 } from "../../store/services/ProductService";
-import { Button, Col, Row, Spin, Tooltip } from "antd";
+import { Button, Col, notification, Row, Spin, Tooltip } from "antd";
 import Header from "../../components/Layout/Header";
 import Slider from "react-slick";
 import { ReactNode, useEffect, useRef, useState } from "react";
@@ -43,6 +43,8 @@ export default function ProductDetail() {
   }>();
   const sliderRef = useRef<Slider>(null);
   const dispatch = useDispatch();
+  const [api, contextHolder] = notification.useNotification();
+
   const preserve = [
     {
       id: 1,
@@ -94,6 +96,7 @@ export default function ProductDetail() {
   ];
   return (
     <>
+      {contextHolder}
       <div className="bg-[#f4f9f8] items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
         <Header />
         <p className="text-primary py-2">
@@ -178,17 +181,22 @@ export default function ProductDetail() {
                 </div>
                 <Button
                   className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       addItemCart({
                         product_id: Number(id),
                         product_name: String(dataProductDetail?.data?.name),
+                        image: String(productColor?.image_color[0]),
                         price: String(dataProductDetail?.data?.price),
                         size: sizeSelect,
                         color: String(productColor?.name),
                       })
-                    )
-                  }
+                    );
+                    api.success({
+                      message: "Thành công!",
+                      description: "Sản phẩm đã được thêm vào giỏ hàng",
+                    });
+                  }}
                 >
                   Add - {dataProductDetail?.data?.price}
                 </Button>
