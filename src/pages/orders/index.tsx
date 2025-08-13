@@ -13,9 +13,19 @@ const OrderPage = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
   const expandColumns = [
     {
+      title: "Hình ảnh",
+      key: "image",
+      render: (value: ProductOrderRes) => {
+        return <img className="w-24" src={value?.image} alt="" />;
+      },
+    },
+    {
       title: "Tên sản phẩm",
       dataIndex: "product_name",
       key: "product_name",
+      render: (value: string) => {
+        return <p className="text-base font-medium text-primary">{value}</p>;
+      },
     },
     { title: "Màu sắc", dataIndex: "color", key: "color" },
     { title: "size", dataIndex: "size", key: "size" },
