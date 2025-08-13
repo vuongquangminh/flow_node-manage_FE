@@ -1,14 +1,16 @@
 import { Button, Table, Tag } from "antd";
 import { useGetOrderQuery } from "../../store/services/OrderService";
 import { getLocalStorage } from "../../hooks/localStorage";
-import { Order, OrderRes, ProductOrderRes } from "../../type/api";
+import { Order, ProductOrderRes } from "../../type/api";
 import { Trash } from "lucide-react";
+import { useState } from "react";
+import ModelConfirm from "../../components/ModelConfirm";
 
 const OrderPage = () => {
   const user = getLocalStorage({ key: "user" });
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: orderList } = useGetOrderQuery({ user_id: user._id });
-
+  const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
   const expandColumns = [
     {
       title: "Tên sản phẩm",
@@ -24,10 +26,6 @@ const OrderPage = () => {
     },
   ];
 
-  const handleDelete = (item: OrderRes) => {
-    console.log("item: ", item);
-    return "123";
-  };
   const columns = [
     {
       title: "Mã đơn hàng ",
@@ -55,7 +53,7 @@ const OrderPage = () => {
     {
       title: "Hành động",
       key: "action",
-      render: (item: OrderRes) => {
+      render: (item: Order) => {
         return (
           <Button onClick={() => handleDelete(item)}>
             <Trash color="red" size={16} />
@@ -73,6 +71,13 @@ const OrderPage = () => {
       pagination={false}
     />
   );
+
+  const handleDelete = (item: Order) => {
+    console.log(item);
+    setSelectedOrder(item);
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <Table
@@ -80,6 +85,19 @@ const OrderPage = () => {
         expandable={{ expandedRowRender }}
         rowKey={(record) => record.code}
         dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
+      />
+      <ModelConfirm
+        title="Xóa"
+        content={
+          <>
+            Bạn có chắc chắn muốn xóa đơn hàng{" "}
+            <strong className="text-primary">{selectedOrder?.code}</strong> hay
+            không
+          </>
+        }
+        isOpen={isModalOpen}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
       />
     </>
   );
