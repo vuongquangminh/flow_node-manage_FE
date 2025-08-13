@@ -20,9 +20,7 @@ const cartSlice = createSlice({
       // Redux Toolkit cho phép mutate trực tiếp vì dùng Immer
       state.push(action.payload);
     },
-    clearCart: (state) => {
-      return (state = []);
-    },
+    clearCart: () => [],
     // decrement: (state) => {
     //   state.value -= 1;
     // },
