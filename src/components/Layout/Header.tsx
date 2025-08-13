@@ -13,7 +13,13 @@ import { RootState } from "../../store";
 import { Badge, Button, Col, Drawer, Flex, Form, Input, Row } from "antd";
 import { useAddOrderMutation } from "../../store/services/OrderService";
 import { clearCart } from "../../store/slices/cartSlice";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, PhoneFilled, UserOutlined } from "@ant-design/icons";
+import {
+  useCreateUserMutation,
+  useLoginMutation,
+} from "../../store/services/UserService";
+import { getLocalStorage, setLocalStorage } from "../../hooks/localStorage";
+import { useNotice } from "../../utils";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -22,10 +28,12 @@ export default function Header() {
   const cart = useSelector((state: RootState) => state?.cart);
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const [doAddCart, { isLoading }] = useAddOrderMutation();
   const dispatch = useDispatch();
-
-  console.log("cart: ", cart);
+  const [doLogin] = useLoginMutation();
+  const [doRegister] = useCreateUserMutation();
+  const { noticeSuccess, noticeError, contextHolder } = useNotice();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,23 +59,70 @@ export default function Header() {
   };
 
   const handleOrder = () => {
+    const token = getLocalStorage({ key: "token" });
+    const user = getLocalStorage({ key: "user" });
+    if (!token || !user) {
+      setShowLogin(true);
+      setIsRegister(false);
+    }
     const products = cart.map((item) => ({
       product_id: item.product_id,
       size: item.size,
       color: item.color,
     }));
-    doAddCart({ products, address: "123", phone: "123" })
+    doAddCart({ products, address: user.address, phone: user.phone })
       .unwrap()
       .then(() => {
         dispatch(clearCart());
         console.log("đặt hàng thành công");
-      });
+        noticeSuccess("order");
+      }); 
   };
-  const onLogin = (values: { username: string; password: string }) => {
-    console.log("Received values of form: ", values);
+  const onLogin = async (values: {
+    email: string;
+    password: string;
+    name: string;
+    address?: string;
+    phone?: string;
+  }) => {
+    try {
+      if (isRegister) {
+        const res = await doRegister(values).unwrap();
+
+        if (res) {
+          noticeSuccess("register");
+          setShowLogin(false);
+        }
+      } else {
+        const res = await doLogin(values);
+        if (res?.data?.status) {
+          setLocalStorage({ key: "token", value: res.data.token });
+          setLocalStorage({ key: "user", value: res.data.user });
+          noticeSuccess("login");
+          setShowLogin(false);
+        } else {
+          const errorMsg =
+            res?.error &&
+            "data" in res.error &&
+            (res.error as { data?: { error?: string } })?.data?.error;
+          noticeError(errorMsg ? errorMsg : "Thất bại");
+        }
+      }
+    } catch (err) {
+      const errorMsg = (err as { data?: { error?: string } })?.data?.error;
+      noticeError(errorMsg || t("error"));
+    }
+  };
+  const onLoginOA2 = async (service: string) => {
+    if (service == "github") {
+      window.location.href = "http://localhost:3000/auth/github";
+    } else if (service == "google") {
+      window.location.href = "http://localhost:3000/auth/google";
+    }
   };
   return (
     <>
+      {contextHolder}
       <div
         className={`fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-6 -translate-x-1/2 border border-gray-100 rounded shadow-xs lg:max-w-7xl   bg-primary text-white header ${
           showHeader ? "show" : "hide"
@@ -157,37 +212,150 @@ export default function Header() {
         <Form
           name="login"
           initialValues={{ remember: true }}
-          style={{ maxWidth: 360 }}
           onFinish={onLogin}
+          className="space-y-6"
         >
+          {isRegister && (
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: "Please input your Name!" }]}
+            >
+              <Input
+                prefix={<UserOutlined className="text-gray-500" />}
+                placeholder="Name"
+                className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
+              />
+            </Form.Item>
+          )}
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            name="email"
+            rules={[{ required: true, message: "Please input your Email!" }]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Username" />
+            <Input
+              prefix={<UserOutlined className="text-gray-500" />}
+              placeholder="Email"
+              className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
+            />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Please input your Password!" }]}
           >
             <Input
-              prefix={<LockOutlined />}
+              prefix={<LockOutlined className="text-gray-500" />}
               type="password"
               placeholder="Password"
+              className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
             />
           </Form.Item>
+          {isRegister && (
+            <>
+              <Form.Item
+                name="password2"
+                dependencies={["password"]}
+                rules={[
+                  {
+                    required: true,
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The new password that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="text-gray-500" />}
+                  type="password"
+                  placeholder="Password Confirm"
+                  className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="phone"
+                rules={[
+                  { required: true, message: "Please input your Phone!" },
+                ]}
+              >
+                <Input
+                  prefix={<PhoneFilled className="text-gray-500" />}
+                  placeholder="Phone"
+                  className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
+                />
+              </Form.Item>
+              <Form.Item
+                name="address"
+                rules={[
+                  { required: true, message: "Please input your Address!" },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className="text-gray-500" />}
+                  placeholder="Address"
+                  className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
+                />
+              </Form.Item>
+            </>
+          )}
           <Form.Item>
-            <Flex justify="space-between" align="center">
-              <a href="">Forgot password</a>
+            <Flex justify="end">
+              <a
+                href="#"
+                className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors duration-200"
+              >
+                Forgot password?
+              </a>
             </Flex>
           </Form.Item>
-
           <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button
+              block
+              type="primary"
+              htmlType="submit"
+              className="bg-indigo-600 hover:bg-indigo-700 rounded-lg py-2.5 text-white font-medium transition-colors duration-200"
+            >
               Log in
             </Button>
-            or <a href="">Register now!</a>
           </Form.Item>
+          <div className="flex justify-center mt-2">
+            <button
+              className="w-12 mx-2 rounded"
+              onClick={() => onLoginOA2("github")}
+            >
+              <img
+                className="w-full rounded"
+                src="/images/logo-github.png"
+                alt=""
+              />
+            </button>
+            <button
+              className="w-12 p-2 rounded"
+              onClick={() => onLoginOA2("google")}
+            >
+              <img
+                className="w-full rounded"
+                src="/images/logo-google.png"
+                alt=""
+              />
+            </button>
+          </div>
+          <div className="text-center text-sm text-gray-600">
+            Don't have an account?{" "}
+            <p
+              onClick={() => setIsRegister(true)}
+              className="text-indigo-600 cursor-pointer hover:text-indigo-800 hover:underline transition-colors duration-200"
+            >
+              Register now!
+            </p>
+          </div>
         </Form>
       </Drawer>
     </>

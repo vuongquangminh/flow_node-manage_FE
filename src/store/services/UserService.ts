@@ -25,7 +25,7 @@ type TLoginReq = {
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL + '/api/',
+    baseUrl: import.meta.env.VITE_API_URL + "/api/",
     prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["User"],
@@ -58,7 +58,7 @@ export const userApi = createApi({
     >({
       query: (body) => {
         return {
-          url: `account`,
+          url: `account/register`,
           method: "POST",
           body: body,
         };
@@ -75,5 +75,5 @@ export const {
   useGetUserByIdQuery,
   useCreateUserMutation,
   useGetMeQuery,
-  useLazyGetMeQuery
+  useLazyGetMeQuery,
 } = userApi;
