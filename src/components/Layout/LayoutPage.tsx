@@ -1,12 +1,8 @@
-import { Col, Layout, Row, Select } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { SocketContext } from "../../utils/SocketContext";
-import { LogoutOutlined } from "@ant-design/icons";
-import { useGetUserQuery } from "../../store/services/UserService";
+import { Col,  Row } from "antd";
+import {  Outlet } from "react-router-dom";
+import {  useEffect, useState } from "react";
 import { getLocalStorage } from "../../hooks/localStorage";
-
-const { Header } = Layout;
+import Header from "./Header";
 
 const LayoutPage = () => {
   // const socket = useContext(SocketContext)();
@@ -46,52 +42,24 @@ const LayoutPage = () => {
 
   return (
     // <SocketContext.Provider value={() => socket}>
-    <Layout style={{ height: "100vh" }}>
-      <Header className="flex justify-center items-center bg-cyan-700">
-        {/* <Select
-            className="w-full"
-            showSearch
-            allowClear
-            placeholder="Select a person"
-            optionFilterProp="label"
-            onChange={handleChange}
-            options={options}
-          />
-          <Link to={"/chatbot"} className="w-10 ml-3">
-            <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
-          </Link> */}
-        {/* <Link to={"/ai-agent"} className="w-10 mx-3">
-            <img className="h-full w-full rounded" src="/ai-agent.jpg" alt="" />
-          </Link>
-          <Link to={"/chat-tool"} className="w-10">
-            <img
-              className="h-full w-full rounded"
-              src="/chat-tool.jpg"
-              alt=""
-            />
-          </Link>
-          <Link to={"/ai-embedding"} className="w-10 mx-3">
-            <img
-              className="h-full w-full rounded"
-              src="/embedding.jpg"
-              alt=""
-            />
-          </Link> */}
+    <>
+      <div className="bg-[#f4f9f8] items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
+        <Header />
+        <p className="text-primary py-2">
+          🎒Buy a backpack = get a free front pocket, code
+          <strong>FREEGIFT</strong>
+          <a href="/">– See terms</a>
+        </p>
+      </div>
 
-        {/* <LogoutOutlined
-          className="text-white text-2xl"
-          onClick={handleLogout}
-        /> */}
-      </Header>
-
-      <Layout>
+      <div className="py-6">
         <Row gutter={16} className="!mx-0 h-full">
           <Col span={24} key={keyRender}>
             <Outlet />
           </Col>
         </Row>
-      </Layout>
-    </Layout>
+      </div>
+    </>
     // </SocketContext.Provider>
   );
 };

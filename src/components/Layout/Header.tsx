@@ -135,7 +135,12 @@ export default function Header() {
           <p className="px-2">{t("back_packs")}</p>
           <p className="px-2">{t("shoulder_bags")}</p>
         </div>
-        <div className="uppercase font-bold text-2xl">CABAIA</div>
+        <div
+          className="uppercase font-bold text-2xl cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          CABAIA
+        </div>
         <div className="flex items-center shrink-0">
           <p>{t("commitments")}</p>
           <div className="flex items-center px-4">
