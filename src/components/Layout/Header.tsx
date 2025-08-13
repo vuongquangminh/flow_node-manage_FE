@@ -10,9 +10,10 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Badge, Button, Col, Drawer, Row } from "antd";
+import { Badge, Button, Col, Drawer, Flex, Form, Input, Row } from "antd";
 import { useAddOrderMutation } from "../../store/services/OrderService";
 import { clearCart } from "../../store/slices/cartSlice";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -62,6 +63,9 @@ export default function Header() {
         console.log("đặt hàng thành công");
       });
   };
+  const onLogin = (values: { username: string; password: string }) => {
+    console.log("Received values of form: ", values);
+  };
   return (
     <>
       <div
@@ -84,8 +88,8 @@ export default function Header() {
           <div className="">
             <MapPinned size={24} />
           </div>
-          <div className="px-2">
-            <User size={24} />
+          <div className="px-2 cursor-pointer">
+            <User size={24} onClick={() => setShowLogin(true)} />
           </div>
           <div className="">
             <BellRing size={24} />
@@ -149,7 +153,43 @@ export default function Header() {
         placement="right"
         open={showLogin}
         onClose={() => setShowLogin(false)}
-      ></Drawer>
+      >
+        <Form
+          name="login"
+          initialValues={{ remember: true }}
+          style={{ maxWidth: 360 }}
+          onFinish={onLogin}
+        >
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: "Please input your Username!" }]}
+          >
+            <Input prefix={<UserOutlined />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: "Please input your Password!" }]}
+          >
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Flex justify="space-between" align="center">
+              <a href="">Forgot password</a>
+            </Flex>
+          </Form.Item>
+
+          <Form.Item>
+            <Button block type="primary" htmlType="submit">
+              Log in
+            </Button>
+            or <a href="">Register now!</a>
+          </Form.Item>
+        </Form>
+      </Drawer>
     </>
   );
 }
