@@ -169,7 +169,7 @@ export default function Header() {
       <Drawer
         closable
         destroyOnHidden
-        title={<p className="text-2xl font-semibold">{t("my_order")}</p>}
+        title={<p className="text-2xl font-semibold">{t("my_cart")}</p>}
         width={500}
         placement="right"
         open={showCart}

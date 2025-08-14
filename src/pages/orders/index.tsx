@@ -5,32 +5,34 @@ import { Order, ProductOrderRes } from "../../type/api";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import ModelConfirm from "../../components/ModelConfirm";
+import { useTranslation } from "react-i18next";
 
 const OrderPage = () => {
+  const { t } = useTranslation();
   const user = getLocalStorage({ key: "user" });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: orderList } = useGetOrderQuery({ user_id: user._id });
   const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
   const expandColumns = [
     {
-      title: "Hình ảnh",
+      title: t("image"),
       key: "image",
       render: (value: ProductOrderRes) => {
         return <img className="w-24" src={value?.image} alt="" />;
       },
     },
     {
-      title: "Tên sản phẩm",
+      title: t("product_name"),
       dataIndex: "product_name",
       key: "product_name",
       render: (value: string) => {
         return <p className="text-base font-medium text-primary">{value}</p>;
       },
     },
-    { title: "Màu sắc", dataIndex: "color", key: "color" },
-    { title: "size", dataIndex: "size", key: "size" },
+    { title: t("color"), dataIndex: "color", key: "color" },
+    { title: t("size"), dataIndex: "size", key: "size" },
     {
-      title: "Giá",
+      title: t("price"),
       dataIndex: "price",
       key: "price",
     },
@@ -38,7 +40,7 @@ const OrderPage = () => {
 
   const columns = [
     {
-      title: "Mã đơn hàng ",
+      title: t("order_code"),
       dataIndex: "code",
       key: "code",
       render: (value: string) => {
@@ -46,7 +48,7 @@ const OrderPage = () => {
       },
     },
     {
-      title: "Tổng tiền",
+      title: t("total_money"),
       key: "total_money",
       render: (_value: string, record: Order) => {
         const total = record?.products?.reduce(
@@ -59,9 +61,9 @@ const OrderPage = () => {
         return total;
       },
     },
-    { title: "Ngày tạo", dataIndex: "createdAt", key: "createdAt" },
+    { title: t("created_at"), dataIndex: "createdAt", key: "createdAt" },
     {
-      title: "Hành động",
+      title: t("action"),
       key: "action",
       render: (item: Order) => {
         return (
@@ -97,12 +99,12 @@ const OrderPage = () => {
         dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
       />
       <ModelConfirm
-        title="Xóa"
+        title={t("delete")}
         content={
           <>
-            Bạn có chắc chắn muốn xóa đơn hàng{" "}
+            {t("confirm_question")}
             <strong className="text-primary">{selectedOrder?.code}</strong> hay
-            không
+            {t("yet")}
           </>
         }
         isOpen={isModalOpen}

@@ -92,7 +92,17 @@
   "size_XL": "Kích thước có thể dao động từ 50-55cm (dài) x 40-45cm (rộng) x 20-30cm (cao) hoặc lớn hơn",
   "new": "Mới",
   "add": "Thêm - ",
-  "explore": "Khám phá"
+  "explore": "Khám phá",
+  "confirm_question": "Bạn có chắc chắn muốn xóa đơn hàng",
+  "yet": "không?",
+  "order_code": "Mã đơn hàng",
+  "product_name": "Tên sản phẩm",
+  "price": "Giá",
+  "image": "Hình ảnh",
+  "total_money": "Tổng tiền",
+  "created_at": "Ngày tạo",
+  "action": "Hành động"
+
 
 
 

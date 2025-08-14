@@ -47,7 +47,7 @@
   "our_univers": "Our Univers",
   "order": "Order",
   "buy": "Buy",
-  "my_cart": "My Order",
+  "my_cart": "My Cart",
   "color": "Color",
   "size": "Size",
   "nothing_product": "Nothing Product!",
@@ -92,7 +92,16 @@
   "size_XL": "Size can range from 50-55cm (length) x 40-45cm (width) x 20-30cm (height) or larger",
   "new": "New",
   "add": "Add - ",
-  "explore": "Explore"
+  "explore": "Explore",
+  "confirm_question": "Do you want to delete this order",
+  "yet": "?",
+  "order_code": "Order Code",
+  "product_name": "Product name",
+  "price": "Price",
+  "image": "Image",
+  "total_money": "Total Money",
+  "created_at": "Created At",
+  "action": "Action"
 
 
 
