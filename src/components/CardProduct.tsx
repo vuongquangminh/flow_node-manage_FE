@@ -45,7 +45,7 @@ export default memo(function CardProduct({
         </div>
         <div className="flex items-center justify-between">
           <span className="text-xl font-bold text-gray-900 dark:text-white">
-            {product?.price}
+            {product?.price}$
           </span>
           <a
             href="#"

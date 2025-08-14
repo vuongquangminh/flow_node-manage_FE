@@ -39,7 +39,7 @@ export default function Homepage() {
           </div>
         </Slider>
 
-        <div className="absolute p-8 md:pl-16 top-3/4 transform -translate-y-3/4 max-w-[800px] text-white">
+        <div className="absolute hidden sm:block p-8 md:pl-16 top-3/4 transform -translate-y-3/4 max-w-[800px] text-white">
           <h2 className="text-sm sm:text-4xl md:text-6xl font-bold font-fantasy">
             {t("cross_body")}
           </h2>
@@ -115,26 +115,26 @@ export const sub_our_mission = [
   {
     id: 1,
     icon: <CreditCard size={24} />,
-    title: t("item_mission_1"),
-    description: t("sub_item_mission_1"),
+    title: "100% secure",
+    description: "Secure payment methods",
   },
   {
     id: 2,
     icon: <Container size={24} />,
-    title: t("item_mission_2"),
-    description: t("sub_item_mission_2"),
+    title: "Lifetime guarantee",
+    description: "on bags and luggage",
   },
   {
     id: 3,
     icon: <RefreshCcw size={24} />,
-    title: t("item_mission_3"),
-    description: t("sub_item_mission_3"),
+    title: "Free Returns",
+    description: "check conditions",
   },
   {
     id: 4,
     icon: <Mail size={24} />,
-    title: t("item_mission_4"),
-    description: t("sub_item_mission_4"),
+    title: "Customer support",
+    description: "Monday to Friday from 10 am to 6:30 pm",
   },
 ];
 export const our_mission = [

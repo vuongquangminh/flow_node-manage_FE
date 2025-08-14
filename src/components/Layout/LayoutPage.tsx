@@ -1,13 +1,12 @@
 import { Col,  Row } from "antd";
 import {  Outlet } from "react-router-dom";
-import {  useEffect, useState } from "react";
+import {  useEffect } from "react";
 import { getLocalStorage } from "../../hooks/localStorage";
 import Header from "./Header";
 
 const LayoutPage = () => {
   // const socket = useContext(SocketContext)();
   // const account = useGetUserQuery();
-  const [keyRender, setKeyRender] = useState(0);
   // const navigate = useNavigate();
 
   // socket.on("update-friend", (data) => {
@@ -16,9 +15,6 @@ const LayoutPage = () => {
   // });
   const user = getLocalStorage({ key: "user" });
 
-  useEffect(() => {
-    setKeyRender((pre) => pre + 1);
-  }, []);
   // const options = account?.data
   //   ?.filter((item) => item._id !== user._id)
   //   ?.map((item) => ({

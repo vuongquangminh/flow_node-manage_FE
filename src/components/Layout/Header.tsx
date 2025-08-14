@@ -1,6 +1,7 @@
 import {
   AlignJustify,
   BellRing,
+  House,
   MapPinned,
   Search,
   ShoppingCart,
@@ -8,7 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Badge, Button, Col, Drawer, Flex, Form, Input, Row } from "antd";
 import { useAddOrderMutation } from "../../store/services/OrderService";
@@ -21,7 +22,6 @@ import { getLocalStorage, setLocalStorage } from "../../hooks/localStorage";
 import { useNotice } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { generateOrderCode } from "../../utils/generateOrderCode";
-import { clearCart } from "../../store/slices/cartSlice";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -36,6 +36,9 @@ export default function Header() {
   const [doRegister] = useCreateUserMutation();
   const { noticeSuccess, noticeError, contextHolder } = useNotice();
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const [showMenuDrawer, setShowMenuDrawer] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -50,9 +53,14 @@ export default function Header() {
 
       setLastScrollY(currentScrollY);
     };
-
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [lastScrollY]);
 
   const handleShowCart = () => {
@@ -75,8 +83,6 @@ export default function Header() {
     doAddCart({ products, address: user.address, phone: user.phone, code })
       .unwrap()
       .then(() => {
-        const dispatch = useDispatch();
-        dispatch(clearCart());
         noticeSuccess(t("feature_success", { name: "order" }));
       });
   };
@@ -131,40 +137,51 @@ export default function Header() {
           showHeader ? "show" : "hide"
         }`}
       >
-        <div className="flex flex-col items-start mb-3 me-4 md:items-center md:flex-row md:mb-0">
-          <AlignJustify size={24} />
-          <p className="px-2">{t("bag_school")}</p>
-          <p className="px-2">{t("back_packs")}</p>
-          <p className="px-2">{t("shoulder_bags")}</p>
-        </div>
-        <div
-          className="uppercase font-bold text-2xl cursor-pointer"
-          onClick={() => navigate("/")}
-        >
-          CABAIA
-        </div>
-        <div className="flex items-center shrink-0">
-          <p>{t("commitments")}</p>
-          <div className="flex items-center px-4">
-            {t("search")} <Search size={24} />
-          </div>
-          <div className="">
-            <MapPinned size={24} />
-          </div>
-          <div className="px-2 cursor-pointer">
-            <User size={24} onClick={() => setShowLogin(true)} />
-          </div>
-          <div className="cursor-pointer">
-            <BellRing size={24} onClick={() => navigate("/order")} />
-          </div>
-          <Badge
-            count={cart?.length}
-            className="px-2 text-white cursor-pointer"
-            onClick={() => handleShowCart()}
-          >
-            <ShoppingCart size={24} />
-          </Badge>
-        </div>
+        {isMobile ? (
+          // MOBILE HEADER
+          <AlignJustify
+            className="mx-4"
+            size={24}
+            onClick={() => setShowMenuDrawer(true)}
+          />
+        ) : (
+          <>
+            <div className="flex flex-col items-start mb-3 me-4 md:items-center md:flex-row md:mb-0">
+              <AlignJustify size={24} />
+              <p className="px-2">{t("bag_school")}</p>
+              <p className="px-2">{t("back_packs")}</p>
+              <p className="px-2">{t("shoulder_bags")}</p>
+            </div>
+            <div
+              className="uppercase font-bold text-2xl cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              CABAIA
+            </div>
+            <div className="flex items-center shrink-0">
+              <p>{t("commitments")}</p>
+              <div className="flex items-center px-4">
+                {t("search")} <Search size={24} />
+              </div>
+              <div className="">
+                <MapPinned size={24} />
+              </div>
+              <div className="px-2 cursor-pointer">
+                <User size={24} onClick={() => setShowLogin(true)} />
+              </div>
+              <div className="cursor-pointer">
+                <BellRing size={24} onClick={() => navigate("/order")} />
+              </div>
+              <Badge
+                count={cart?.length}
+                className="px-2 text-white cursor-pointer"
+                onClick={() => handleShowCart()}
+              >
+                <ShoppingCart size={24} />
+              </Badge>
+            </div>
+          </>
+        )}
       </div>
       <Drawer
         closable
@@ -192,7 +209,7 @@ export default function Header() {
                   {t("size")}: <strong>{item.size}</strong>
                 </p>
                 <p className="text-end text-yellow-600 text-lg font-semibold">
-                  {item.price}
+                  {item.price}$
                 </p>
               </Col>
             </Row>
@@ -382,6 +399,43 @@ export default function Header() {
             </p>
           </div>
         </Form>
+      </Drawer>
+      <Drawer
+        title="Menu"
+        placement="left"
+        onClose={() => setShowMenuDrawer(false)}
+        open={showMenuDrawer}
+      >
+        <div>
+          <div className="flex items-center ">
+            <Input.Search
+              placeholder={t("search")}
+              onSearch={() => {}}
+              enterButton
+            />
+          </div>
+          <div className="flex items-center py-2">
+            <div className="px-2 cursor-pointer">
+              <House size={24} onClick={() => navigate("/")} />
+            </div>
+            <div className="">
+              <MapPinned size={24} />
+            </div>
+            <div className="px-2 cursor-pointer">
+              <User size={24} onClick={() => setShowLogin(true)} />
+            </div>
+            <div className="cursor-pointer">
+              <BellRing size={24} onClick={() => navigate("/order")} />
+            </div>
+            <Badge
+              count={cart?.length}
+              className="px-2  cursor-pointer"
+              onClick={() => handleShowCart()}
+            >
+              <ShoppingCart size={24} />
+            </Badge>
+          </div>
+        </div>
       </Drawer>
     </>
   );

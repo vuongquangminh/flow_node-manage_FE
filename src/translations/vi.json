@@ -101,7 +101,13 @@
   "image": "Hình ảnh",
   "total_money": "Tổng tiền",
   "created_at": "Ngày tạo",
-  "action": "Hành động"
+  "action": "Hành động",
+  "status": "Trạng thái",
+  "canceled": "Đã hủy",
+  "unpaid": "Chưa thanh toán",
+  "in_transit": "Đang vận chuyển",
+  "done": "Hoàn thành",
+  "qr": "Đơn hàng của bạn sẽ được kế toán xác nhận và vận chuyển (Mã QR chỉ là mẫu, yêu cầu khách hàng không chuyển)"
 
 
 

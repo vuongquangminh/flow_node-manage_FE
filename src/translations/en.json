@@ -101,7 +101,14 @@
   "image": "Image",
   "total_money": "Total Money",
   "created_at": "Created At",
-  "action": "Action"
+  "action": "Action",
+  "status": "Status",
+  "canceled": "Canceled",
+  "unpaid": "Unpaid",
+  "in_transit": "In Transit",
+  "done": "Done",
+  "qr": "Your order will be confirmed and shipped by accounting (QR code is just a sample, customers are requested not to transfer)"
+
 
 
 
