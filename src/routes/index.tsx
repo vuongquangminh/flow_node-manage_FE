@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import AccountPage from "../pages/admin/account";
 import ErrorPage from "../components/ErrorPage";
 import PrivateRoute from "../components/PrivateRoute";
 import LayoutPage from "../components/Layout/LayoutPage";
@@ -10,6 +9,7 @@ import ProductDetail from "../pages/user/products/ProductDetail";
 import OrderPage from "../pages/user/orders";
 import AdminLayout from "../components/Layout/AdminLayout";
 import OrderAdminPage from "../pages/admin/orders";
+import AccountAdminPage from "../pages/admin/account";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
           {
             element: <AdminLayout />,
             children: [
-              { path: "users", element: <AccountPage /> },
+              { path: "users", element: <AccountAdminPage /> },
               { path: "orders", element: <OrderAdminPage /> },
               // ... thêm các route khác
             ],
