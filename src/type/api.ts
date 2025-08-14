@@ -52,15 +52,18 @@ export type ProductOrderRes = {
   color: string;
   quantity: number;
 };
+
+export type Order = {
+  user_id: number;
+  user_name: number;
+  products?: ProductOrderRes[];
+  address: string;
+  phone: string;
+  code: string;
+};
 export type OrderRes = {
   message: string;
-  result: {
-    user_id: number;
-    user_name: number;
-    products?: ProductOrderRes[];
-    address: string;
-    phone: string;
-  };
+  data: Order;
 };
 
 export type OrderReq = {
@@ -71,4 +74,5 @@ export type OrderReq = {
   }[];
   address: string;
   phone: string;
+  code: string;
 };

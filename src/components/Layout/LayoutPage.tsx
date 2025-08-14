@@ -1,43 +1,41 @@
-import { Col, Layout, Row, Select } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { SocketContext } from "../../utils/SocketContext";
-import { LogoutOutlined } from "@ant-design/icons";
-import SideBar from "./Sidebar";
-import { useGetUserQuery } from "../../store/services/UserService";
+import { Col,  Row } from "antd";
+import {  Outlet } from "react-router-dom";
+import {  useEffect, useState } from "react";
 import { getLocalStorage } from "../../hooks/localStorage";
-
-const { Header } = Layout;
+import Header from "./Header";
 
 const LayoutPage = () => {
-  const socket = useContext(SocketContext)();
-  const account = useGetUserQuery();
+  // const socket = useContext(SocketContext)();
+  // const account = useGetUserQuery();
   const [keyRender, setKeyRender] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  socket.on("update-friend", (data) => {
-    console.log(data);
-    setKeyRender((pre) => pre + 1);
-  });
+  // socket.on("update-friend", (data) => {
+  //   console.log(data);
+  //   setKeyRender((pre) => pre + 1);
+  // });
   const user = getLocalStorage({ key: "user" });
 
-  const options = account?.data
-    ?.filter((item) => item._id !== user._id)
-    ?.map((item) => ({
-      value: item._id,
-      label: `${item.name} - ${item.email}`,
-    }));
-
-  const handleChange = (value: number) => {
-    socket.emit("add-friend", {
-      id: value,
-    });
+  useEffect(() => {
     setKeyRender((pre) => pre + 1);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
+  }, []);
+  // const options = account?.data
+  //   ?.filter((item) => item._id !== user._id)
+  //   ?.map((item) => ({
+  //     value: item._id,
+  //     label: `${item.name} - ${item.email}`,
+  //   }));
+
+  // const handleChange = (value: number) => {
+  //   socket.emit("add-friend", {
+  //     id: value,
+  //   });
+  //   setKeyRender((pre) => pre + 1);
+  // };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/");
+  // };
   useEffect(() => {
     console.log("User data:", user);
   }, [user]);

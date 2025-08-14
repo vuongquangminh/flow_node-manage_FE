@@ -8,6 +8,7 @@ import { friendApi } from "./services/FriendService";
 import { productApi } from "./services/ProductService";
 import { persistReducer, persistStore } from "redux-persist";
 import cartReducer from "./slices/cartSlice";
+import { orderApi } from "./services/OrderService";
 // 🔹 Cấu hình persist
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   [chatApi.reducerPath]: chatApi.reducer,
   [friendApi.reducerPath]: friendApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  [orderApi.reducerPath]: orderApi.reducer,
 });
 
 // 🔹 Tạo persistedReducer
@@ -36,6 +38,7 @@ export const store = configureStore({
       .concat(flowApi.middleware)
       .concat(chatApi.middleware)
       .concat(productApi.middleware)
+      .concat(orderApi.middleware)
       .concat(friendApi.middleware),
 });
 

@@ -5,7 +5,6 @@ import PrivateRoute from "../components/PrivateRoute";
 import LayoutPage from "../components/Layout/LayoutPage";
 import ChatPage from "../pages/chat/ChatPage";
 import GetStartChatPage from "../pages/chat/GetStartChatPage";
-import RegisterPage from "../components/RegisterPage";
 import ChatBotPage from "../pages/chat/ChatBotPage";
 import AgentPage from "../pages/chat/AgentPage";
 import ChatToolPage from "../pages/chat/ChatToolPage";
@@ -14,7 +13,7 @@ import OAuthCallback from "../components/OAuthCallback";
 import Homepage from "../pages/homepage/HomePage";
 import Products from "../pages/products";
 import ProductDetail from "../pages/products/ProductDetail";
-import LoginPage from "../components/Login";
+import OrderPage from "../pages/orders";
 
 export const router = createBrowserRouter([
   {
@@ -33,14 +32,7 @@ export const router = createBrowserRouter([
     path: "/oauth-callback",
     element: <OAuthCallback />,
   },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
+
   {
     element: <PrivateRoute />,
     children: [
@@ -50,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: "/user",
             element: <UserPage />,
+          },
+          {
+            path: "/order",
+            element: <OrderPage />,
           },
           {
             path: "/conversation",

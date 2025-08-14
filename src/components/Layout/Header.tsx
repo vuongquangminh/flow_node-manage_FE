@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Badge, Button, Col, Drawer, Flex, Form, Input, Row } from "antd";
 import { useAddOrderMutation } from "../../store/services/OrderService";
-import { clearCart } from "../../store/slices/cartSlice";
 import { LockOutlined, PhoneFilled, UserOutlined } from "@ant-design/icons";
 import {
   useCreateUserMutation,
@@ -20,6 +19,9 @@ import {
 } from "../../store/services/UserService";
 import { getLocalStorage, setLocalStorage } from "../../hooks/localStorage";
 import { useNotice } from "../../utils";
+import { useNavigate } from "react-router-dom";
+import { generateOrderCode } from "../../utils/generateOrderCode";
+import { clearCart } from "../../store/slices/cartSlice";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -30,11 +32,10 @@ export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [doAddCart, { isLoading }] = useAddOrderMutation();
-  const dispatch = useDispatch();
   const [doLogin] = useLoginMutation();
   const [doRegister] = useCreateUserMutation();
   const { noticeSuccess, noticeError, contextHolder } = useNotice();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -59,6 +60,7 @@ export default function Header() {
   };
 
   const handleOrder = () => {
+    const code = generateOrderCode();
     const token = getLocalStorage({ key: "token" });
     const user = getLocalStorage({ key: "user" });
     if (!token || !user) {
@@ -70,9 +72,10 @@ export default function Header() {
       size: item.size,
       color: item.color,
     }));
-    doAddCart({ products, address: user.address, phone: user.phone })
+    doAddCart({ products, address: user.address, phone: user.phone, code })
       .unwrap()
       .then(() => {
+        const dispatch = useDispatch();
         dispatch(clearCart());
         noticeSuccess(t("feature_success", { name: "order" }));
       });
@@ -90,7 +93,7 @@ export default function Header() {
 
         if (res) {
           noticeSuccess("register");
-          setShowLogin(false);
+          setIsRegister(false);
         }
       } else {
         const res = await doLogin(values);
@@ -119,6 +122,7 @@ export default function Header() {
       window.location.href = "http://localhost:3000/auth/google";
     }
   };
+
   return (
     <>
       {contextHolder}
@@ -133,7 +137,12 @@ export default function Header() {
           <p className="px-2">{t("back_packs")}</p>
           <p className="px-2">{t("shoulder_bags")}</p>
         </div>
-        <div className="uppercase font-bold text-2xl">CABAIA</div>
+        <div
+          className="uppercase font-bold text-2xl cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          CABAIA
+        </div>
         <div className="flex items-center shrink-0">
           <p>{t("commitments")}</p>
           <div className="flex items-center px-4">
@@ -145,8 +154,8 @@ export default function Header() {
           <div className="px-2 cursor-pointer">
             <User size={24} onClick={() => setShowLogin(true)} />
           </div>
-          <div className="">
-            <BellRing size={24} />
+          <div className="cursor-pointer">
+            <BellRing size={24} onClick={() => navigate("/order")} />
           </div>
           <Badge
             count={cart?.length}
