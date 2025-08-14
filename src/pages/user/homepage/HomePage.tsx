@@ -1,15 +1,15 @@
 import { Button } from "antd";
-import Header from "../../components/Layout/Header";
-import SlickImage from "../../components/SlickImage";
-import { useGetProductQuery } from "../../store/services/ProductService";
+import Header from "../../../components/Layout/Header";
+import SlickImage from "../../../components/SlickImage";
+import { useGetProductQuery } from "../../../store/services/ProductService";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
-import { slick_settings_banner } from "../../constants";
+import { slick_settings_banner } from "../../../constants";
 import OurUnivers from "./OurUnivers";
-import CardOurCategory from "../../components/CardOurCategory";
+import CardOurCategory from "../../../components/CardOurCategory";
 import { Container, CreditCard, Mail, RefreshCcw } from "lucide-react";
 import MostProminent from "./MostProminent";
-import Footer from "../../components/Layout/Footer";
+import Footer from "../../../components/Layout/Footer";
 import { t } from "i18next";
 
 export default function Homepage() {

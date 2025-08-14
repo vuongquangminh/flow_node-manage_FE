@@ -1,10 +1,10 @@
 import Slider from "react-slick";
-import { slick_settings } from "../../constants";
-import CardOurCategory from "../../components/CardOurCategory";
+import { slick_settings } from "../../../constants";
+import CardOurCategory from "../../../components/CardOurCategory";
 import { useTranslation } from "react-i18next";
 
 export default function OurUnivers() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const items = [
     {
       id: 1,

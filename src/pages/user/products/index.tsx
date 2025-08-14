@@ -1,9 +1,9 @@
 import { Badge, Button, Progress, Spin } from "antd";
-import Header from "../../components/Layout/Header";
-import { useGetProductInfInfiniteQuery } from "../../store/services/ProductService";
-import CardProduct from "../../components/CardProduct";
+import Header from "../../../components/Layout/Header";
+import { useGetProductInfInfiniteQuery } from "../../../store/services/ProductService";
+import CardProduct from "../../../components/CardProduct";
 import { useEffect, useState } from "react";
-import { ProductRes } from "../../type/api";
+import { ProductRes } from "../../../type/api";
 import { useTranslation } from "react-i18next";
 
 export default function Products() {

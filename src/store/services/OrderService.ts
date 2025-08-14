@@ -9,7 +9,7 @@ export const orderApi = createApi({
     baseUrl: import.meta.env.VITE_API_URL + "/api/",
     prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
-  tagTypes: ["Order"],
+  tagTypes: ["Order", "OrderAdmin"],
   endpoints: (build) => ({
     getOrder: build.query<OrderRes, { user_id: number }>({
       query: ({ user_id }) => ({
@@ -23,9 +23,10 @@ export const orderApi = createApi({
         method: "POST",
         body: body,
       }),
-      async onQueryStarted(_arg, { dispatch }) {
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
-          dispatch(clearCart()); // Await the completion of the mutation
+          await queryFulfilled; // Chờ API call thành công
+          dispatch(clearCart());
         } catch (error) {
           console.error("Mutation failed:", error);
         }
@@ -39,8 +40,30 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
+    getOrderAdmin: build.query<OrderRes, { search?: string }>({
+      query: (params) => ({
+        url: `admin/orders`,
+        params,
+      }),
+      providesTags: ["OrderAdmin"],
+    }),
+    approveOrderAdmin: build.mutation<OrderRes, { id: number; status: number }>(
+      {
+        query: (body) => ({
+          url: `/admin/orders/approve/${body.id}`,
+          method: "POST",
+          body: body,
+        }),
+        invalidatesTags: ["OrderAdmin"],
+      }
+    ),
   }),
 });
 
-export const { useGetOrderQuery, useAddOrderMutation, useDeleteOrderMutation } =
-  orderApi;
+export const {
+  useGetOrderQuery,
+  useAddOrderMutation,
+  useDeleteOrderMutation,
+  useGetOrderAdminQuery,
+  useApproveOrderAdminMutation,
+} = orderApi;

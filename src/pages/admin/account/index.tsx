@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetUserQuery } from "../store/services/UserService";
-
 import React from "react";
 import { Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { t } from "i18next";
+import { useGetUserQuery } from "../../../store/services/UserService";
 
 interface DataType {
   email: string;
@@ -23,7 +21,6 @@ const columns: TableProps<DataType>["columns"] = [
     dataIndex: "email",
     key: "email",
   },
-
   {
     title: "Action",
     key: "action",
@@ -36,10 +33,11 @@ const columns: TableProps<DataType>["columns"] = [
   },
 ];
 
-const UserPage: React.FC = () => {
+const AccountPage: React.FC = () => {
   const res: any = useGetUserQuery();
   return (
     <Table<DataType>
+      rowKey="email"
       columns={columns}
       dataSource={res.data}
       loading={res.isLoading}
@@ -47,4 +45,4 @@ const UserPage: React.FC = () => {
   );
 };
 
-export default UserPage;
+export default AccountPage;

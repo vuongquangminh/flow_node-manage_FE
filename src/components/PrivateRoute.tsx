@@ -4,7 +4,12 @@ import { getLocalStorage } from "../hooks/localStorage";
 import useGetMe from "../utils/getMe";
 import { useEffect } from "react";
 
-const PrivateRoute = () => {
+
+interface PrivateRouteProps {
+  roles?: string[]; // Danh sách role được phép
+}
+
+const PrivateRoute = ({ roles }: PrivateRouteProps) => {
   const getMe = useGetMe();
   const token = getLocalStorage({ key: "token" });
   const user = getLocalStorage({ key: "user" });
@@ -17,6 +22,12 @@ const PrivateRoute = () => {
   
   if (!token) {
     return <Navigate to="/" replace />;
+  }
+  // Nếu có truyền roles, kiểm tra role user
+  if (roles && roles.length > 0) {
+    if (!user || !roles.includes(user.role)) {
+      return <Navigate to="/" replace />;
+    }
   }
 
   return <Outlet />;

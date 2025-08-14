@@ -84,6 +84,11 @@ export default function Header() {
       .unwrap()
       .then(() => {
         noticeSuccess(t("feature_success", { name: "order" }));
+      })
+      .catch((err) => {
+        const errorMsg = err?.data?.message || err?.message || t("fail");
+        console.log("err: ", err);
+        noticeError(errorMsg);
       });
   };
   const onLogin = async (values: {
