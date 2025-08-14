@@ -10,6 +10,7 @@ import OrderPage from "../pages/user/orders";
 import AdminLayout from "../components/Layout/AdminLayout";
 import OrderAdminPage from "../pages/admin/orders";
 import AccountAdminPage from "../pages/admin/account";
+import ProductAdminPage from "../pages/admin/products";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
             children: [
               { path: "users", element: <AccountAdminPage /> },
               { path: "orders", element: <OrderAdminPage /> },
+              { path: "products", element: <ProductAdminPage /> },
               // ... thêm các route khác
             ],
           },

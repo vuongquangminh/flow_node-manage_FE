@@ -62,6 +62,9 @@ const AccountAdminPage: React.FC = () => {
   return (
     <>
       {contextHolder}
+      <div className="text-end pb-4">
+        <Button type="primary">{t("add")}</Button>
+      </div>
       <Table<DataType>
         rowKey="email"
         columns={columns}

@@ -45,7 +45,7 @@ const AdminLayout: React.FC = () => {
             {
               key: "/admin/products",
               icon: <SettingOutlined />,
-              label: <Link to="/admin/settings">Settings</Link>,
+              label: <Link to="/admin/products">Products</Link>,
             },
           ]}
         />
