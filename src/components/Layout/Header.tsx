@@ -74,9 +74,8 @@ export default function Header() {
       .unwrap()
       .then(() => {
         dispatch(clearCart());
-        console.log("đặt hàng thành công");
-        noticeSuccess("order");
-      }); 
+        noticeSuccess(t("feature_success", { name: "order" }));
+      });
   };
   const onLogin = async (values: {
     email: string;
@@ -105,7 +104,7 @@ export default function Header() {
             res?.error &&
             "data" in res.error &&
             (res.error as { data?: { error?: string } })?.data?.error;
-          noticeError(errorMsg ? errorMsg : "Thất bại");
+          noticeError(errorMsg ? errorMsg : t("fail"));
         }
       }
     } catch (err) {
@@ -161,7 +160,7 @@ export default function Header() {
       <Drawer
         closable
         destroyOnHidden
-        title={<p className="text-2xl font-semibold">Giỏ hàng của bạn</p>}
+        title={<p className="text-2xl font-semibold">{t("my_order")}</p>}
         width={500}
         placement="right"
         open={showCart}
@@ -178,10 +177,10 @@ export default function Header() {
                   {item.product_name}
                 </p>
                 <p className="">
-                  Color: <strong>{item.color}</strong>
+                  {t("color")}: <strong>{item.color}</strong>
                 </p>
                 <p className="">
-                  Size: <strong>{item.size}</strong>
+                  {t("size")}: <strong>{item.size}</strong>
                 </p>
                 <p className="text-end text-yellow-600 text-lg font-semibold">
                   {item.price}
@@ -190,20 +189,20 @@ export default function Header() {
             </Row>
           ))
         ) : (
-          <p className="text-center text-base">Chưa có sản phẩm nào!</p>
+          <p className="text-center text-base">{t("nothing_product")}</p>
         )}
         <Button
           loading={isLoading}
           className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary"
           onClick={() => handleOrder()}
         >
-          Đặt hàng
+          {t("buy")}
         </Button>
       </Drawer>
       <Drawer
         closable
         destroyOnHidden
-        title={<p className="text-2xl font-semibold">Đăng nhập</p>}
+        title={<p className="text-2xl font-semibold">{t("login")}</p>}
         width={500}
         placement="right"
         open={showLogin}
@@ -218,7 +217,12 @@ export default function Header() {
           {isRegister && (
             <Form.Item
               name="name"
-              rules={[{ required: true, message: "Please input your Name!" }]}
+              rules={[
+                {
+                  required: true,
+                  message: t("please_field_required", { field: "name" }),
+                },
+              ]}
             >
               <Input
                 prefix={<UserOutlined className="text-gray-500" />}
@@ -229,7 +233,12 @@ export default function Header() {
           )}
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "Please input your Email!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: "email" }),
+              },
+            ]}
           >
             <Input
               prefix={<UserOutlined className="text-gray-500" />}
@@ -239,7 +248,12 @@ export default function Header() {
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("please_field_required", { field: "password" }),
+              },
+            ]}
           >
             <Input
               prefix={<LockOutlined className="text-gray-500" />}
@@ -262,11 +276,7 @@ export default function Header() {
                       if (!value || getFieldValue("password") === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(
-                        new Error(
-                          "The new password that you entered do not match!"
-                        )
-                      );
+                      return Promise.reject(new Error(t("password_not_match")));
                     },
                   }),
                 ]}
@@ -274,7 +284,7 @@ export default function Header() {
                 <Input
                   prefix={<LockOutlined className="text-gray-500" />}
                   type="password"
-                  placeholder="Password Confirm"
+                  placeholder={t("password_confirm")}
                   className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
                 />
               </Form.Item>
@@ -282,24 +292,30 @@ export default function Header() {
               <Form.Item
                 name="phone"
                 rules={[
-                  { required: true, message: "Please input your Phone!" },
+                  {
+                    required: true,
+                    message: t("please_field_required", { field: "phone" }),
+                  },
                 ]}
               >
                 <Input
                   prefix={<PhoneFilled className="text-gray-500" />}
-                  placeholder="Phone"
+                  placeholder={t("phone")}
                   className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
                 />
               </Form.Item>
               <Form.Item
                 name="address"
                 rules={[
-                  { required: true, message: "Please input your Address!" },
+                  {
+                    required: true,
+                    message: t("please_field_required", { field: "address" }),
+                  },
                 ]}
               >
                 <Input
                   prefix={<UserOutlined className="text-gray-500" />}
-                  placeholder="Address"
+                  placeholder={t("address")}
                   className="rounded-lg border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 py-2.5 px-4"
                 />
               </Form.Item>
@@ -311,7 +327,7 @@ export default function Header() {
                 href="#"
                 className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors duration-200"
               >
-                Forgot password?
+                {t("forgot_password")}
               </a>
             </Flex>
           </Form.Item>
@@ -322,7 +338,7 @@ export default function Header() {
               htmlType="submit"
               className="bg-indigo-600 hover:bg-indigo-700 rounded-lg py-2.5 text-white font-medium transition-colors duration-200"
             >
-              Log in
+              {t("login")}
             </Button>
           </Form.Item>
           <div className="flex justify-center mt-2">
@@ -348,12 +364,12 @@ export default function Header() {
             </button>
           </div>
           <div className="text-center text-sm text-gray-600">
-            Don't have an account?{" "}
+            {t("had_account")}
             <p
               onClick={() => setIsRegister(true)}
               className="text-indigo-600 cursor-pointer hover:text-indigo-800 hover:underline transition-colors duration-200"
             >
-              Register now!
+              {t("register")}
             </p>
           </div>
         </Form>

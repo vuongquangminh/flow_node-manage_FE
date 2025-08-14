@@ -10,11 +10,12 @@ import CardOurCategory from "../../components/CardOurCategory";
 import { Container, CreditCard, Mail, RefreshCcw } from "lucide-react";
 import MostProminent from "./MostProminent";
 import Footer from "../../components/Layout/Footer";
+import { t } from "i18next";
 
 export default function Homepage() {
   const res = useGetProductQuery({});
   const { t } = useTranslation();
-  
+
   return (
     <>
       <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
@@ -75,17 +76,12 @@ export default function Homepage() {
 
         <div className="absolute p-8 md:pl-16 top-3/4 transform -translate-y-3/4 max-w-[800px] text-white">
           <h2 className=" text-4xl sm:text-4xl md:text-6xl font-bold font-fantasy">
-            Our mission
+            {t("our_mission")}
           </h2>
-          <p className="mt-4 max-w-xl">
-            A committed company, CABAIA became a mission-driven enterprise in
-            2021 and has been B Corp certified since 2022. Deeply dedicated to
-            its partner organizations, it established its own endowment fund,
-            Care & Give, in 2024 to further its commitments.
-          </p>
+          <p className="mt-4 max-w-xl">{t("sub_mission")}</p>
 
           <Button className="mt-4 text-primary rounded-none text-lg px-8 py-6 border-primary">
-            Read more
+            {t("read_more")}
           </Button>
         </div>
       </div>
@@ -119,42 +115,42 @@ export const sub_our_mission = [
   {
     id: 1,
     icon: <CreditCard size={24} />,
-    title: "100% secure",
-    description: "Secure payment methods",
+    title: t("item_mission_1"),
+    description: t("sub_item_mission_1"),
   },
   {
     id: 2,
     icon: <Container size={24} />,
-    title: "Lifetime guarantee",
-    description: "on bags and luggage",
+    title: t("item_mission_2"),
+    description: t("sub_item_mission_2"),
   },
   {
     id: 3,
     icon: <RefreshCcw size={24} />,
-    title: "Free Returns",
-    description: "check conditions",
+    title: t("item_mission_3"),
+    description: t("sub_item_mission_3"),
   },
   {
     id: 4,
     icon: <Mail size={24} />,
-    title: "Customer support",
-    description: "Monday to Friday from 10 am to 6:30 pm",
+    title: t("item_mission_4"),
+    description: t("sub_item_mission_4"),
   },
 ];
 export const our_mission = [
   {
     id: 1,
     image: "/images/our-mission-1.webp",
-    title: "Partner organization",
+    title: t("partner_organization"),
   },
   {
     id: 2,
     image: "/images/our-mission-2.webp",
-    title: "We are Bcorp",
+    title: t("we_are_Bcorp"),
   },
   {
     id: 3,
     image: "/images/our-mission-3.webp",
-    title: "Know-How",
+    title: t("know_how"),
   },
 ];

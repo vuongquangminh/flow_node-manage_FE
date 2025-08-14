@@ -4,6 +4,7 @@ import { useGetProductInfInfiniteQuery } from "../../store/services/ProductServi
 import CardProduct from "../../components/CardProduct";
 import { useEffect, useState } from "react";
 import { ProductRes } from "../../type/api";
+import { useTranslation } from "react-i18next";
 
 export default function Products() {
   const {
@@ -14,7 +15,7 @@ export default function Products() {
 
   // Store products so old references are preserved
   const [products, setProducts] = useState<ProductRes[]>([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (dataProduct?.pages) {
       // Flatten pages into one array
@@ -55,7 +56,7 @@ export default function Products() {
           count={dataProduct?.pages?.[0].total}
         >
           <div className="text-4xl font-bold font-mono text-primary px-6 pb-6 uppercase">
-            ALL
+            {t("all")}
           </div>
         </Badge>
         {isFetching && products.length == 0 && <Spin fullscreen={true} />}
@@ -86,7 +87,7 @@ export default function Products() {
                 products.length == Number(dataProduct?.pages?.[0].total)
               }
             >
-              See more products
+              {t("see_more_product")}
             </Button>
           </div>
         </div>

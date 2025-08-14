@@ -24,6 +24,7 @@ import { our_mission, sub_our_mission } from "../homepage/HomePage";
 import Footer from "../../components/Layout/Footer";
 import { useDispatch } from "react-redux";
 import { addItemCart } from "../../store/slices/cartSlice";
+import { t } from "i18next";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -78,20 +79,17 @@ export default function ProductDetail() {
     {
       id: 1,
       label: "M",
-      title:
-        "Kích thước có thể dao động từ 40-45cm (dài) x 30-35cm (rộng) x 15-20cm (cao)",
+      title: t("size_M"),
     },
     {
       id: 2,
       label: "L",
-      title:
-        "Kích thước có thể dao động từ 45-50cm (dài) x 35-40cm (rộng) x 18-25cm (cao)",
+      title: t("size_L"),
     },
     {
       id: 3,
       label: "XL",
-      title:
-        "Kích thước có thể dao động từ 50-55cm (dài) x 40-45cm (rộng) x 20-30cm (cao) hoặc lớn hơn",
+      title: t("size_XL"),
     },
   ];
   return (
@@ -139,7 +137,7 @@ export default function ProductDetail() {
               </Col>
               <Col sm={24} md={8} className="bg-white">
                 <Button className="mt-4 text-primary rounded text-sm px-4 py-0 border-primary">
-                  New
+                  {t("new")}
                 </Button>
                 <div className="flex justify-between my-4">
                   <p className="text-primary text-2xl uppercase font-bold max-w-80 md:max-w-full">
@@ -150,7 +148,7 @@ export default function ProductDetail() {
                   </p>
                 </div>
                 <div className="py-4">
-                  Color: <strong>{productColor?.name}</strong>
+                  {t("color")}: <strong>{productColor?.name}</strong>
                 </div>
                 {listSize.map((item) => (
                   <Tooltip key={item.id} title={item.title}>
@@ -198,7 +196,7 @@ export default function ProductDetail() {
                     });
                   }}
                 >
-                  Add - {dataProductDetail?.data?.price}
+                  {t("add")} {dataProductDetail?.data?.price}
                 </Button>
                 <div className="flex items-center text-sm bg-[#f4f9f8] py-2 px-2">
                   <Award size={24} color="#0da01e" />
@@ -264,7 +262,7 @@ export default function ProductDetail() {
             </Row>
             <div className="p-8">
               <p className="text-primary text-2xl uppercase font-bold max-w-80 md:max-w-full">
-                Explore
+                {t("explore")}
               </p>
               <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 {exploreProduct?.data?.map((product) => (

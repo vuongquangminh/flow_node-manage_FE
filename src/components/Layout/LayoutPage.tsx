@@ -43,57 +43,72 @@ const LayoutPage = () => {
   }, [user]);
 
   return (
-    <SocketContext.Provider value={() => socket}>
-      <Layout style={{ height: "100vh" }}>
-        <Header className="flex justify-center items-center bg-cyan-700">
-          <Select
-            className="w-full"
-            showSearch
-            allowClear
-            placeholder="Select a person"
-            optionFilterProp="label"
-            onChange={handleChange}
-            options={options}
-          />
-          <Link to={"/chatbot"} className="w-10 ml-3">
-            <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
-          </Link>
-          {/* <Link to={"/ai-agent"} className="w-10 mx-3">
-            <img className="h-full w-full rounded" src="/ai-agent.jpg" alt="" />
-          </Link>
-          <Link to={"/chat-tool"} className="w-10">
-            <img
-              className="h-full w-full rounded"
-              src="/chat-tool.jpg"
-              alt=""
-            />
-          </Link>
-          <Link to={"/ai-embedding"} className="w-10 mx-3">
-            <img
-              className="h-full w-full rounded"
-              src="/embedding.jpg"
-              alt=""
-            />
-          </Link> */}
+    <>
+      <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
+        <Header />
+        <p className="text-primary py-2">
+          🎒Buy a backpack = get a free front pocket, code
+          <strong>FREEGIFT</strong>
+          <a href="/">– See terms</a>
+        </p>
+      </div>
+      <Row gutter={16} className="!mx-0 h-full">
+        <Col span={24}>
+          <Outlet />
+        </Col>
+      </Row>
+    </>
+    // <SocketContext.Provider value={() => socket}>
+    //   <Layout style={{ height: "100vh" }}>
+    //     <Header className="flex justify-center items-center bg-cyan-700">
+    //       <Select
+    //         className="w-full"
+    //         showSearch
+    //         allowClear
+    //         placeholder="Select a person"
+    //         optionFilterProp="label"
+    //         onChange={handleChange}
+    //         options={options}
+    //       />
+    //       <Link to={"/chatbot"} className="w-10 ml-3">
+    //         <img className="h-full w-full rounded" src="/logo-gpt.jpg" alt="" />
+    //       </Link>
+    //       <Link to={"/ai-agent"} className="w-10 mx-3">
+    //         <img className="h-full w-full rounded" src="/ai-agent.jpg" alt="" />
+    //       </Link>
+    //       <Link to={"/chat-tool"} className="w-10">
+    //         <img
+    //           className="h-full w-full rounded"
+    //           src="/chat-tool.jpg"
+    //           alt=""
+    //         />
+    //       </Link>
+    //       <Link to={"/ai-embedding"} className="w-10 mx-3">
+    //         <img
+    //           className="h-full w-full rounded"
+    //           src="/embedding.jpg"
+    //           alt=""
+    //         />
+    //       </Link>
 
-          <LogoutOutlined
-            className="text-white text-2xl"
-            onClick={handleLogout}
-          />
-        </Header>
+    //       <LogoutOutlined
+    //         className="text-white text-2xl"
+    //         onClick={handleLogout}
+    //       />
+    //     </Header>
 
-        <Layout>
-          <Row gutter={16} className="!mx-0 h-full">
-            <Col span={6}>
-              <SideBar key={keyRender} />{" "}
-            </Col>
-            <Col span={18}>
-              <Outlet />
-            </Col>
-          </Row>
-        </Layout>
-      </Layout>
-    </SocketContext.Provider>
+    //     <Layout>
+    //       <Row gutter={16} className="!mx-0 h-full">
+    //         <Col span={6}>
+    //           <SideBar key={keyRender} />{" "}
+    //         </Col>
+    //         <Col span={18}>
+    //           <Outlet />
+    //         </Col>
+    //       </Row>
+    //     </Layout>
+    //   </Layout>
+    // </SocketContext.Provider>
   );
 };
 

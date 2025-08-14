@@ -18,7 +18,7 @@
   "password": "Mật khẩu",
   "remember_me": "Ghi nhớ tài khoản",
   "forgot_password": "Quên mật khẩu?",
-  "register": "Đăng ký",
+  "register": "Đăng ký!",
   "login_with_name": "Đăng nhập với {{name}}",
   "success": "Thành công",
   "feature_success": "{{name}} thành công!",
@@ -45,5 +45,65 @@
   "discover": "Khám phá",
   "know_more": "Tìm hiểu thêm",
   "our_univers": "Vũ trụ của chúng tôi",
-  "order": "Đặt hàng"
+  "order": "Đơn hàng",
+  "buy": "Mua hàng",
+  "my_cart": "Giỏ hàng của tôi",
+  "color": "Màu sắc",
+  "size": "Kích cỡ",
+  "nothing_product": "Chưa có sản phẩm nào!",
+  "password_not_match": "Mật khẩu không trùng khớp",
+  "password_confirm": "Xác nhận mật khẩu",
+  "phone": "Số điện thoại",
+  "address": "Địa chỉ",
+  "had_account": "Bạn có tài khoản không?",
+  "our_mission": "Nhiệm vụ của chúng tôi",
+  "sub_mission": "Là một công ty tận tâm, CABAIA đã trở thành một doanh nghiệp hoạt động theo sứ mệnh vào năm 2021 và được chứng nhận B Corp từ năm 2022. Tận tâm với các tổ chức đối tác, CABAIA đã thành lập quỹ tài trợ riêng, Care & Give, vào năm 2024 để tiếp tục thực hiện các cam kết của mình.",
+  "read_more": "Đọc thêm",
+  "item_mission_1": "100% an toàn",
+  "sub_item_mission_1": "Phương thức thanh toán an toàn",
+  "item_mission_2": "Bảo hành trọn đời",
+  "sub_item_mission_2": "trên túi xách và hành lý",
+  "item_mission_3": "Trả hàng miễn phí",
+  "sub_item_mission_3": "kiểm tra điều kiện",
+  "item_mission_4": "Hỗ trợ khách hàng",
+  "sub_item_mission_4": "Thứ Hai đến Thứ Sáu từ 10 giờ sáng đến 6 giờ 30 chiều",
+  "partner_organization" : "Tổ chức đối tác",
+  "we_are_Bcorp": "Chúng tôi là Bcorp",
+  "know_how": "Hiểu biết-Cách nào",
+  "bage": "Túi",
+  "bage_16": "Túi đựng đồ thay đổi16",
+  "des_bag_1": "✨ Nâng tầm phong cách của bạn – Khám phá chiếc túi xách hoàn hảo! ✨",
+  "des_bag_2": "Bởi vì làm cha mẹ là một cuộc phiêu lưu không gì sánh bằng. Túi đựng đồ sơ sinh đầu tiên của chúng tôi thích ứng với mọi tình huống. Giữ bình sữa mát mẻ trong túi cách nhiệt, gắn vào xe đẩy, mở bằng một tay trong chưa đầy một giây, và cất gọn mọi thứ để bạn có thể tìm lại khi cần.",
+  "des_bag_3": "Thiết kế đẹp mắt, lớp hoàn thiện cao cấp và kích thước vừa phải để đựng mọi thứ bạn cần mà không ảnh hưởng đến phong cách.",
+  "des_bag_4": "Túi xách của chúng tôi kết hợp giữa thời trang vượt thời gian với chức năng sử dụng hàng ngày, vì vậy bạn không bao giờ phải lựa chọn giữa vẻ đẹp và tính thực tế.",
+  "des_bag_5": "Cho dù bạn đang chinh phục văn phòng hay dạo quanh thành phố, chiếc túi này sẽ theo kịp phong cách sống của bạn một cách dễ dàng.",
+  "our_univers_1": "Ba lô",
+  "our_univers_2": "Nhà thám hiểm đeo chéo",
+  "our_univers_3": "Túi đựng đồ thay thế",
+  "our_univers_4": "Nhà thám hiểm Nano",
+  "our_univers_5": "Duffle Explorer",
+  "our_univers_6": "Túi Tote",
+  "conposition": "Thành phần",
+  "entretien": "Entretien",
+  "all": "Tất cả",
+  "see_more_product": "Xem thêm sản phẩm",
+  "size_M": "Kích thước có thể dao động từ 40-45cm (dài) x 30-35cm (rộng) x 15-20cm (cao)",
+  "size_L": "Kích thước có thể dao động từ 45-50cm (dài) x 35-40cm (rộng) x 18-25cm (cao)",
+  "size_XL": "Kích thước có thể dao động từ 50-55cm (dài) x 40-45cm (rộng) x 20-30cm (cao) hoặc lớn hơn",
+  "new": "Mới",
+  "add": "Thêm - ",
+  "explore": "Khám phá"
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,8 +1,10 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function MostProminent() {
   const [isMobile, setIsMobile] = useState(false);
+  const {t} = useTranslation();
   useEffect(() => {
     const checkWidth = () => setIsMobile(window.innerWidth <= 650);
 
@@ -18,10 +20,10 @@ export default function MostProminent() {
           <div className="md:pr-30">
             <div className="">
               <p className="uppercase tracking-[3px] text-sm text-[#504584]">
-                bage
+                {t("bage")}
               </p>
               <h2 className="text-5xl font-bold text-primary">
-                Changing bags16
+                {t('bage_16')}
               </h2>
             </div>
             <div className="my-6 md:my-12">
@@ -33,26 +35,19 @@ export default function MostProminent() {
                 />
               )}
               <h3 className="text-xl font-medium">
-                ✨ "Elevate Your Style – Discover the Perfect Handbag!" ✨
+                {t("des_bag_1")}
               </h3>
               <p className="text-base my-6 italic">
-                Because being parents is an adventure like no other. Our first
-                baby bag adapts to every situation. Keep bottles cool in the
-                insulated pocket, attach to the pushchair, open with one hand in
-                less than a second, and store everything so you can find it
-                again
+                {t("des_bag_2")}
               </p>
               <p className="text-base my-6 italic">
-                Sleek design, premium finish, and just the right size to hold
-                everything you need without compromising style.
+                {t("des_bag_3")}
               </p>
               <p className="text-base my-6 italic">
-                Our handbag blends timeless fashion with everyday function, so
-                you never have to choose between beauty and practicality.
+                {t("des_bag_4")}
               </p>
               <p className="text-base my-6 italic">
-                Whether you’re conquering the office or strolling through the
-                city, this bag keeps up with your lifestyle effortlessly.
+                {t("des_bag_5")}
               </p>
             </div>
           </div>

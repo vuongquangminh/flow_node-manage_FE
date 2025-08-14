@@ -1,38 +1,40 @@
 import Slider from "react-slick";
 import { slick_settings } from "../../constants";
 import CardOurCategory from "../../components/CardOurCategory";
+import { useTranslation } from "react-i18next";
 
 export default function OurUnivers() {
+  const {t} = useTranslation();
   const items = [
     {
       id: 1,
       image: "./images/our_univers-1.webp",
-      title: "Backpacks",
+      title: t("our_univers_1"),
     },
     {
       id: 2,
       image: "./images/our_univers-2.webp",
-      title: "Crossbody Adventurer",
+      title: t("our_univers_2"),
     },
     {
       id: 3,
       image: "./images/our_univers-3.webp",
-      title: "Changing bags",
+      title: t("our_univers_3"),
     },
     {
       id: 4,
       image: "./images/our_univers-4.webp",
-      title: "Nano Adventurer",
+      title: t("our_univers_4"),
     },
     {
       id: 5,
       image: "./images/our_univers-5.webp",
-      title: "Duffle Explorer",
+      title: t("our_univers_5"),
     },
     {
       id: 6,
       image: "./images/our_univers-6.webp",
-      title: "Tote bags",
+      title: t("our_univers_6"),
     },
   ];
   return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { Drawer } from "antd";
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Composition = ({
   button,
@@ -10,7 +11,7 @@ const Composition = ({
   item?: { title: string; composition: string[]; entretien: string[] };
 }) => {
   const [open, setOpen] = React.useState<boolean>(false);
-
+  const { t } = useTranslation();
   const onShow = () => {
     setOpen(true);
   };
@@ -37,7 +38,7 @@ const Composition = ({
       >
         <div className="border-0 border-b">
           <div className="text-primary text-lg font-semibold py-2">
-            Composition
+            {t("conposition")}
           </div>
           {item?.composition.map((item, index) => (
             <li key={index} className="tracking-wide text-base text-gray-250">
@@ -47,7 +48,7 @@ const Composition = ({
         </div>
         <div className="border-0 border-b">
           <div className="text-primary text-lg font-semibold py-2">
-            Entretien
+            {t("entretien")}
           </div>
           {item?.entretien.map((item, index) => (
             <li key={index} className="tracking-wide text-base text-gray-250">
