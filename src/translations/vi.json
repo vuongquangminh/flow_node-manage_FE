@@ -107,7 +107,10 @@
   "unpaid": "Chưa thanh toán",
   "in_transit": "Đang vận chuyển",
   "done": "Hoàn thành",
-  "qr": "Đơn hàng của bạn sẽ được kế toán xác nhận và vận chuyển (Mã QR chỉ là mẫu, yêu cầu khách hàng không chuyển)"
+  "qr": "Đơn hàng của bạn sẽ được kế toán xác nhận và vận chuyển (Mã QR chỉ là mẫu, yêu cầu khách hàng không chuyển)",
+  "language": "Ngôn ngữ",
+  "vi": "Tiếng Việt",
+  "en": "Tiếng Anh"
 
 
 

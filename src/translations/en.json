@@ -107,7 +107,10 @@
   "unpaid": "Unpaid",
   "in_transit": "In Transit",
   "done": "Done",
-  "qr": "Your order will be confirmed and shipped by accounting (QR code is just a sample, customers are requested not to transfer)"
+  "qr": "Your order will be confirmed and shipped by accounting (QR code is just a sample, customers are requested not to transfer)",
+  "language": "Language",
+  "vi": "Vietnamese",
+  "en": "English"
 
 
 

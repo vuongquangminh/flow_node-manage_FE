@@ -9,6 +9,9 @@ import "./i18n";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PersistGate } from "redux-persist/integration/react";
+import initI18n from "./i18n";
+
+initI18n("en");
 
 createRoot(document.getElementById("root")!).render(
   <React.Suspense fallback={<div>Đang tải...</div>}>

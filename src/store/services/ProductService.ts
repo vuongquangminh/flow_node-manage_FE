@@ -23,6 +23,18 @@ export const productApi = createApi({
         params: params,
       }),
     }),
+    searchProduct: build.query<
+      {
+        data?: ProductRes[];
+        message: string;
+      },
+      { name?: string}
+    >({
+      query: (params) => ({
+        url: `products/search`,
+        params: params,
+      }),
+    }),
     getProductInf: build.infiniteQuery<
       {
         data?: ProductRes[];
@@ -68,4 +80,5 @@ export const {
   useGetProductQuery,
   useGetProductInfInfiniteQuery,
   useGetProductDetailQuery,
+  useLazySearchProductQuery
 } = productApi;

@@ -2,8 +2,10 @@ import {
   AlignJustify,
   BellRing,
   House,
+  Languages,
   MapPinned,
   Search,
+  SearchIcon,
   ShoppingCart,
   User,
 } from "lucide-react";
@@ -11,7 +13,18 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Badge, Button, Col, Drawer, Flex, Form, Input, Row } from "antd";
+import {
+  Badge,
+  Button,
+  Col,
+  Drawer,
+  Flex,
+  Form,
+  Input,
+  Modal,
+  Popover,
+  Row,
+} from "antd";
 import { useAddOrderMutation } from "../../store/services/OrderService";
 import { LockOutlined, PhoneFilled, UserOutlined } from "@ant-design/icons";
 import {
@@ -22,15 +35,20 @@ import { getLocalStorage, setLocalStorage } from "../../hooks/localStorage";
 import { useNotice } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { generateOrderCode } from "../../utils/generateOrderCode";
+import { useLazySearchProductQuery } from "../../store/services/ProductService";
+import useDebounce from "../../hooks/useDebounce";
+import { ProductRes } from "../../type/api";
+import CardProduct from "../CardProduct";
+import i18next from "i18next";
 
 export default function Header() {
   const { t } = useTranslation();
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const cart = useSelector((state: RootState) => state?.cart);
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [search, setSearch] = useState("");
   const [doAddCart, { isLoading }] = useAddOrderMutation();
   const [doLogin] = useLoginMutation();
   const [doRegister] = useCreateUserMutation();
@@ -38,7 +56,11 @@ export default function Header() {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const [showMenuDrawer, setShowMenuDrawer] = useState(false);
-
+  const [isModal, setIsModal] = useState(false);
+  const [doSearch] = useLazySearchProductQuery();
+  const debouncedQuery = useDebounce({ value: search, delay: 500 });
+  const [productSearch, setProductSearch] = useState<ProductRes[]>([]);
+  const cart = useSelector((state: RootState) => state?.cart);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -133,12 +155,41 @@ export default function Header() {
       window.location.href = "http://localhost:3000/auth/google";
     }
   };
+  const handleSearch = () => {
+    setIsModal(true);
+  };
 
+  useEffect(() => {
+    doSearch({ name: debouncedQuery })
+      .unwrap()
+      .then((response) => setProductSearch(response?.data || []));
+  }, [debouncedQuery]);
+
+  const contentPopover = (
+    <>
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          i18next.changeLanguage("vi");
+        }}
+      >
+        Tiếng Việt
+      </p>
+      <p
+        className="cursor-pointer"
+        onClick={() => {
+          i18next.changeLanguage("en");
+        }}
+      >
+        Tiếng Anh
+      </p>
+    </>
+  );
   return (
     <>
       {contextHolder}
       <div
-        className={`fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-6 -translate-x-1/2 border border-gray-100 rounded shadow-xs lg:max-w-7xl   bg-primary text-white header ${
+        className={`fixed z-50 flex flex-col md:flex-row justify-between w-[calc(100%-2rem)] p-6 -translate-x-1/2 border border-gray-100 rounded shadow-xs    bg-primary text-white header ${
           showHeader ? "show" : "hide"
         }`}
       >
@@ -156,6 +207,9 @@ export default function Header() {
               <p className="px-2">{t("bag_school")}</p>
               <p className="px-2">{t("back_packs")}</p>
               <p className="px-2">{t("shoulder_bags")}</p>
+              <Popover content={contentPopover} title="Title">
+                <Languages size={24} className="cursor-pointer" />
+              </Popover>
             </div>
             <div
               className="uppercase font-bold text-2xl cursor-pointer"
@@ -165,7 +219,12 @@ export default function Header() {
             </div>
             <div className="flex items-center shrink-0">
               <p>{t("commitments")}</p>
-              <div className="flex items-center px-4">
+              <div
+                className="flex items-center px-4 cursor-pointer"
+                onClick={() => {
+                  handleSearch();
+                }}
+              >
                 {t("search")} <Search size={24} />
               </div>
               <div className="">
@@ -442,6 +501,52 @@ export default function Header() {
           </div>
         </div>
       </Drawer>
+      <Modal
+        title="Tìm kiếm sản phẩm"
+        centered
+        open={isModal}
+        footer={null}
+        onCancel={() => setIsModal(false)}
+        width={{
+          xs: "90%",
+          sm: "80%",
+          md: "70%",
+          lg: "70%",
+          xl: "70%",
+          xxl: "70%",
+        }}
+      >
+        <div className="px-6 py-4">
+          <div className="flex items-center border-b border-purple-300 pb-2 mb-6">
+            <SearchIcon size={24} />
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full outline-none text-gray-700 placeholder-gray-400"
+              onChange={(item) => {
+                setSearch(item.target.value);
+              }}
+            />
+          </div>
+
+          {/* Title */}
+          <h2 className="text-2xl font-extrabold text-primary mb-6">
+            TRENDING PRODUCTS
+          </h2>
+
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Product Card */}
+            {productSearch.map((item) => (
+              <div key={item._id} className="px-2">
+                <CardProduct product={item} />
+              </div>
+            ))}
+
+            {/* Repeat other product cards here */}
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }
