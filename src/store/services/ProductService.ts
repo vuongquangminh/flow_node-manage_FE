@@ -73,6 +73,11 @@ export const productApi = createApi({
         url: `products/${id}`,
       }),
     }),
+    getAllProductAdmin: build.query<{ data?: ProductRes[] }, void>({
+      query: () => ({
+        url: `admin/products`,
+      }),
+    }),
   }),
 });
 
@@ -80,5 +85,6 @@ export const {
   useGetProductQuery,
   useGetProductInfInfiniteQuery,
   useGetProductDetailQuery,
-  useLazySearchProductQuery
+  useLazySearchProductQuery,
+  useGetAllProductAdminQuery,
 } = productApi;

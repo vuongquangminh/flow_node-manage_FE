@@ -48,6 +48,7 @@ export const userApi = createApi({
     }),
     getUser: build.query<UserRes[], void>({
       query: () => `account`,
+      providesTags: ["User"]
     }),
     getUserById: build.query<UserRes[], { id: number }>({
       query: ({ id }) => `account/${id}`,
@@ -64,6 +65,15 @@ export const userApi = createApi({
         };
       },
     }),
+    deleteUser: build.mutation<{ message: string }, { id: number }>({
+      query: (body) => {
+        return {
+          url: `admin/account/${body.id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -76,4 +86,5 @@ export const {
   useCreateUserMutation,
   useGetMeQuery,
   useLazyGetMeQuery,
+  useDeleteUserMutation,
 } = userApi;

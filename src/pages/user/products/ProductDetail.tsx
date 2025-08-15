@@ -196,7 +196,7 @@ export default function ProductDetail() {
                     });
                   }}
                 >
-                  {t("add")} {dataProductDetail?.data?.price}$
+                  {t("add")} - {dataProductDetail?.data?.price}$
                 </Button>
                 <div className="flex items-center text-sm bg-[#f4f9f8] py-2 px-2">
                   <Award size={24} color="#0da01e" />
