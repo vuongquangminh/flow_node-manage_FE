@@ -14,7 +14,7 @@ export default memo(function CardProduct({
   const navigate = useNavigate();
 
   return (
-    <div className="w-full overflow-hidden bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full h-full overflow-hidden bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <div className="block overflow-hidden">
         <img
           className=" overflow-hidden  transition duration-500 ease-in-out transform hover:scale-105"
@@ -25,7 +25,7 @@ export default memo(function CardProduct({
       <div className="px-5 pb-5">
         <div>
           <h5
-            className=" cursor-pointer text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+            className=" cursor-pointer text-xl font-semibold  tracking-tight text-gray-900 dark:text-white"
             onClick={() =>
               navigate(`/products/${product?._id}/${product?.name}`)
             }
