@@ -67,7 +67,7 @@
   "sub_item_mission_3": "check conditions",
   "item_mission_4": "Customer support",
   "sub_item_mission_4": "Monday to Friday from 10 am to 6:30 pm",
-  "partner_organization" : "Partner organization",
+  "partner_organization": "Partner organization",
   "we_are_Bcorp": "We are Bcorp",
   "know_how": "Know-How",
   "bage": "Bage",
@@ -110,21 +110,6 @@
   "qr": "Your order will be confirmed and shipped by accounting (QR code is just a sample, customers are requested not to transfer)",
   "language": "Language",
   "vi": "Vietnamese",
-  "en": "English"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "en": "English",
+  "expired": "Session expired!"
 }

@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { Button, Table } from "antd";
 import type { TableProps } from "antd";
-import { t } from "i18next";
 import {
   useDeleteUserMutation,
-  useGetUserQuery,
+  useGetUserAdminQuery,
 } from "../../../store/services/UserService";
 import { Trash } from "lucide-react";
 import { useNotice } from "../../../utils";
 import { UserRes } from "../../../type/api";
 import ModelConfirm from "../../../components/ModelConfirm";
+import { useTranslation } from "react-i18next";
 interface DataType {
   email: string;
   name: string;
 }
 
 const AccountAdminPage: React.FC = () => {
-  const res = useGetUserQuery();
+  const { noticeSuccess, noticeError, contextHolder } = useNotice();
+  const { t } = useTranslation();
+
+  const res = useGetUserAdminQuery({
+    onError: () => {
+      noticeError(t("expired"));
+    },
+  });
   const [doDelete] = useDeleteUserMutation();
-  const { noticeSuccess, contextHolder } = useNotice();
   const [selectedUser, setSelectedUser] = useState<UserRes | undefined>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 

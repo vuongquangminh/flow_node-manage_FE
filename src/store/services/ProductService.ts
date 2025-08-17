@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ProductRes } from "../../type/api";
+import headerTokenRequest from "../../utils/headerTokenRequest";
 
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL + "/api/",
+    prepareHeaders: (headers) => headerTokenRequest(headers),
   }),
   tagTypes: ["Product"],
   endpoints: (build) => ({
@@ -28,7 +30,7 @@ export const productApi = createApi({
         data?: ProductRes[];
         message: string;
       },
-      { name?: string}
+      { name?: string }
     >({
       query: (params) => ({
         url: `products/search`,
@@ -73,10 +75,21 @@ export const productApi = createApi({
         url: `products/${id}`,
       }),
     }),
-    getAllProductAdmin: build.query<{ data?: ProductRes[] }, void>({
+    getAllProductAdmin: build.query<
+      { data?: ProductRes[] },
+      { onError?: () => void }
+    >({
       query: () => ({
         url: `admin/products`,
       }),
+      providesTags: ["Product"],
+      async onQueryStarted({ onError }, { queryFulfilled }) {
+        try {
+          await queryFulfilled; // Chờ API call thành công
+        } catch {
+          onError?.();
+        }
+      },
     }),
   }),
 });

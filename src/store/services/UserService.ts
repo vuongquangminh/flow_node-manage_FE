@@ -46,9 +46,16 @@ export const userApi = createApi({
     getMe: build.query<UserRes, void>({
       query: () => `account/me`,
     }),
-    getUser: build.query<UserRes[], void>({
+    getUserAdmin: build.query<UserRes[], { onError?: () => void }>({
       query: () => `account`,
-      providesTags: ["User"]
+      providesTags: ["User"],
+      async onQueryStarted({ onError }, { queryFulfilled }) {
+        try {
+          await queryFulfilled; // Chờ API call thành công
+        } catch {
+          onError?.();
+        }
+      },
     }),
     getUserById: build.query<UserRes[], { id: number }>({
       query: ({ id }) => `account/${id}`,
@@ -81,7 +88,7 @@ export const userApi = createApi({
 // auto-generated based on the defined endpoints
 export const {
   useLoginMutation,
-  useGetUserQuery,
+  useGetUserAdminQuery,
   useGetUserByIdQuery,
   useCreateUserMutation,
   useGetMeQuery,

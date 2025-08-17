@@ -40,12 +40,19 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
-    getOrderAdmin: build.query<OrderRes, { search?: string }>({
+    getOrderAdmin: build.query<OrderRes, { search?: string, onError?: () => void }>({
       query: (params) => ({
         url: `admin/orders`,
         params,
       }),
       providesTags: ["OrderAdmin"],
+      async onQueryStarted({ onError }, { queryFulfilled }) {
+        try {
+          await queryFulfilled; // Chờ API call thành công
+        } catch {
+          onError?.();
+        }
+      },
     }),
     approveOrderAdmin: build.mutation<OrderRes, { id: number; status: number }>(
       {

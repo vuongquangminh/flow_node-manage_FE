@@ -72,7 +72,7 @@ export default function Footer() {
           <span className="text-sm text-center sm:text-left">
             © 2023{" "}
             <a href="https://flowbite.com/" className="hover:underline">
-              Nasa™
+              Cabaia™
             </a>
             . All Rights Reserved.
           </span>

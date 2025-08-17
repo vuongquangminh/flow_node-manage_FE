@@ -4,10 +4,17 @@ import { useTranslation } from "react-i18next";
 import { ProductRes } from "../../../type/api";
 import { FilePen, Trash } from "lucide-react";
 import dayjs from "dayjs";
+import { useNotice } from "../../../utils";
 
 const ProductAdminPage = () => {
   const { t } = useTranslation();
-  const { data: dataProduct } = useGetAllProductAdminQuery();
+  const { noticeError, contextHolder } = useNotice();
+
+  const { data: dataProduct } = useGetAllProductAdminQuery({
+    onError: () => {
+      noticeError(t("expired"));
+    },
+  });
   const columns = [
     {
       title: t("image"),
@@ -63,15 +70,18 @@ const ProductAdminPage = () => {
   };
   console.log("dataProduct: ", dataProduct);
   return (
-    <div className="py-6">
-      <div className="text-end pb-4">
-        <Button type="primary">{t("add")}</Button>
+    <>
+      {contextHolder}
+      <div className="py-6">
+        <div className="text-end pb-4">
+          <Button type="primary">{t("add")}</Button>
+        </div>
+        <Table
+          columns={columns}
+          dataSource={Array.isArray(dataProduct?.data) ? dataProduct?.data : []}
+        />
       </div>
-      <Table
-        columns={columns}
-        dataSource={Array.isArray(dataProduct?.data) ? dataProduct?.data : []}
-      />
-    </div>
+    </>
   );
 };
 

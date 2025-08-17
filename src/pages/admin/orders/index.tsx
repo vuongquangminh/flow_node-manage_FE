@@ -13,10 +13,17 @@ import {
   SyncOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { useNotice } from "../../../utils";
 
 const OrderAdminPage = () => {
   const { t } = useTranslation();
-  const { data: orderList } = useGetOrderAdminQuery({});
+  const { noticeError, contextHolder } = useNotice();
+
+  const { data: orderList } = useGetOrderAdminQuery({
+    onError: () => {
+      noticeError(t("expired"));
+    },
+  });
   const [doApprove] = useApproveOrderAdminMutation();
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
@@ -117,49 +124,52 @@ const OrderAdminPage = () => {
   };
 
   return (
-    <div className="py-6">
-      <Table
-        columns={columns}
-        expandable={{ expandedRowRender }}
-        rowKey={(record) => record.code}
-        dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
-      />
+    <>
+      {contextHolder}
+      <div className="py-6">
+        <Table
+          columns={columns}
+          expandable={{ expandedRowRender }}
+          rowKey={(record) => record.code}
+          dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
+        />
 
-      {/* Modal Cập nhật trạng thái */}
-      <Modal
-        title={t("update")}
-        open={isUpdateModalOpen}
-        onCancel={() => setIsUpdateModalOpen(false)}
-        footer={null} // Ẩn nút mặc định
-        centered
-      >
-        <Form
-          layout="vertical"
-          name="updateStatus"
-          initialValues={{ status: 1 }}
-          onFinish={handleApprove}
-          autoComplete="off"
+        {/* Modal Cập nhật trạng thái */}
+        <Modal
+          title={t("update")}
+          open={isUpdateModalOpen}
+          onCancel={() => setIsUpdateModalOpen(false)}
+          footer={null} // Ẩn nút mặc định
+          centered
         >
-          <Form.Item label={t("status")} name="status">
-            <Radio.Group
-              options={[
-                { value: 1, label: t("canceled") },
-                { value: 2, label: t("in_transit") },
-                { value: 3, label: t("done") },
-              ]}
-            />
-          </Form.Item>
-          <div className="flex gap-2 justify-end">
-            <Button onClick={() => setIsUpdateModalOpen(false)}>
-              {t("cancel")}
-            </Button>
-            <Button type="primary" htmlType="submit">
-              {t("confirm")}
-            </Button>
-          </div>
-        </Form>
-      </Modal>
-    </div>
+          <Form
+            layout="vertical"
+            name="updateStatus"
+            initialValues={{ status: 1 }}
+            onFinish={handleApprove}
+            autoComplete="off"
+          >
+            <Form.Item label={t("status")} name="status">
+              <Radio.Group
+                options={[
+                  { value: 1, label: t("canceled") },
+                  { value: 2, label: t("in_transit") },
+                  { value: 3, label: t("done") },
+                ]}
+              />
+            </Form.Item>
+            <div className="flex gap-2 justify-end">
+              <Button onClick={() => setIsUpdateModalOpen(false)}>
+                {t("cancel")}
+              </Button>
+              <Button type="primary" htmlType="submit">
+                {t("confirm")}
+              </Button>
+            </div>
+          </Form>
+        </Modal>
+      </div>
+    </>
   );
 };
 

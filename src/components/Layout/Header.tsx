@@ -173,7 +173,7 @@ export default function Header() {
           i18next.changeLanguage("vi");
         }}
       >
-        Tiếng Việt
+        {t("vi")}
       </p>
       <p
         className="cursor-pointer"
@@ -181,7 +181,7 @@ export default function Header() {
           i18next.changeLanguage("en");
         }}
       >
-        Tiếng Anh
+        {t("en")}
       </p>
     </>
   );
@@ -207,7 +207,7 @@ export default function Header() {
               <p className="px-2">{t("bag_school")}</p>
               <p className="px-2">{t("back_packs")}</p>
               <p className="px-2">{t("shoulder_bags")}</p>
-              <Popover content={contentPopover} title="Title">
+              <Popover content={contentPopover} title={t("language")}>
                 <Languages size={24} className="cursor-pointer" />
               </Popover>
             </div>
@@ -502,7 +502,6 @@ export default function Header() {
         </div>
       </Drawer>
       <Modal
-        title="Tìm kiếm sản phẩm"
         centered
         open={isModal}
         footer={null}
@@ -542,8 +541,6 @@ export default function Header() {
                 <CardProduct product={item} />
               </div>
             ))}
-
-            {/* Repeat other product cards here */}
           </div>
         </div>
       </Modal>
