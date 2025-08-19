@@ -47,3 +47,17 @@
 .order .ant-table-wrapper {
   width: 100%;
 }
+
+/* Fix slick với Tailwind */
+.slick-track {
+  display: flex !important;
+  gap: 16px; /* Nếu muốn khoảng cách giữa các slide */
+}
+
+.slick-slide {
+  height: auto !important;
+}
+
+.slick-slide > div {
+  height: 100%;
+}
