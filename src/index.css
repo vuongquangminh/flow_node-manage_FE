@@ -50,6 +50,5 @@
 
 /* Fix slick với Tailwind */
 .our-recommandation .slick-track {
-  display: auto !important;
-  gap: 16px; /* Nếu muốn khoảng cách giữa các slide */
+  width: auto !important;
 }
