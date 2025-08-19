@@ -15,19 +15,25 @@ import ProductAdminPage from "../pages/admin/products";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/products",
-    element: <Products />,
-  },
-  {
-    path: "/products/:id/:name",
-    element: <ProductDetail />,
-  },
-  {
-    path: "/oauth-callback",
-    element: <OAuthCallback />,
+    element: <LayoutPage />,
+    children: [
+      {
+        path: "/",
+        element: <Homepage />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
+      },
+      {
+        path: "/products/:id/:name",
+        element: <ProductDetail />,
+      },
+      {
+        path: "/oauth-callback",
+        element: <OAuthCallback />,
+      },
+    ],
   },
 
   {
@@ -52,44 +58,10 @@ export const router = createBrowserRouter([
               { path: "users", element: <AccountAdminPage /> },
               { path: "orders", element: <OrderAdminPage /> },
               { path: "products", element: <ProductAdminPage /> },
-              // ... thêm các route khác
             ],
           },
         ],
       },
-      // {
-      //   element: <PrivateRoute roles={["admin"]} />,
-      //   children: [
-      //     {
-      //       path: "/user",
-      //       element: <AccountPage />,
-      //     },
-      //     // {
-      //     //   path: "/chatbot",
-      //     //   element: <ChatBotPage />,
-      //     // },
-      //     // {
-      //     //   path: "/conversation",
-      //     //   element: <GetStartChatPage />,
-      //     // },
-      //     // {
-      //     //   path: "/conversation/:id/:name",
-      //     //   element: <ChatPage />,
-      //     // },
-      //     // {
-      //     //   path: "/chat-tool",
-      //     //   element: <ChatToolPage />,
-      //     // },
-      //     // {
-      //     //   path: "/ai-agent",
-      //     //   element: <AgentPage />,
-      //     // },
-      //     // {
-      //     //   path: "/ai-embedding",
-      //     //   element: <AiEmbeddingPage />,
-      //     // },
-      //   ],
-      // },
     ],
   },
   {

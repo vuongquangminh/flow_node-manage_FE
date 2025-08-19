@@ -58,6 +58,11 @@ const OrderAdminPage = () => {
   // Cột chính của bảng
   const columns = [
     {
+      title: t("user_name"),
+      dataIndex: "user_name",
+      key: "user_name",
+    },
+    {
       title: t("order_code"),
       dataIndex: "code",
       key: "code",

@@ -111,5 +111,16 @@
   "language": "Language",
   "vi": "Vietnamese",
   "en": "English",
-  "expired": "Session expired!"
+  "expired": "Session expired!",
+  "user_name": "Username",
+  "confirm_logout": "Are you sure you want to log out?",
+  "featur_manage": "{name} Manage",
+  "product": "Products",
+  "account": "Account",
+  "type_bag": "Type bag"
+
+
+
+
+
 }

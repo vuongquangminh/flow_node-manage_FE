@@ -111,7 +111,14 @@
   "language": "Ngôn ngữ",
   "vi": "Tiếng Việt",
   "en": "Tiếng Anh",
-  "expired": "Phiên đăng nhập hết hạn!"
+  "expired": "Phiên đăng nhập hết hạn!",
+  "user_name": "Tên người dùng",
+  "confirm_logout": "Bạn có chắc chắn muốn đăng xuất không?",
+  "featur_manage": "Quản lý {name}",
+  "product": "Sản phẩm",
+  "account": "Tài khoản",
+  "type_bag": "Loại túi"
+
 
 
 

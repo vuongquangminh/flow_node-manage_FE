@@ -68,8 +68,13 @@ const AccountAdminPage: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <div className="text-end pb-4">
-        <Button type="primary">{t("add")}</Button>
+      <div className="flex items-center justify-between pb-4">
+        <p className="text-xl font-bold ">
+          {t("featur_manage", { name: "account" })}
+        </p>
+        <div className="">
+          <Button type="primary">{t("add")}</Button>
+        </div>
       </div>
       <Table<DataType>
         rowKey="email"

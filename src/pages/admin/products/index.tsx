@@ -5,11 +5,13 @@ import { ProductRes } from "../../../type/api";
 import { FilePen, Trash } from "lucide-react";
 import dayjs from "dayjs";
 import { useNotice } from "../../../utils";
+import ProductForm from "./ProductForm";
+import { useState } from "react";
 
 const ProductAdminPage = () => {
   const { t } = useTranslation();
   const { noticeError, contextHolder } = useNotice();
-
+  const [isModal, setIsModal] = useState(false);
   const { data: dataProduct } = useGetAllProductAdminQuery({
     onError: () => {
       noticeError(t("expired"));
@@ -68,17 +70,30 @@ const ProductAdminPage = () => {
   const handleDelete = (item: ProductRes) => {
     console.log("item: ", item);
   };
+  const handleAdd = () => {};
   console.log("dataProduct: ", dataProduct);
   return (
     <>
       {contextHolder}
       <div className="py-6">
-        <div className="text-end pb-4">
-          <Button type="primary">{t("add")}</Button>
+        <div className="flex items-center justify-between pb-4">
+          <p className="text-xl font-bold ">
+            {t("featur_manage", { name: "product" })}
+          </p>
+          <div className="">
+            <Button type="primary" onClick={() => setIsModal(true)}>
+              {t("add")}
+            </Button>
+          </div>
         </div>
         <Table
           columns={columns}
           dataSource={Array.isArray(dataProduct?.data) ? dataProduct?.data : []}
+        />
+        <ProductForm
+          isModalOpen={isModal}
+          handleOk={() => handleAdd}
+          handleCancel={() => setIsModal(false)}
         />
       </div>
     </>

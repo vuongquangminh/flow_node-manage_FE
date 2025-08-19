@@ -1,5 +1,4 @@
 import { Button } from "antd";
-import Header from "../../../components/Layout/Header";
 import SlickImage from "../../../components/SlickImage";
 import { useGetProductQuery } from "../../../store/services/ProductService";
 import { useTranslation } from "react-i18next";
@@ -18,14 +17,6 @@ export default function Homepage() {
 
   return (
     <>
-      <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
-        <Header />
-        <p className="text-primary py-2">
-          🎒Buy a backpack = get a free front pocket, code
-          <strong>FREEGIFT</strong>
-          <a href="/">– See terms</a>
-        </p>
-      </div>
       <div className="relative overflow-hidden">
         <Slider {...slick_settings_banner} className="w-full">
           <div>
