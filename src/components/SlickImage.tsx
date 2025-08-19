@@ -5,7 +5,7 @@ import { slick_settings } from "../constants";
 
 function SlickImage({ products }: { products?: ProductRes[] }) {
   return (
-    <div className="slider-container overflow-hidden">
+    <div className="overflow-hidden">
       <Slider {...slick_settings} >
         {products?.map((product) => (
           <div className="px-2">
