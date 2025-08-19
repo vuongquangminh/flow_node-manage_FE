@@ -15,7 +15,7 @@ const OAuthCallback = () => {
       if (token) {
         setLocalStorage({ key: "token", value: token });
         getMe();
-        navigate("/conversation"); // hoặc route bạn muốn chuyển tới
+        navigate("/"); // hoặc route bạn muốn chuyển tới
       } else {
         navigate("/");
       }

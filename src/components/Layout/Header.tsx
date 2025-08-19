@@ -431,28 +431,7 @@ export default function Header() {
               {t("login")}
             </Button>
           </Form.Item>
-          <div className="flex justify-center mt-2">
-            <button
-              className="w-12 mx-2 rounded"
-              onClick={() => onLoginOA2("github")}
-            >
-              <img
-                className="w-full rounded"
-                src="/images/logo-github.png"
-                alt=""
-              />
-            </button>
-            <button
-              className="w-12 p-2 rounded"
-              onClick={() => onLoginOA2("google")}
-            >
-              <img
-                className="w-full rounded"
-                src="/images/logo-google.png"
-                alt=""
-              />
-            </button>
-          </div>
+
           <div className="text-center text-sm text-gray-600">
             {t("had_account")}
             <p
@@ -463,6 +442,28 @@ export default function Header() {
             </p>
           </div>
         </Form>
+        <div className="flex justify-center mt-2">
+          <button
+            className="w-12 mx-2 rounded"
+            onClick={() => onLoginOA2("github")}
+          >
+            <img
+              className="w-full rounded"
+              src="/images/logo-github.png"
+              alt=""
+            />
+          </button>
+          <button
+            className="w-12 p-2 rounded"
+            onClick={() => onLoginOA2("google")}
+          >
+            <img
+              className="w-full rounded"
+              src="/images/logo-google.png"
+              alt=""
+            />
+          </button>
+        </div>
       </Drawer>
       <Drawer
         title="Menu"
