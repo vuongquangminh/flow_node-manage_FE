@@ -4,10 +4,10 @@ import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import { router } from "./routes";
-import "./index.css";
 import "./i18n";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./index.css";
 import { PersistGate } from "redux-persist/integration/react";
 import initI18n from "./i18n";
 
