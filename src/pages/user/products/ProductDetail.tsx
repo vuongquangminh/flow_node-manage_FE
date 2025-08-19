@@ -4,7 +4,6 @@ import {
   useGetProductQuery,
 } from "../../../store/services/ProductService";
 import { Button, Col, notification, Row, Spin, Tooltip } from "antd";
-import Header from "../../../components/Layout/Header";
 import Slider from "react-slick";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import {
@@ -95,14 +94,7 @@ export default function ProductDetail() {
   return (
     <>
       {contextHolder}
-      <div className="bg-[#f4f9f8] items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
-        <Header />
-        <p className="text-primary py-2">
-          🎒Buy a backpack = get a free front pocket, code
-          <strong>FREEGIFT</strong>
-          <a href="/">– See terms</a>
-        </p>
-      </div>
+
       <div className="py-6">
         {isLoading ? (
           <Spin fullscreen={true} />

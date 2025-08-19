@@ -1,5 +1,4 @@
 import { Badge, Button, Progress, Spin } from "antd";
-import Header from "../../../components/Layout/Header";
 import { useGetProductInfInfiniteQuery } from "../../../store/services/ProductService";
 import CardProduct from "../../../components/CardProduct";
 import { useEffect, useState } from "react";
@@ -41,14 +40,6 @@ export default function Products() {
 
   return (
     <>
-      <div className=" items-center justify-items-center font-[family-name:var(--font-geist-sans)]">
-        <Header />
-        <p className="text-primary py-2">
-          🎒Buy a backpack = get a free front pocket, code
-          <strong>FREEGIFT</strong>
-          <a href="/">– See terms</a>
-        </p>
-      </div>
       <div className="container mx-auto py-10">
         <Badge
           size="small"
