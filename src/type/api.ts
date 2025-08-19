@@ -6,6 +6,39 @@ export type UserRes = {
   upDateAt: string;
 };
 
+export type ProductReq = {
+  name: string;
+  price: string;
+  image: string;
+  type_bag: string;
+  size: string[];
+  color: {
+    id: number;
+    name: string;
+    image_color: string[];
+  }[];
+  title: string;
+  rate: string;
+  sold: string;
+  dimensions: string;
+  weight: string;
+  feature: string[];
+  composition_maintenance?: {
+    title: string;
+    composition: string[];
+    entretien: string[];
+  };
+  sustainability_guarantee?: {
+    title: string;
+    description: string;
+    item: {
+      logo: string;
+      title: string;
+      description: string;
+    }[];
+  };
+};
+
 export type ProductRes = {
   composition_maintenance: {
     title: string;
@@ -54,14 +87,14 @@ export type ProductOrderRes = {
 };
 
 export type Order = {
-  _id: number,
+  _id: number;
   user_id: number;
   user_name: number;
   products?: ProductOrderRes[];
   address: string;
   phone: string;
   code: string;
-  status: number
+  status: number;
 };
 export type OrderRes = {
   message: string;

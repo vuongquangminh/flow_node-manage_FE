@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ProductRes } from "../../type/api";
+import { ProductReq, ProductRes } from "../../type/api";
 import headerTokenRequest from "../../utils/headerTokenRequest";
 
 export const productApi = createApi({
@@ -24,6 +24,7 @@ export const productApi = createApi({
         url: `products`,
         params: params,
       }),
+      providesTags: ["Product"],
     }),
     searchProduct: build.query<
       {
@@ -36,6 +37,7 @@ export const productApi = createApi({
         url: `products/search`,
         params: params,
       }),
+      providesTags: ["Product"],
     }),
     getProductInf: build.infiniteQuery<
       {
@@ -63,6 +65,42 @@ export const productApi = createApi({
           queryArg.type_bag ?? ""
         }`;
       },
+      providesTags: ["Product"],
+    }),
+    addProduct: build.mutation<
+      {
+        data?: ProductRes;
+        message: string;
+      },
+      ProductReq
+    >({
+      query: (body) => ({
+        url: "/product",
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+    updateProduct: build.mutation<
+      {
+        data?: ProductRes;
+        message: string;
+      },
+      ProductReq & { id: number }
+    >({
+      query: (body) => ({
+        url: `/product/${body.id}`,
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+    deleteProduct: build.mutation<ProductRes, { id: number }>({
+      query: ({ id }) => ({
+        url: `product/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Product"],
     }),
     getProductDetail: build.query<
       {
@@ -74,6 +112,7 @@ export const productApi = createApi({
       query: ({ id }) => ({
         url: `products/${id}`,
       }),
+      providesTags: ["Product"],
     }),
     getAllProductAdmin: build.query<
       { data?: ProductRes[] },
@@ -97,7 +136,10 @@ export const productApi = createApi({
 export const {
   useGetProductQuery,
   useGetProductInfInfiniteQuery,
+  useAddProductMutation,
+  useUpdateProductMutation,
   useGetProductDetailQuery,
   useLazySearchProductQuery,
   useGetAllProductAdminQuery,
+  useDeleteProductMutation,
 } = productApi;

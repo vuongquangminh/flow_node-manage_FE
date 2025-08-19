@@ -114,10 +114,17 @@
   "expired": "Session expired!",
   "user_name": "Username",
   "confirm_logout": "Are you sure you want to log out?",
-  "featur_manage": "{name} Manage",
+  "featur_manage": "{{name}} Manage",
   "product": "Products",
   "account": "Account",
-  "type_bag": "Type bag"
+  "type_bag": "Type bag",
+  "submit": "Submit",
+  "add_success": "Add {{name}} success",
+  "add_image_color": "Add image color",
+  "add_product_color": "Add color for Product"
+
+
+
 
 
 

@@ -114,10 +114,15 @@
   "expired": "Phiên đăng nhập hết hạn!",
   "user_name": "Tên người dùng",
   "confirm_logout": "Bạn có chắc chắn muốn đăng xuất không?",
-  "featur_manage": "Quản lý {name}",
+  "featur_manage": "Quản lý {{name}}",
   "product": "Sản phẩm",
   "account": "Tài khoản",
-  "type_bag": "Loại túi"
+  "type_bag": "Loại túi",
+  "submit": "Tạo",
+  "add_success": "Thêm {{name}} thành công",
+  "add_image_color": "Thêm ảnh màu",
+  "add_product_color": "Thêm màu cho sản phẩm"
+
 
 
 
