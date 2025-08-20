@@ -2,18 +2,22 @@
 
 ## 📘 Overview
 
-**Flow Web Manage Frontend** is a modern web-based admin interface developed using **React** and **TypeScript**. This project is part of a larger system designed to manage users, real-time communication, and AI-powered chat features. Built with scalability and performance in mind, it leverages powerful tools like **WebSocket**, **Redux Toolkit**, and **Ant Design** to provide a seamless experience.
+This project is a sales product with integrated chatbot, supporting many features such as real-time chat, information search, product management, order management, and account management. The platform uses modern technologies such as LangChain, OpenAI, Redis, and Socket.IO to provide a smart and efficient interactive experience.
 
 ---
 
 ## 🚀 Features
 
-- **User Management**: Create, update, delete users with full CRUD functionality.
-- **WebSocket Integration**: Real-time communication with the backend using Socket.IO.
-- **OpenAI Assistant**: Integrated Chatbot using WebChat + OpenAI for smart user interactions.
-- **Modern UI**: Built with Ant Design to ensure a clean, user-friendly interface.
-- **Search & Filter**: Fast search and data filtering across lists.
-- **Friend Management**: Add and manage user connections/friends easily.
+- **Login, Logout, Register, OAuth2**: AAuthorization
+- **CRUD account**: Admin manages user accounts
+- **CRUD product**: Admin manages products put on the market.
+- **CRUD order**: User can manage their shopping cart when logged in.
+- **Landing page introducing products**: Page displaying the interface to invite customers and featured products with product information.
+- **Product Details**: View detailed parameters to choose product size and color.
+
+- **Automatic Email**: Send automatic email when user has logged in and placed an order..
+
+- **AI Chatbot**: Integrate OpenAI GPT-3.5 to support smart chat.
 
 ---
 
@@ -23,7 +27,7 @@
 - **Real-time**: WebSocket, Socket.IO
 - **State Management**: Redux Toolkit
 - **AI Integration**: OpenAI, Langchain
-- **Backend**: Node.js, ExpressJS (for chat), Laravel (optional setup)
+- **Backend**: Node.js, ExpressJS, Socket.io (for chat)
 
 ---
 
@@ -39,10 +43,11 @@ cd flow-web-manage-frontend
    yarn
    yarn dev
 
-   
+
 📺 Demo & Screenshots
 <!-- 🔹 Upload a demo video to YouTube or Loom and paste the link here -->
 🎥 Demo Video: Coming soon...
 🖼️ Screenshots: Coming soon...
 
 You can update this section with:
+```
