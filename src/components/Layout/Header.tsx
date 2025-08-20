@@ -195,11 +195,21 @@ export default function Header() {
       >
         {isMobile ? (
           // MOBILE HEADER
-          <AlignJustify
-            className="mx-4"
-            size={24}
-            onClick={() => setShowMenuDrawer(true)}
-          />
+          <div className="flex justify-between">
+            <AlignJustify
+              className="mx-4"
+              size={24}
+              onClick={() => setShowMenuDrawer(true)}
+            />
+            <div
+              className="flex items-center px-4 cursor-pointer"
+              onClick={() => {
+                handleSearch();
+              }}
+            >
+              <Search size={24} />
+            </div>
+          </div>
         ) : (
           <>
             <div className="flex flex-col items-start mb-3 me-4 md:items-center md:flex-row md:mb-0">
@@ -472,13 +482,7 @@ export default function Header() {
         open={showMenuDrawer}
       >
         <div>
-          <div className="flex items-center ">
-            <Input.Search
-              placeholder={t("search")}
-              onSearch={() => {}}
-              enterButton
-            />
-          </div>
+          <div className="flex items-center "></div>
           <div className="flex items-center py-2">
             <div className="px-2 cursor-pointer">
               <House size={24} onClick={() => navigate("/")} />
