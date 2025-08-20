@@ -61,7 +61,7 @@ const AccountAdminPage: React.FC = () => {
       .then(() => {
         setSelectedUser(undefined);
         setIsModalOpen(false);
-        noticeSuccess(t("delete"));
+        noticeSuccess("delete");
       });
   };
 

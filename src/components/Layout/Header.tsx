@@ -105,7 +105,7 @@ export default function Header() {
     doAddCart({ products, address: user.address, phone: user.phone, code })
       .unwrap()
       .then(() => {
-        noticeSuccess(t("feature_success", { name: "order" }));
+        noticeSuccess("order");
       })
       .catch((err) => {
         const errorMsg = err?.data?.message || err?.message || t("fail");
@@ -284,9 +284,9 @@ export default function Header() {
         <Button
           loading={isLoading}
           className="my-8 rounded-none w-full font-medium text-primary bg-yellow-300 hover:!bg-yellow-400 cursor-pointer text-lg px-8 py-6 border-primary"
-          onClick={() => handleOrder()}
+          onClick={() => (cart.length > 0 ? handleOrder() : setShowCart(false))}
         >
-          {t("buy")}
+          {cart.length > 0 ? t("buy") : t("back")}
         </Button>
       </Drawer>
       <Drawer

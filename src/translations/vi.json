@@ -119,7 +119,8 @@
   "account": "Tài khoản",
   "type_bag": "Loại túi",
   "submit": "Tạo",
-  "add_success": "Thêm {{name}} thành công",
+  "add_product": "Thêm sản phẩm",
+  "edit_product": "Cập nhật sản phẩm",
   "add_image_color": "Thêm ảnh màu",
   "add_product_color": "Thêm màu cho sản phẩm"
 

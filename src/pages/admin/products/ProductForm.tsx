@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  Checkbox,
-  Form,
-  Input,
-  Modal,
-  Space,
-} from "antd";
+import { Button, Card, Checkbox, Form, Input, Modal, Space } from "antd";
 import { ProductReq, ProductRes } from "../../../type/api";
 import { useTranslation } from "react-i18next";
 import { CloseOutlined } from "@ant-design/icons";
@@ -44,13 +36,13 @@ export default function ProductForm({
       doUpdate({ ...newData, id: item._id })
         .unwrap()
         .then(() => {
-          noticeSuccess(t("add_success", { name: t("product") }));
+          noticeSuccess("edit_product");
         });
     } else {
       doAdd({ ...newData })
         .unwrap()
         .then(() => {
-          noticeSuccess(t("add_success", { name: t("product") }));
+          noticeSuccess("add_product");
         });
     }
   };
@@ -58,7 +50,7 @@ export default function ProductForm({
     <>
       {contextHolder}
       <Modal
-        title="Basic Modal"
+        title={t("add_product")}
         closable={{ "aria-label": "Custom Close Button" }}
         open={isModalOpen}
         onCancel={handleCancel}

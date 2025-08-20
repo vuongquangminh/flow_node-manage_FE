@@ -119,7 +119,8 @@
   "account": "Account",
   "type_bag": "Type bag",
   "submit": "Submit",
-  "add_success": "Add {{name}} success",
+  "add_product": "Add product",
+  "edit_product": "Update product",
   "add_image_color": "Add image color",
   "add_product_color": "Add color for Product"
 

@@ -23,7 +23,7 @@ const AdminLayout: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    noticeSuccess(t("feature_success", { name: "logout" }));
+    noticeSuccess("logout");
   };
   return (
     <>
