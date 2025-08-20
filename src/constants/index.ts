@@ -4,7 +4,7 @@ export const slick_settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   speed: 500,
-  // autoplay: true,
+  autoplay: true,
   arrows: true,
   responsive: [
     {

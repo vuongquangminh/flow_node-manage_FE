@@ -187,8 +187,8 @@ export default function ProductDetail() {
                           })
                         );
                         api.success({
-                          message: "Thành công!",
-                          description: "Sản phẩm đã được thêm vào giỏ hàng",
+                          message: t("success"),
+                          description: t("add_cart_success"),
                         });
                       }}
                     >

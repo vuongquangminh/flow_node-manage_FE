@@ -20,7 +20,7 @@
   "forgot_password": "Quên mật khẩu?",
   "register": "Đăng ký!",
   "login_with_name": "Đăng nhập với {{name}}",
-  "success": "Thành công",
+  "success": "Thành công!",
   "feature_success": "{{name}} thành công!",
   "name": "Tên tài khoản",
   "confirm_password": "Xác nhận mật khẩu",
@@ -122,7 +122,8 @@
   "add_product": "Thêm sản phẩm",
   "edit_product": "Cập nhật sản phẩm",
   "add_image_color": "Thêm ảnh màu",
-  "add_product_color": "Thêm màu cho sản phẩm"
+  "add_product_color": "Thêm màu cho sản phẩm",
+  "add_cart_success": "Sản phẩm đã được thêm vào giỏ hàng"
 
 
 

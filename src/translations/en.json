@@ -20,7 +20,7 @@
   "forgot_password": "Forgot password?",
   "register": "Register!",
   "login_with_name": "Login with {{name}}",
-  "success": "Success",
+  "success": "Success!",
   "feature_success": "{{name}} success!",
   "name": "Username",
   "confirm_password": "Confirm Password",
@@ -122,7 +122,9 @@
   "add_product": "Add product",
   "edit_product": "Update product",
   "add_image_color": "Add image color",
-  "add_product_color": "Add color for Product"
+  "add_product_color": "Add color for Product",
+  "add_cart_success": "Product has been added to cart"
+
 
 
 
