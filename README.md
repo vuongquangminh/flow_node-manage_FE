@@ -23,7 +23,7 @@ This project is a sales product with integrated chatbot, supporting many feature
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React, TypeScript, Ant Design, TailwindCSS, Redux Toolkit, Redux Toolkit Query, i18n
+- **Frontend**: React, TypeScript, Ant Design, TailwindCSS, Redux Toolkit, Redux Toolkit Query, i18n, Slick lib 
 - **Real-time**: WebSocket, Socket.IO
 - **State Management**: Redux Toolkit
 - **AI Integration**: OpenAI, Langchain
