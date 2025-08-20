@@ -45,9 +45,5 @@ cd flow-web-manage-frontend
 
 
 📺 Demo & Screenshots
-<!-- 🔹 Upload a demo video to YouTube or Loom and paste the link here -->
-🎥 Demo Video: Coming soon...
-🖼️ Screenshots: Coming soon...
-
-You can update this section with:
+https://cabaia.vercel.app/
 ```
