@@ -50,5 +50,5 @@
 
 /* Fix slick với Tailwind */
 .our-recommandation .slick-track {
-  /* width: auto !important; */
+  width: auto !important;
 }

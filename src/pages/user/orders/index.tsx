@@ -1,4 +1,4 @@
-import { Button, Table, Tag } from "antd";
+import { Button, Spin, Table, Tag } from "antd";
 import {
   useDeleteOrderMutation,
   useGetOrderQuery,
@@ -21,7 +21,9 @@ const OrderPage = () => {
   const { t } = useTranslation();
   const user = getLocalStorage({ key: "user" });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: orderList } = useGetOrderQuery({ user_id: user._id });
+  const { data: orderList, isLoading } = useGetOrderQuery({
+    user_id: user._id,
+  });
   const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
   const [doDelete] = useDeleteOrderMutation();
   const expandColumns = [
@@ -129,40 +131,48 @@ const OrderPage = () => {
   };
 
   return (
-    <div className="py-6">
-      <Table
-        columns={columns}
-        expandable={{ expandedRowRender }}
-        rowKey={(record) => record.code}
-        dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
-      />
-      <ModelConfirm
-        title={selectedOrder ? t("delete") : t("qr")}
-        content={
-          <>
-            {selectedOrder ? (
-              <>
-                {t("confirm_question")}
-                <strong className="text-primary">
-                  {selectedOrder?.code}
-                </strong>{" "}
-                hay
-                {t("yet")}
-              </>
-            ) : (
-              <>
-                <img
-                  src={`https://qr.sepay.vn/img?bank=Techcombank&acc=19036382538019&template=compact&amount=100000&des=thanh+toan+don+hang`}
-                />
-              </>
-            )}
-          </>
-        }
-        isOpen={isModalOpen}
-        onOk={() => handleOk()}
-        onCancel={() => setIsModalOpen(false)}
-      />
-    </div>
+    <>
+      {isLoading ? (
+        <Spin fullscreen />
+      ) : (
+        <>
+          <div className="py-6">
+            <Table
+              columns={columns}
+              expandable={{ expandedRowRender }}
+              rowKey={(record) => record.code}
+              dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
+            />
+            <ModelConfirm
+              title={selectedOrder ? t("delete") : t("qr")}
+              content={
+                <>
+                  {selectedOrder ? (
+                    <>
+                      {t("confirm_question")}
+                      <strong className="text-primary">
+                        {selectedOrder?.code}
+                      </strong>{" "}
+                      hay
+                      {t("yet")}
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={`https://qr.sepay.vn/img?bank=Techcombank&acc=19036382538019&template=compact&amount=100000&des=thanh+toan+don+hang`}
+                      />
+                    </>
+                  )}
+                </>
+              }
+              isOpen={isModalOpen}
+              onOk={() => handleOk()}
+              onCancel={() => setIsModalOpen(false)}
+            />
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

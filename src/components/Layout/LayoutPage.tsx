@@ -7,6 +7,7 @@ import { MessageCircle } from "lucide-react";
 import { SocketContext } from "../../utils/SocketContext";
 import { Socket } from "socket.io-client";
 import { useTranslation } from "react-i18next";
+import Footer from "./Footer";
 
 const LayoutPage = () => {
   const { t } = useTranslation();
@@ -79,7 +80,7 @@ const LayoutPage = () => {
             <a href="/">– See terms</a>
           </p>
         </div>
-        <Row gutter={16} className="!mx-0 h-full">
+        <Row gutter={16} className="!mx-0 h-full min-h-screen">
           <Col span={24}>
             <Outlet />
           </Col>
@@ -139,6 +140,7 @@ const LayoutPage = () => {
             </form>
           </div>
         )}
+        <Footer />
       </SocketContext.Provider>
     </>
   );
