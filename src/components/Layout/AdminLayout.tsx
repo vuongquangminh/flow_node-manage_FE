@@ -4,7 +4,7 @@ import {
   ShoppingCartOutlined,
   LoginOutlined,
 } from "@ant-design/icons";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNotice } from "../../utils";
@@ -19,11 +19,14 @@ const AdminLayout: React.FC = () => {
   const { t } = useTranslation();
   const { noticeSuccess, contextHolder } = useNotice();
   const user = getLocalStorage({ key: "user" });
+  const navigate = useNavigate();
   const [isLogout, setIsLogout] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     noticeSuccess("logout");
+    setIsLogout(false);
+    navigate("/");
   };
   return (
     <>
@@ -60,12 +63,13 @@ const AdminLayout: React.FC = () => {
               theme="dark"
               mode="inline"
               selectable={false}
+              onClick={() => setIsLogout(true)}
               items={[
                 {
                   key: "login",
                   icon: <LoginOutlined />,
                   label: (
-                    <div onClick={() => setIsLogout(true)}>{user.email}</div>
+                    <div >{user.email}</div>
                   ),
                 },
               ]}

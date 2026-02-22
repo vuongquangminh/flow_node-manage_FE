@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserRes } from "../../type/api";
 import headerTokenRequest from "../../utils/headerTokenRequest";
 
-type TLoginRes = {
+export type TLoginRes = {
   message: string;
   token: string;
   user: {
@@ -13,6 +13,7 @@ type TLoginRes = {
     status: boolean;
     createAt: string;
     upDateAt: string;
+    role?: string
   };
   status: boolean;
 };
