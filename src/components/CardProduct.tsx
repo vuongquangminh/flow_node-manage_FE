@@ -16,7 +16,6 @@ export default memo(function CardProduct({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [api, contextHolder] = notification.useNotification();
-
   return (
     <>
       {contextHolder}
@@ -33,7 +32,7 @@ export default memo(function CardProduct({
             <h5
               className="cursor-pointer text-xl font-semibold  tracking-tight text-gray-900 dark:text-white truncate max-w-full"
               onClick={() =>
-                navigate(`/products/${product?._id}/${product?.name}`)
+                navigate(`/products/${product?.id}/${product?.name}`)
               }
             >
               {product?.name}
@@ -58,7 +57,7 @@ export default memo(function CardProduct({
               onClick={() => {
                 dispatch(
                   addItemCart({
-                    product_id: Number(product?._id),
+                    product_id: Number(product?.id),
                     product_name: String(product?.name),
                     image: String(product?.color[0]?.image_color[0]),
                     price: String(product?.price),

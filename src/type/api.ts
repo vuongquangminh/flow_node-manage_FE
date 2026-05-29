@@ -54,7 +54,7 @@ export type ProductRes = {
       description: string;
     }[];
   };
-  _id: number;
+  id: number;
   name: string;
   price: string;
   image: string;
