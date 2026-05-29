@@ -265,7 +265,7 @@ export default function Header() {
       >
         {
           isLogined ?
-          <InforPersonnalAccount user={isLogined} />:
+          <InforPersonnalAccount user={isLogined} onLogout={() => setShowLogin(false)} />:
            <LoginForm setShowLogin={setShowLogin} noticeSuccess={noticeSuccess} noticeError={noticeError} isRegister={isRegister} setIsRegister={setIsRegister} />
 
         }
