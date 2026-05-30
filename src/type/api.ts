@@ -87,7 +87,7 @@ export type ProductOrderRes = {
 };
 
 export type Order = {
-  _id: number;
+  id: number;
   user_id: number;
   user_name: number;
   products?: ProductOrderRes[];

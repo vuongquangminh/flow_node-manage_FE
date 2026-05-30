@@ -24,7 +24,7 @@ export default function Products() {
       setProducts((prev) => {
         const newItems = flatData.filter(
           (item): item is ProductRes =>
-            item !== undefined && !prev.some((p) => p._id === item._id)
+            item !== undefined && !prev.some((p) => p.id === item.id)
         );
         return [...prev, ...newItems];
       });
@@ -53,7 +53,7 @@ export default function Products() {
         {isFetching && products.length == 0 && <Spin fullscreen={true} />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 px-4">
           {products.map((item) => (
-            <div key={item._id} className="px-2">
+            <div key={item.id} className="px-2">
               <CardProduct product={item} />
             </div>
           ))}

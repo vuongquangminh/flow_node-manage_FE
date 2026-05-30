@@ -2,6 +2,7 @@ import { Button, Spin, Table, Tag } from "antd";
 import {
   useDeleteOrderMutation,
   useGetOrderQuery,
+  useCreatePaymentSessionMutation,
 } from "../../../store/services/OrderService";
 import { getLocalStorage } from "../../../hooks/localStorage";
 import { Order, ProductOrderRes } from "../../../type/api";
@@ -16,16 +17,21 @@ import {
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { t } from "i18next";
+import { useNotice } from "../../../utils";
 
 const OrderPage = () => {
   const { t } = useTranslation();
+  const { noticeError } = useNotice();
   const user = getLocalStorage({ key: "user" });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: orderList, isLoading } = useGetOrderQuery({
-    user_id: user._id,
+    user_id: user.id,
   });
   const [selectedOrder, setSelectedOrder] = useState<Order | undefined>();
+  const [payingOrderId, setPayingOrderId] = useState<number | null>(null);
   const [doDelete] = useDeleteOrderMutation();
+  const [doCreatePaymentSession] = useCreatePaymentSessionMutation();
+
   const expandColumns = [
     {
       title: t("image"),
@@ -92,10 +98,21 @@ const OrderPage = () => {
       title: t("action"),
       key: "action",
       render: (item: Order) => {
+        const isPaying = payingOrderId === item.id;
+        const isUnpaid = item.status === 0;
+
         return (
           <div className="flex gap-2">
-            <Button onClick={() => setIsModalOpen(true)}>
-              <HandCoins color="green" size={16} />
+            <Button
+              loading={isPaying}
+              disabled={!isUnpaid}
+              title={isUnpaid ? "Pay with Stripe" : "Already paid or cancelled"}
+              onClick={() => handlePayment(item)}
+            >
+              <HandCoins
+                color={isUnpaid ? "green" : "gray"}
+                size={16}
+              />
             </Button>
             <Button onClick={() => handleDelete(item)}>
               <Trash color="red" size={16} />
@@ -109,20 +126,33 @@ const OrderPage = () => {
   const expandedRowRender = (record: Order) => (
     <Table
       columns={expandColumns}
-      dataSource={record?.products} // lấy products của order này
-      rowKey={(item) => item.product_id} // nếu có _id
+      dataSource={record?.products}
+      rowKey={(item) => item.product_id}
       pagination={false}
     />
   );
 
+  const handlePayment = async (item: Order) => {
+    setPayingOrderId(item.id);
+    try {
+      const res = await doCreatePaymentSession({
+        order_id: (item.id),
+      }).unwrap();
+      window.location.href = res.url;
+    } catch {
+      noticeError("Payment failed. Please try again.");
+    } finally {
+      setPayingOrderId(null);
+    }
+  };
+
   const handleDelete = (item: Order) => {
-    console.log(item);
     setSelectedOrder(item);
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    doDelete({ id: Number(selectedOrder?._id) })
+    doDelete({ id: Number(selectedOrder?.id) })
       .unwrap()
       .then(() => {
         setSelectedOrder(undefined);
@@ -144,30 +174,20 @@ const OrderPage = () => {
               dataSource={Array.isArray(orderList?.data) ? orderList.data : []}
             />
             <ModelConfirm
-              title={selectedOrder ? t("delete") : t("qr")}
+              title={t("delete")}
               content={
                 <>
-                  {selectedOrder ? (
-                    <>
-                      {t("confirm_question")}
-                      <strong className="text-primary">
-                        {selectedOrder?.code}
-                      </strong>{" "}
-                      hay
-                      {t("yet")}
-                    </>
-                  ) : (
-                    <>
-                      <img
-                        src={`https://qr.sepay.vn/img?bank=Techcombank&acc=19036382538019&template=compact&amount=100000&des=thanh+toan+don+hang`}
-                      />
-                    </>
-                  )}
+                  {t("confirm_question")}
+                  <strong className="text-primary">{selectedOrder?.code}</strong>{" "}
+                  {t("yet")}
                 </>
               }
               isOpen={isModalOpen}
               onOk={() => handleOk()}
-              onCancel={() => setIsModalOpen(false)}
+              onCancel={() => {
+                setIsModalOpen(false);
+                setSelectedOrder(undefined);
+              }}
             />
           </div>
         </>

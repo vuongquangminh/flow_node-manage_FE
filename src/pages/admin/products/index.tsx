@@ -84,7 +84,7 @@ const ProductAdminPage = () => {
   ];
 
   const handleDelete = (item: ProductRes) => {
-    doDelete({ id: Number(item._id) })
+    doDelete({ id: Number(item.id) })
       .unwrap()
       .then(() => setModalDelete(false));
   };

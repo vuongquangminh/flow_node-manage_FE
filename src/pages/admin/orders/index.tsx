@@ -120,7 +120,7 @@ const OrderAdminPage = () => {
   };
   const handleApprove = (values: { status: number }) => {
     if (!selectedOrder) return;
-    doApprove({ id: Number(selectedOrder._id), status: values.status })
+    doApprove({ id: Number(selectedOrder.id), status: values.status })
       .unwrap()
       .then(() => {
         setIsUpdateModalOpen(false);

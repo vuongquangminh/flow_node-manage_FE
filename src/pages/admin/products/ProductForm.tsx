@@ -33,7 +33,7 @@ export default function ProductForm({
       sustainability_guarantee: sustainability_guarantee,
     };
     if (item) {
-      doUpdate({ ...newData, id: item._id })
+      doUpdate({ ...newData, id: item.id })
         .unwrap()
         .then(() => {
           noticeSuccess("edit_product");

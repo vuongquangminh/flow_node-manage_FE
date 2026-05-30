@@ -64,6 +64,13 @@ export const orderApi = createApi({
         invalidatesTags: ["OrderAdmin"],
       }
     ),
+    createPaymentSession: build.mutation<{ url: string }, { order_id: number }>({
+      query: (body) => ({
+        url: `payment/create-checkout-session`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -73,4 +80,5 @@ export const {
   useDeleteOrderMutation,
   useGetOrderAdminQuery,
   useApproveOrderAdminMutation,
+  useCreatePaymentSessionMutation,
 } = orderApi;
